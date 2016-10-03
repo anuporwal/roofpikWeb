@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Roofpik Web</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body ng-app="NewApp">
+    <div class="main" layout="column" layout-fill>
+        <md-content class="main-content">
+            <div ui-view></div>
+        </md-content>
+    </div>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCKaEjpBt-dv65ktLuLmEj8NwdAAkD9Ba4",
+        authDomain: "project-313476129231192088.firebaseapp.com",
+        databaseURL: "https://project-313476129231192088.firebaseio.com",
+        storageBucket: "project-313476129231192088.appspot.com",
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/controllers/home-ctrl.js"></script>
+</body>
+
+</html>
