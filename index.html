@@ -7,22 +7,25 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/angular-jk-carousel/dist/jk-carousel.min.css">
 </head>
 
 <body ng-app="NewApp">
-    <div class="main" layout="column" layout-fill>
-        <md-content class="main-content">
-            <div ui-view></div>
-        </md-content>
-    </div>
+    <md-content ng-controller="testCtrl">
+        <div class="main" layout="column" layout-fill>
+            <div ng-include="'navigation/header.html'"></div>
+            <div ng-include="'navigation/auth.html'"></div>
+                <div ui-view></div>
+            </div>
+    </md-content>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-jk-carousel/dist/jk-carousel.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
     // Initialize Firebase
@@ -37,6 +40,7 @@
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
     <script src="js/controllers/home-ctrl.js"></script>
+    <script src="js/controllers/test-ctrl.js"></script>
 </body>
 
 </html>

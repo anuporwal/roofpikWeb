@@ -1,9 +1,9 @@
-var app = angular.module('NewApp', ['ngMaterial', 'ui.router']);
+var app = angular.module('NewApp', ['ngMaterial', 'ui.router', 'jkAngularCarousel']);
 var db = firebase.database();
 
-app.config(['$mdThemingProvider', '$mdIconProvider', function($mdThemingProvider, $mdIconProvider) {
+app.config(['$mdThemingProvider', function($mdThemingProvider) {
 
-   var customBlueMap = $mdThemingProvider.extendPalette('teal', {
+   var customBlueMap = $mdThemingProvider.extendPalette('grey', {
       'contrastDefaultColor': 'light',
       'contrastDarkColors': ['50'],
       '50': 'ffffff'
