@@ -99,4 +99,15 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     })
   }
 
+  $scope.getLocalityPosts = function(locality){
+    console.log(locality);
+    angular.forEach($scope.allStories, function(value, key){
+      if(value.placeId == locality.locationId){
+        value.selected = true;
+      } else {
+        value.selected = false;
+      }
+    })
+  }
+
 })

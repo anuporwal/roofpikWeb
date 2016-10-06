@@ -91,7 +91,7 @@
                 <md-card-content>
                     <ul>
                         <li ng-repeat="locality in popularLocalities">
-                            <div><i class="material-icons">&#xE409;</i><a href="#">{{locality.locationName}}</a></div>
+                            <div><i class="material-icons">&#xE409;</i><p ng-click="getLocalityPosts(locality)">{{locality.locationName}}</p></div>
                             <div class="clearfix"></div>
                         </li>
                     </ul>
