@@ -187,50 +187,52 @@
     display: list-item;
 }
 
-.popular-localities i{
-	margin-right: 12px;
+.popular-localities i {
+    margin-right: 12px;
     margin-left: -18px;
 }
 
-.popular-localities ul li a{
-	    color: #111111;
-	        text-decoration: none;
-	        vertical-align: top;
+.popular-localities ul li a {
+    color: #111111;
+    text-decoration: none;
+    vertical-align: top;
 }
 
-.popular-stories md-card-title{
-	padding-top:10px;
-	padding-bottom: 30px;
+.popular-stories md-card-title {
+    padding-top: 10px;
+    padding-bottom: 30px;
 }
 
-.popular-stories md-card-title span{
-	padding-top:0px !important;
+.popular-stories md-card-title span {
+    padding-top: 0px !important;
 }
 
-
-.popular-stories img{
-	width:100%;
+.popular-stories img {
+    width: 100%;
 }
 
-.story-tags button{
-	    margin: 0px;
+.story-tags button {
+    margin: 0px;
     min-width: 0px;
 }
-.story-tags button span{
-color: #0c8cce;
-}
-.story-card .story-project-header md-card-title{
-	padding:0px;
-}
-.story-card .story-project-header md-card-title-text .md-subhead{
-	padding-top:0px;
+
+.story-tags button span {
+    color: #0c8cce;
 }
 
-.tagcloud a{
-	    font-size: 16px !important;
-	    background: #27BA7D;
+.story-card .story-project-header md-card-title {
+    padding: 0px;
+}
+
+.story-card .story-project-header md-card-title-text .md-subhead {
+    padding-top: 0px;
+}
+
+.tagcloud a {
+    font-size: 16px !important;
+    background: #27BA7D;
     color: #ffffff;
-        display: inline-block;
+    display: inline-block;
     white-space: nowrap;
     padding: 6px 10px;
     margin-right: 4px;
@@ -238,5 +240,5 @@ color: #0c8cce;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-        text-decoration: none;
+    text-decoration: none;
 }
