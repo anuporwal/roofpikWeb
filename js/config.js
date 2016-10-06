@@ -7,12 +7,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'homeCtrl'
 		})
 
-			$stateProvider
+	$stateProvider
 		.state('test', {
 			url: '/test',
 			templateUrl: 'templates/test.html'
 		})
 
-	$urlRouterProvider.otherwise('/test');
+	$stateProvider
+		.state('cover-stories', {
+			url: '/cover-stories',
+			templateUrl: 'templates/cover-stories.html',
+			controller: 'coverStoryCtrl'
+		})
+
+	$urlRouterProvider.otherwise('/cover-stories');
 
 }]);
