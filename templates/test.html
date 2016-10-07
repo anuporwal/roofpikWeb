@@ -1,128 +1,58 @@
-<div layout="column" flex layout-wrap>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
-        <article flex="100" flex-xs="100" flex-sm="100">
-            <div class="featured-story">
-                <div class="featured-caption">
-                    <div class="featured-caption-content">
-                        <div class="featured-caption-category"><a href="#">Vipul Greens</a></div>
-                        <h3><a href="#">Romantic, Elegant, Beauty and Timeless Wedding Dresses</a></h3>
-                        <time>Feb 8, 2016</time>
-                        <ul class="featured-tags">
-                            <li><a href="#">#goodLocation</a></li>
-                            <li><a href="#">#bestSociety</a></li>
-                            <li><a href="#">#SohnaRoad</a></li>
-                            <li><a href="#">#DLF</a></li>
-                        </ul>
+<div layout="column" flex layout-wrap layout-fill>
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
+        <div class="filters-wrapper" layout-align="center center" layout="row" flex>
+            <div flex="80" layout-align="center center">
+                Filters
+            </div>
+        </div>
+    </section>
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
+        <div class="projects-wrapper" layout-align="center center" layout="row" flex>
+            <div flex="80" layout-align="center center" layout="row">
+                <div class="project-list" flex="50" layout="row">
+                    <div flex="50" flex-xs="100" flex-sm="100">
+                        <div style="padding:10px">
+                            <div class="image-box">
+                                <div class="image">
+                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
+                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <div class="project-name">
+                                    <span class="left">Orchid Petals</span>
+                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
+                                </div>
+                                <div class="project-location">
+                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex="50" flex-xs="100" flex-sm="100">
+                        <div style="padding:10px">
+                            <div class="image-box">
+                                <div class="image">
+                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
+                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <div class="project-name">
+                                    <span class="left">Orchid Petals</span>
+                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
+                                </div>
+                                <div class="project-location">
+                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="map-wrapper" flex="50">
+                    <div id="map"></div>
+                </div>
             </div>
-        </article>
-    </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
-        <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
-            <md-card class="story-card">
-                <md-card-header>
-                    <md-card-header-text>
-                        <span class="md-title">Great Amenities, nice people!!</span>
-                    </md-card-header-text>
-                </md-card-header>
-                <img src="http://67.media.tumblr.com/9af4f1808f5d82ac9b2aff7a88d9f2b6/tumblr_njf51a5j7D1un8el7o1_1280.jpg" class="md-card-image" alt="Washed Out" />
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Vipul Greens</span>
-                        <span class="md-subhead">Sohna Road, Gurgaon</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-actions layout="row" layout-align="start center" class="story-tags">
-                    <md-button>#tag1</md-button>
-                    <md-button>#tag2</md-button>
-                </md-card-actions>
-                <md-card-content>
-                    <p>
-                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-                    </p>
-                </md-card-content>
-                <!--  <md-card-actions layout="row" layout-align="end center">
-                    <md-button>Action 1</md-button>
-                    <md-button>Action 2</md-button>
-                </md-card-actions> -->
-                <md-card-header>
-                    <md-card-header-text layout-align="end center" layout="row">
-                        <md-card-avatar>
-                            <md-icon class="md-avatar-icon" md-svg-icon="img/icons/menu.svg"></md-icon>
-                        </md-card-avatar>
-                        <span class="md-title">Title</span>
-                    </md-card-header-text>
-                </md-card-header>
-            </md-card>
-        </div>
-        <div flex="30" class="story-widget" flex-xs="100" flex-sm="100">
-            <md-card class="popular-stories">
-                <md-card-header>
-                    <md-card-header-text>
-                        <span class="md-title">Popular Stories</span>
-                    </md-card-header-text>
-                </md-card-header>
-                <article>
-                    <img src="http://67.media.tumblr.com/9af4f1808f5d82ac9b2aff7a88d9f2b6/tumblr_njf51a5j7D1un8el7o1_1280.jpg" class="md-card-image" alt="Washed Out" />
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">In-card actions</span>
-                            <span class="md-subhead">Description</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                </article>
-                <article>
-                    <img src="http://67.media.tumblr.com/9af4f1808f5d82ac9b2aff7a88d9f2b6/tumblr_njf51a5j7D1un8el7o1_1280.jpg" class="md-card-image" alt="Washed Out" />
-                    <md-card-title>
-                        <md-card-title-text>
-                            <span class="md-headline">In-card actions</span>
-                            <span class="md-subhead">Description</span>
-                        </md-card-title-text>
-                    </md-card-title>
-                </article>
-            </md-card>
-            <md-card class="popular-localities">
-                <md-card-header>
-                    <md-card-header-text>
-                        <span class="md-title">Popular Localities</span>
-                    </md-card-header-text>
-                </md-card-header>
-                <md-card-content>
-                    <ul>
-                        <li>
-                            <div><i class="material-icons">&#xE409;</i><a href="#">Standard Post</a></div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div><i class="material-icons">&#xE409;</i><a href="#">Standard Post</a></div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <li>
-                            <div><i class="material-icons">&#xE409;</i><a href="#">Standard Post</a></div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                </md-card-content>
-            </md-card>
-            <md-card class="popular-tags">
-                <md-card-header>
-                    <md-card-header-text>
-                        <span class="md-title">Tag Cloud</span>
-                    </md-card-header-text>
-                </md-card-header>
-                <md-card-content>
-                    <div class="tagcloud">
-                        <a href="#">Tag1</a>
-                        <a href="#">Tag1</a>
-                        <a href="#">Tag1</a>
-                        <a href="#">Tag1</a>
-                        <a href="#">Tag1</a>
-                        <a href="#">Tag1</a>
-                    </div>
-                </md-card-content>
-            </md-card>
         </div>
     </section>
 </div>
-</md-content>
