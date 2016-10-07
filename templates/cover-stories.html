@@ -52,8 +52,11 @@
                     <!-- <md-button>#tag2</md-button> -->
                 </md-card-actions>
                 <md-card-content>
-                    <p ng-bind-html="toTrustedHTML(story.data)">
+                    <p ng-bind-html="toTrustedHTML(story.shortStory)" ng-show="story.showMore == 'Show More'">
                     </p>
+                    <p ng-bind-html="toTrustedHTML(story.data)" ng-show="story.showMore == 'Show Less'">
+                    </p>
+                    <span style="float:right;" ng-click="showMoreLess(story)" ng-class="story.showMore=='Show More'? 'roofpikGreen':'roofpikGrey'">{{story.showMore}}</span>
                 </md-card-content>
                 <md-card-header>
                     <md-card-header-text layout-align="end center" layout="row">

@@ -32,6 +32,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         $scope.allStories = snapshot.val();
         angular.forEach($scope.allStories, function(value, key){
           value.selected = true;
+          value.showMore = 'Show More';
         })
       } else {
         $scope.showNoStories = true;
@@ -75,6 +76,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
           var count = 0;
           angular.forEach($scope.allStories, function(value, key){
             count++;
+            value.showMore = 'Show More';
             if(snapshot.val()[key]){
               value.selected = true;
               storyCount++;
@@ -92,6 +94,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         } else {
           angular.forEach($scope.allStories, function(value, key){
             value.selected = false;
+            value.showMore = 'Show More';
           })
           $scope.showNoStories = true;
         }
@@ -102,12 +105,21 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
   $scope.getLocalityPosts = function(locality){
     console.log(locality);
     angular.forEach($scope.allStories, function(value, key){
+      value.showMore = 'Show More';
       if(value.placeId == locality.locationId){
         value.selected = true;
       } else {
         value.selected = false;
       }
     })
+  }
+
+  $scope.showMoreLess = function(story){
+    if(story.showMore == 'Show More'){
+      story.showMore = 'Show Less';
+    } else {
+      story.showMore = 'Show More';
+    }
   }
 
 })
