@@ -16,7 +16,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
   }
   $scope.featuredStories = [];
 
-  db.ref('featuredStories').once('value', function(data){
+  db.ref('featuredStories/-KPmH9oIem1N1_s4qpCv').once('value', function(data){
     $timeout(function(){
       if(data.val()){
         angular.forEach(data.val(), function(value, key){
@@ -26,10 +26,11 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     },0);
   })
 
-  db.ref('coverStory/stories').once('value', function(snapshot){
+  db.ref('shortStories/-KPmH9oIem1N1_s4qpCv').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.allStories = snapshot.val();
+        console.log($scope.allStories);
         angular.forEach($scope.allStories, function(value, key){
           value.selected = true;
           value.showMore = 'Show More';
@@ -40,7 +41,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     })
   })
 
-  db.ref('popularStories').once('value', function(snapshot){
+  db.ref('popularStories/-KPmH9oIem1N1_s4qpCv').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.popularStories = snapshot.val();
