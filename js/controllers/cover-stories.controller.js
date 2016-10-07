@@ -1,4 +1,4 @@
-app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, $sce){
+app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
 	console.log('working');
 
   $scope.showNoStories = false;
@@ -33,10 +33,14 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         console.log($scope.allStories);
         angular.forEach($scope.allStories, function(value, key){
           value.selected = true;
-          value.showMore = 'Show More';
         })
       } else {
         $scope.showNoStories = true;
+      }
+      if($stateParams.from == 'locality'){
+        $scope.getLocalityPosts($stateParams.id);
+      } else if($stateParams.from == 'tag'){
+        $scope.getRelatedStories($stateParams.id);
       }
     })
   })
@@ -69,7 +73,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
 
   $scope.getRelatedStories = function(tag){
     console.log(tag);
-    db.ref('coverStory/hashtags/'+tag.tagId+'/stories').once('value', function(snapshot){
+    db.ref('coverStory/hashtags/'+tag+'/stories').once('value', function(snapshot){
       $timeout(function(){
         if(snapshot.val()){
           console.log(snapshot.val());
@@ -77,7 +81,6 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
           var count = 0;
           angular.forEach($scope.allStories, function(value, key){
             count++;
-            value.showMore = 'Show More';
             if(snapshot.val()[key]){
               value.selected = true;
               storyCount++;
@@ -95,7 +98,6 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         } else {
           angular.forEach($scope.allStories, function(value, key){
             value.selected = false;
-            value.showMore = 'Show More';
           })
           $scope.showNoStories = true;
         }
@@ -106,8 +108,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
   $scope.getLocalityPosts = function(locality){
     console.log(locality);
     angular.forEach($scope.allStories, function(value, key){
-      value.showMore = 'Show More';
-      if(value.placeId == locality.locationId){
+      if(value.placeId == locality){
         value.selected = true;
       } else {
         value.selected = false;
@@ -115,12 +116,9 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     })
   }
 
-  $scope.showMoreLess = function(story){
-    if(story.showMore == 'Show More'){
-      story.showMore = 'Show Less';
-    } else {
-      story.showMore = 'Show More';
-    }
+  $scope.goToStoryDetails = function(id){
+    console.log(id);
+    $state.go('story-details', {id: id});
   }
 
 })
