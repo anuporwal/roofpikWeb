@@ -26,6 +26,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'storyDetailsCtrl'
 		})
 
-	$urlRouterProvider.otherwise('/story-details');
+	$stateProvider
+		.state('project-details', {
+			url: '/project-details',
+			templateUrl: 'templates/project-details.html',
+			controller: 'projectDetailsCtrl'
+		})
+
+	$urlRouterProvider.otherwise('/project-details');
 
 }]);
