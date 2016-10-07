@@ -389,3 +389,18 @@
 .align-middle i{
 	 vertical-align: bottom;
 }
+
+
+
+/* Project List */
+.map-wrapper{
+	height:500px;
+}
+
+.project-list img{
+	width:100%;
+}
+
+ #map {
+        height: 100%;
+      }
