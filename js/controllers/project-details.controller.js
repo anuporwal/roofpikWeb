@@ -5,8 +5,8 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
    	id: 1
    }
     var rates = [1, 2, 3, 4, 5];
-    $scope.projectName = $scope.projectDetails.name;
-    $scope.projectId = $scope.projectDetails.id;
+    $scope.projectName = $stateParams.name;
+    $scope.projectId = $stateParams.id;
     $scope.reviews = {};
     $scope.features = [];
     $scope.bhkAvailable = '';
