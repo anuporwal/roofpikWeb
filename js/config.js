@@ -28,7 +28,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('project-details', {
-			url: '/project-details',
+			url: '/project-details/:id/:name',
 			templateUrl: 'templates/project-details.html',
 			controller: 'projectDetailsCtrl'
 		})
