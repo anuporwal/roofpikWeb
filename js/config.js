@@ -42,7 +42,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('project-list', {
-			url: '/project-list/:from',
+			url: '/project-list/:from/:type/:id',
 			templateUrl: 'templates/project-list.html',
 			controller: 'projectListCtrl'
 		})

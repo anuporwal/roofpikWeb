@@ -21,7 +21,7 @@
                     <div flex="100" class="home-category-wrapper" layout-sm="column" layout-xs="column" layout-gt-sm="row">
                         <div flex="80" layout="column" flex-xs="100" flex-sm="100">
                             <div flex="100" layout-sm="column" layout-xs="column" layout-gt-sm="row">
-                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100">
+                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('justMarried')">
                                     <div class="image">
                                         <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
                                         <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
@@ -35,13 +35,13 @@
                                 </div>
                             </div>
                             <div flex="100" layout-sm="column" layout-xs="column" layout-gt-sm="row">
-                                <div flex="33" class="image-box" flex-xs="100" flex-sm="100">
+                                <div flex="33" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('kids')">
                                     <div class="image">
                                         <img src="http://roofpik.com/test/newweb/images/kids.jpg" alt="" />
                                         <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
                                     </div>
                                 </div>
-                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100">
+                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('bachelors')">
                                     <div class="image">
                                         <img src="http://roofpik.com/test/newweb/images/bachelors.jpg" alt="" />
                                         <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div flex="20" flex-xs="100" flex-sm="100">
-                            <div class="image-box">
+                            <div class="image-box" ng-click="takeToProjectList('oldAgeFriendly')">
                                 <div class="image">
                                     <img src="http://roofpik.com/test/newweb/images/old.jpg" alt="" />
                                     <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
@@ -76,7 +76,7 @@
  </h1>
                 <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child. </h2>
                 <div layout="row" layout-align="center center">
-                    <md-button class="md-raised md-primary">Write Review</md-button>
+                    <md-button class="md-raised md-primary" ng-click="gotoWriteReviews()">Write Review</md-button>
                 </div>
             </div>
         </div>

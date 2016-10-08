@@ -10,7 +10,26 @@
         <div class="projects-wrapper" layout-align="center center" layout="row" flex>
             <div flex="100" layout-align="start start" layout="row">
                 <div class="project-list" flex="50" layout="row" layout-wrap>
-                    <div flex="50" flex-xs="100" flex-sm="100">
+                    <div flex="50" flex-xs="100" flex-sm="100" ng-repeat="project in projects">
+                        <div style="padding:10px">
+                            <div class="image-box">
+                                <div class="image">
+                                    <img src="{{project.imgUrl}}" alt="" />
+                                    <h2>#{{$index+1}} of {{numProjects}} projects in Gurgaon</h2>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <div class="project-name">
+                                    <span class="left">{{project.projectName}}</span>
+                                    <span class="right">{{project.rating}}<i class="material-icons">&#xE838;</i></span>
+                                </div>
+                                <div class="project-location">
+                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> {{project.displayLocation}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div flex="50" flex-xs="100" flex-sm="100">
                         <div style="padding:10px">
                             <div class="image-box">
                                 <div class="image">
@@ -66,26 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div flex="50" flex-xs="100" flex-sm="100">
-                        <div style="padding:10px">
-                            <div class="image-box">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                            <div class="project-info">
-                                <div class="project-name">
-                                    <span class="left">Orchid Petals</span>
-                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
-                                </div>
-                                <div class="project-location">
-                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="map-wrapper" flex="50">
                     <div id="map"></div>

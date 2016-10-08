@@ -1,4 +1,4 @@
-app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout) {
+app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateParams) {
     $scope.close = function() {
         // Component lookup should always be available since we are not using `ng-if`
         $mdSidenav('right').close()
@@ -93,8 +93,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout) {
 
       
 
-    }, 3000)
-
+    }, 3000);
 
     // $timeout(function(){
     // 	console.log('called');
@@ -103,6 +102,43 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout) {
     //     zoom: 12
     // });
     // }, 3000)
+
+    var type = $stateParams.type || null;
+    var id = $stateParams.id || null;
+    console.log(type);
+    $scope.projects = [];
+    var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors'];
+
+    if ($stateParams.from == 'topRated') {
+        db.ref('topRated').once('value', function(dataSnapshot) {
+            console.log(dataSnapshot.val());
+            $timeout(function() {
+                $scope.projects = dataSnapshot.val();
+                $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                $scope.numResults = Object.keys($scope.projects).length;
+            }, 100);
+        });
+    } else {
+        for (var i = 0; i < 5; i++) {
+            if ($stateParams.from == types[i]) {
+                console.log($stateParams.from + 'List');
+                db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
+                    $timeout(function() {
+                        console.log(dataSnapshot.val());
+                        console.log(Object.keys(dataSnapshot.val()).length);
+                        $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                        $scope.numResults = Object.keys(dataSnapshot.val()).length;
+                        $scope.projects = dataSnapshot.val();
+                    }, 100);
+                })
+            }
+        }
+    }
+
+    $scope.selectProject = function(pro) {
+        console.log(pro);
+        $state.go('project-details', { id: pro.projectId, name: pro.projectName });
+    }
    
 
 })
