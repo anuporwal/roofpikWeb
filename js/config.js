@@ -40,6 +40,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'writeReviewsCtrl'
 		})
 
+	$stateProvider
+		.state('project-list', {
+			url: '/project-list',
+			templateUrl: 'templates/project-list.html',
+			controller: 'projectListCtrl'
+		})
+
 	$urlRouterProvider.otherwise('/project-details');
 
 }]);
