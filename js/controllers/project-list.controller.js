@@ -14,7 +14,9 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     var h = $(window).height() - 300;
     console.log(h);
     $('.map-wrapper').css('height', h);
-    $timeout(function() {
+    // $timeout(function() {
+
+    $scope.initializeProjects = function(projects){
 
         var map;
         var bounds = new google.maps.LatLngBounds();
@@ -39,25 +41,38 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
 
         // Info Window Content
-        var infoWindowContent = [
-            ['<div class="info_content">' +
-            	'<img style="width:80%" src="http://roofpik.com/test/newweb/images/newlymarried.jpg"' +
-                '<h3>London Eye</h3>' +
-                '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
-            ],
-            ['<div class="info_content">' +
-                '<h3>Palace of Westminster</h3>' +
-                '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-                '</div>'
-            ]
-        ];
+        // var infoWindowContent = [
+        //     ['<div class="info_content">' +
+        //     	'<img style="width:80%" src="http://roofpik.com/test/newweb/images/newlymarried.jpg"' +
+        //         '<h3>London Eye</h3>' +
+        //         '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
+        //     ],
+        //     ['<div class="info_content">' +
+        //         '<h3>Palace of Westminster</h3>' +
+        //         '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
+        //         '</div>'
+        //     ]
+        // ];
+        var infoWindowContent = [];
+        var markers = [];
+        angular.forEach(projects, function(value, key){
+            var data = [];
+            data = ['<div class="info_content">' +
+             '<img style="width:80%" src="'+value.imgUrl+'"' +
+                '<h3>'+value.projectName+'</h3>' +
+                '<p>'+value.displayLocation+'</p>' + '</div>'
+            ];
+            var markerData = [value.projectName, value.lat, value.lng];
+            markers.push(markerData);
+            infoWindowContent.push(data);
+        })
 
 
         var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-        var markers = [
-            ['Gurgaon, India', 28.465168, 77.0296213],
-            ['Delhi, India', 28.4111889, 77.040829]
-        ];
+        // var markers = [
+        //     ['Gurgaon, India', 28.465168, 77.0296213],
+        //     ['Delhi, India', 28.4111889, 77.040829]
+        // ];
 
 
         var infoWindow = new google.maps.InfoWindow(),
@@ -91,9 +106,11 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             google.maps.event.removeListener(boundsListener);
         });
 
+    }
+
       
 
-    }, 3000);
+    // }, 3000);
 
     // $timeout(function(){
     // 	console.log('called');
@@ -116,6 +133,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                 $scope.projects = dataSnapshot.val();
                 $scope.numProjects = Object.keys(dataSnapshot.val()).length;
                 $scope.numResults = Object.keys($scope.projects).length;
+                $scope.initializeProjects($scope.projects);
             }, 100);
         });
     } else {
@@ -129,6 +147,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                         $scope.numProjects = Object.keys(dataSnapshot.val()).length;
                         $scope.numResults = Object.keys(dataSnapshot.val()).length;
                         $scope.projects = dataSnapshot.val();
+                        $scope.initializeProjects($scope.projects);
                     }, 100);
                 })
             }
