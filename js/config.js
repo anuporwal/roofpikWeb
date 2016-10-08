@@ -26,6 +26,28 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'storyDetailsCtrl'
 		})
 
+		.state('about-us', {
+			url: '/about-us',
+			templateUrl: 'templates/about-us.html',
+			controller: 'aboutUsCtrl'
+		})
+		.state('contact-us', {
+			url: '/contact-us',
+			templateUrl: 'templates/contact-us.html',
+			controller: 'contactUsCtrl'
+		})
+		.state('career-n-goals', {
+			url: '/career-n-goals',
+			templateUrl: 'templates/career-n-goals.html',
+			controller: 'careerAndGoalsCtrl'
+		})
+		.state('faq', {
+			url: '/faq',
+			templateUrl: 'templates/faq.html',
+			controller: 'faqCtrl'
+		})
+
+
 	$urlRouterProvider.otherwise('/story-details');
 
 }]);
