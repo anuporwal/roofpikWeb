@@ -21,7 +21,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             $scope.project = snapshot.val();
             console.log($scope.project);
             console.log($scope.project.images.main['2100x800']);
-            $('.gl-page-header-wrapper').css('background-image','url('+$scope.project.images.main['2100x800']+')');
+            // $('.gl-page-header-wrapper').css('background-image','url('+$scope.project.images.main['2100x800']+')');
             angular.forEach($scope.project.standoutFeatures, function(value, key) {
                 $scope.features.push(key);
             })

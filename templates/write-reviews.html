@@ -1,0 +1,204 @@
+<style type="text/css">
+.review-tips {
+    background-color: #dddddd;
+}
+
+.review-form {
+    background-color: #ffffff;
+}
+
+.rating span {
+    font-size: 30px;
+}
+.searchList {
+    max-height: 200px;
+    overflow: scroll;
+    border: 1px solid #f2f2f2;
+    margin: -16px auto 8px auto;
+    width: 100%;
+    box-shadow: 5px 6px 10px 0 rgba(0,0,0,0.2);
+}
+.review-search-list {
+    padding: 0px;
+}
+.review-search-item {
+    border-bottom:1px solid #e6e6e6;
+    background-color:#f2f2f2;
+}
+
+md-radio-group {
+    float:right;
+}
+</style>
+<md-content>
+
+<div layout="row" class="" layout-xs="column" >
+    <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box">
+        <!-- <div id="gl-review-loader-wrapper" ng-hide="loginStatus">
+            <div id="gl-review-loader-center">
+                <div class="gl-review-load">
+                    <h2>Please Login First</h2>
+                    <a ng-click="openLogin()" class="gl-btn gl-large-btn gl-btn-color-3">Login/Signup</a>
+                </div>
+            </div>
+        </div> -->
+        <form name="review-form">
+            <div layout="row" class="md-padding">
+                <div flex>
+                    <md-input-container class="md-block">
+                        <input ng-model="selectedItem" placeholder="Select Project/Locality" ng-change="nameEntered()" required>
+                    </md-input-container>
+                    <div class="searchList" ng-show="showList">
+                        <md-list class="review-search-list">
+                            <md-list-item ng-repeat="item in projectLocality|filter:selectedItem" class="review-search-item" ng-click="selectProjectLocality(item)">
+                                {{item.name}}
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="showRequired">
+                <div layout="row">
+                    <div flex="75"></div>
+                    <div flex="25">
+                        (*Required)
+                    </div>
+                </div>
+            </div> -->
+            <div layout="row" class="md-padding" layout-sm="column">
+                Are you a *
+                <span flex></span>
+                <md-radio-group ng-model="review.userType" layout="row" class="md-warn" required>
+                    <md-radio-button value="Owner"> Owner </md-radio-button>
+                    <md-radio-button value="Tenant"> Tenant </md-radio-button>
+                    <md-radio-button value="Visitor"> Visitor </md-radio-button>
+                </md-radio-group>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Overall rating *
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding">
+                <div flex>
+                    <md-input-container class="md-block">
+                        <input ng-model="review.reviewTitle" placeholder="Review Title" required>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" >
+                <div flex class="md-padding">
+                    <md-input-container class="md-block">
+                        <textarea ng-model="review.reviewText" md-maxlength="1000" rows="5" placeholder="Write your review" required></textarea>
+                    </md-input-container>
+                </div>
+            </div>
+            
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Security
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='2'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Amenities
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='3'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Open and green areas
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='4'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Electricity and water supply
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='5'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Convinience of housemaids
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='6'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding rating" layout-sm="column">
+                <div flex>
+                    Convinience of parking
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <review-ratings ratingsobj='ratingsObject' index='7'></review-ratings>
+                </div>
+            </div>
+            <md-divider></md-divider>
+            <div layout="row" class="md-padding">
+                <div flex>
+                    Is the project conveniently located ?
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <md-radio-group ng-model="review.projectConvenientlyLocated" layout="row" class="md-warn">
+                        <md-radio-button value="Yes"> Yes</md-radio-button>
+                        <md-radio-button value="No"> No </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+            <div layout="row" class="md-padding">
+                <div flex>
+                    Do you have easy access to public transport ?
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <md-radio-group ng-model="review.easyAccessToPublicTransport" layout="row" class="md-warn">
+                        <md-radio-button value="Yes"> Yes </md-radio-button>
+                        <md-radio-button value="No"> No </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+            <div layout="row" class="md-padding">
+                <div flex>
+                    Do you think a property reviewing platform like this would be useful for you in the future ?
+                </div>
+                <div layout="row" flex layout-align="end center">
+                    <md-radio-group ng-model="review.useful" layout="row" class="md-warn">
+                        <md-radio-button value="Yes"> Yes </md-radio-button>
+                        <md-radio-button value="No"> No </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+        </form>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-warn" ng-click="submitReview(review)" ng-disabled="review-form.$invalid">Submit</md-button>
+        </div>
+    </div>
+    <div flex="25 grow" class="md-padding review-tips">
+        <h3 class="gl-sub-heading">Review Writing Tips</h3>
+        <p><b>Help your fellow apartment seeker get the most out of your review with the following tips:</b></p>
+        <p><b>Be Specific </b>- Don't just complain about something but rather describe specific thing you do or don't like. Explain what happened. We've found users lend more weight to a review with details.</p>
+        <p><b>Be Courteous and Honest</b> - Describe your experience, be it good or bad, but don't go overboard. Keep your review precise and to the point. We value open expression, but profanity and hateful speech are not allowed on the site.</p>
+        <p><b>Add Photos </b>- A picture tells a thousand words, or so they say.</p>
+        <p><b>No Personal Info </b>- We don't allow reviews with names, phone numbers, email or other contact info, so please avoid using it.</p>
+    </div>
+</div>
+
+</md-content>

@@ -1,5 +1,22 @@
-<md-content>
-    <section class="gl-page-header-wrapper">
+<md-content class="project-details-page">
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+        <article flex="100" flex-xs="100" flex-sm="100">
+            <div class="featured-story" style="background-image:url({{project.images.main['2100x800']}});">
+                <div class="featured-caption">
+                    <div class="featured-caption-content">
+                        <h1 class="project-title">{{projectName}}</h1>
+                        <p style="color:#fff;"><i class="material-icons">location_on</i>{{project.projectDetails.address.displayLocation}}</p>
+                        <span style="color:#fff;"><i class="material-icons" >grade</i>4.5</span>
+                        <div>
+                            <a href="#" >{{project.projectStatus}}</a>
+                            <a href="#">{{bhkAvailable}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+<!--     <section class="gl-page-header-wrapper">
         <div class="container">
             <div class="row" id="reviewHeading">
                 <h1>{{projectName}}</h1>
@@ -11,8 +28,18 @@
                 </div>
             </div>
         </div>
+    </section> -->
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+        <article flex="100" flex-xs="100" flex-sm="100">
+                <div class="featured-caption-content">
+                    <div class="tagcloud">
+                        <span class="tag-btn" ng-click="getRelatedStories(tag)" ng-repeat="tag in features">{{tag}}</span>
+                    </div>
+                </div>
+        </article>
     </section>
-    <section class="gl-tab-profile-meta-section">
+    
+<!--     <section class="gl-tab-profile-meta-section">
         <div class="container">
             <div class="row">
                 <div class="gl-tab-nav-wrapper col-md-12 col-sm-12 col-xs-12">
@@ -24,11 +51,74 @@
                 </div>
             </div>
         </div>
+    </section> -->
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="review-details md-padding">
+        <div flex-gt-sm="66" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="row" >
+            <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
+                <div class="overall-rating">
+                    <h4 class="overall-ratings-headings">Overall Rating ({{allRatings.overallRating}})</h4>
+                    <h3>
+                        <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(allRatings.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
+                    </h3>
+                    <h5>Ratings from {{allRatings.overallRatingNum}} reviews</h5>
+                </div>
+            </article>
+            <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
+                 <div class="overview-wrapper">
+                    <h4 class="overview-heading">Overview</h4>
+                    <ul>
+                        <li>Area <span>{{project.area.min}} Sq.Ft. - {{project.area.max}} Sq.Ft.</span></li>
+                        <li>Buy <span>&#8377;{{project.price.buy.min}} - &#8377;{{project.price.buy.max}}</span></li>
+                        <li>Rent <span>&#8377;{{project.price.rent.min}} - &#8377;{{project.price.rent.max}}</span></li>
+                        <li>Address <span>{{project.projectDetails.address.addressLine1}} {{project.projectDetails.address.addressLine2}}</span></li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+        <div flex-gt-sm="33" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="row" >
+            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                    <div class="all-rating-summary">
+                        <h4 class="all-rating-summary-heading">User Ratings</h4>
+                        <ul>
+                            <li>Excellent ({{allRatings.fiveStar}})
+                                <div class="progress-bar">
+                                    <span class="my-progress" id="excellentStar"></span>
+                                </div>
+                            </li>
+                            <li>Very Good ({{allRatings.fourStar}})
+                                <div class="progress-bar">
+                                    <span class="my-progress" id="veryGoodStar"></span>
+                                </div>
+                            </li>
+                            <li>Good ({{allRatings.threeStar}})
+                                <div class="progress-bar">
+                                    <span class="my-progress" id="goodStar"></span>
+                                </div>
+                            </li>
+                            <li>Average ({{allRatings.twoStar}})
+                                <div class="progress-bar">
+                                    <span class="my-progress" id="averageStar"></span>
+                                </div>
+                            </li>
+                            <li>Bad ({{allRatings.oneStar}})
+                                <div class="progress-bar">
+                                    <span class="my-progress" id="badStar"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+            </article>
+        </div>
     </section>
-    <section class="gl-page-content-section">
+
+
+
+<!-- Previous code with correct data binding-->
+
+<!--         <section class="gl-page-content-section">
         <div class="container">
             <div class="row">
-                <!-- PAGE CONTENT DETAILS -->
+            
                 <div class="col-md-8">
                     <div class="gl-page-content col-md-6 col-sm-6 col-xs-12">
                         <div class="gl-sidebar-widget gl-author-widget">
@@ -54,25 +144,28 @@
                             </div>
                         </div>
                     </div>
+
+
+                    Reviews Start
+
                     <div class="gl-page-content col-md-12 col-sm-12 col-xs-12">
                         <div class="gl-post-comments-wrapper">
                             <h3 class="gl-blog-sec-title">REVIEWS</h3>
-                            <!-- Reviews -->
+                            
                             <div layout="row">
                                 <div>
                                     <div class="gl-comments" ng-repeat="review in reviews">
-                                        <!-- USER IMG -->
+                                      
                                         <div class="gl-user-img">
                                             <img src="images/noImage.png" alt="User" class="gl-lazy">
                                         </div>
-                                        <!-- END -->
-                                        <!-- TEXT -->
+                                        
                                         <div class="gl-comment-text">
                                             <div class="gl-username-date">
                                                 <div class="gl-comment-title-description">
                                                     <h3>
                                                         <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                    <!-- <span ng-repeat="counter in starrating(5-(review.overallRating)) track by $index"><i class="icon ion-ios-star-outline"></i></span> -->
+                                                   
                                                     </h3>
                                                     <h3 ng-show="!review.anonymous">{{review.reviewTitle}}</h3>
                                                 </div>
@@ -163,13 +256,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- END -->
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <!-- END -->
+                          
                         </div>
                     </div>
+
+                    Reviews End
                 </div>
                 <div class="gl-page-content col-md-4 col-sm-4 col-xs-12">
                     <div class="gl-sidebar-widget gl-overview-widget">
@@ -204,6 +299,10 @@
                             </ul>
                         </div>
                     </div>
+
+
+                    Rating Summary Start
+
                     <div class="gl-sidebar-widget gl-overview-widget gl-rating-widget">
                         <div class="gl-overview-wrapper">
                             <h3>Rating Summary</h3>
@@ -259,6 +358,13 @@
                             </div>
                         </div>
                     </div>
+
+                    Rating Summary End
+
+
+                    Online Links Start
+
+
                     <div class="gl-sidebar-widget gl-overview-widget gl-rating-widget" ng-show="project.pricingLinks">
                         <div class="gl-overview-wrapper links">
                             <h3>Are you looking for?</h3>
@@ -286,8 +392,14 @@
                             </ul>
                         </div>
                     </div>
+
+                    Online Links End
+
+
+
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+
 </md-content>

@@ -33,6 +33,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'projectDetailsCtrl'
 		})
 
+	$stateProvider
+		.state('write-reviews', {
+			url: '/write-reviews',
+			templateUrl: 'templates/write-reviews.html',
+			controller: 'writeReviewsCtrl'
+		})
+
 	$urlRouterProvider.otherwise('/project-details');
 
 }]);
