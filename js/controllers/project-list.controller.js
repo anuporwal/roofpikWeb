@@ -68,7 +68,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
         })
 
 
-        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var image = 'https://wiki.smu.edu.sg/is480/img_auth.php/thumb/0/00/Change-Makers_home-icon.png/40px-Change-Makers_home-icon.png';
         // var markers = [
         //     ['Gurgaon, India', 28.465168, 77.0296213],
         //     ['Delhi, India', 28.4111889, 77.040829]
