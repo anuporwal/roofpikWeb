@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="js/jquery.min.js"></script>
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw11e3mCdbPwpJCwtxHn5yCGt1uwErX24">
     </script>
 </head>
 
 <body ng-app="NewApp">
-    <md-content ng-controller="testCtrl">
+    <md-content ng-controller="homeCtrl" layout-fill flex>
         <div class="main" layout="column" layout-fill>
             <div ng-include="'navigation/header.html'"></div>
             <div ng-include="'navigation/auth.html'"></div>
             <div ui-view></div>
+            <div ng-include="'navigation/footer.html'"></div>
         </div>
     </md-content>
     <script src="bower_components/angular/angular.min.js"></script>
