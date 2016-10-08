@@ -54,9 +54,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             // console.log(snapshot.val());
             $timeout(function() {
                 $scope.reviews = snapshot.val();
-                angular.forEach($scope.reviews, function(value, key) {
-                    value.moreOrLess = 'Show More';
-                })
                 // $rootScope.loading = false;
             }, 100);
         }).then(function() {
@@ -78,15 +75,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.starrating = function(rating) {
         rating = Math.round(rating);
         return new Array(rating); //ng-repeat will run as many times as size of array
-    }
-
-    $scope.showMore = function(review) {
-        review.showRest = !review.showRest;
-        if (review.moreOrLess == 'Show More') {
-            review.moreOrLess = 'Show Less';
-        } else {
-            review.moreOrLess = "Show More";
-        }
     }
 
     $scope.buySelected = true;

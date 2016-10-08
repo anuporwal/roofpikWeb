@@ -553,3 +553,26 @@
   background-color: rgba(52, 104, 137, 0.1);
   color: #3468ed;
 }
+
+.status-n-bhk p {
+    float:right;
+}
+
+.project-status {
+    background-color: #12A895;
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-right:10px;
+    font-weight: 500;
+}
+
+.bhk-available{
+    background-color: #FC313A;
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}

@@ -1,4 +1,4 @@
-app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateParams) {
+app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateParams, $state) {
     $scope.close = function() {
         // Component lookup should always be available since we are not using `ng-if`
         $mdSidenav('right').close()

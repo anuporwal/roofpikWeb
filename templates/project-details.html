@@ -7,9 +7,11 @@
                         <h1 class="project-title">{{projectName}}</h1>
                         <p style="color:#fff;"><i class="material-icons">location_on</i>{{project.projectDetails.address.displayLocation}}</p>
                         <span style="color:#fff;"><i class="material-icons" >grade</i>4.5</span>
-                        <div>
-                            <a href="#" >{{project.projectStatus}}</a>
-                            <a href="#">{{bhkAvailable}}</a>
+                        <div class="status-n-bhk">
+                            <p>
+                                <span class="project-status">{{project.projectStatus}}</span>
+                                <span class="bhk-available">{{bhkAvailable}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -176,83 +178,20 @@
                                                 </div>
                                             </div>
                                             <p>{{review.reviewText}}</p>
-                                            <p ng-click="showMore(review)" class="moreLess" ng-class="review.moreOrLess=='Show More'? 'roofpikGreen':'roofpikGrey'">{{review.moreOrLess}}</p>
-                                            <div ng-show="review.showRest" class="other-params">
-                                                <div layout="row" ng-show="review.ratings.security">
-                                                    <div flex>
-                                                        <p>Security</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.security-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
+                                            <div layout="row">
+                                                <div flex="80">
+                                                    <p>Is the project conveniently located?</p>
                                                 </div>
-                                                <div layout="row" ng-show="review.ratings.amenities">
-                                                    <div flex>
-                                                        <p>Amenities</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.amenities-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
+                                                <div flex="20" id="yesNoQues">
+                                                    <p>{{review.projectConvenientlyLocated}}</p>
                                                 </div>
-                                                <div layout="row" ng-show="review.ratings.openAndGreenAreas">
-                                                    <div flex>
-                                                        <p>Open and Green Areas</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.openAndGreenAreas-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
+                                            </div>
+                                            <div layout="row">
+                                                <div flex="80">
+                                                    <p>Do you have easy access to public transport?</p>
                                                 </div>
-                                                <div layout="row" ng-show="review.ratings.electricityAndWaterSupply">
-                                                    <div flex>
-                                                        <p>Electricity and Water Supply</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.electricityAndWaterSupply-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div layout="row" ng-show="review.ratings.convenienceOfHouseMaids">
-                                                    <div flex>
-                                                        <p>Convenience of Housemaids</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.convenienceOfHouseMaids-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div layout="row" ng-show="review.ratings.convenienceOfParking">
-                                                    <div flex>
-                                                        <p>Convenience of Parking</p>
-                                                    </div>
-                                                    <div flex class="starRatings">
-                                                        <h4>
-                                                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.ratings.convenienceOfParking-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div layout="row">
-                                                    <div flex="80">
-                                                        <p>Is the project conveniently located?</p>
-                                                    </div>
-                                                    <div flex="20" id="yesNoQues">
-                                                        <p>{{review.projectConvenientlyLocated}}</p>
-                                                    </div>
-                                                </div>
-                                                <div layout="row">
-                                                    <div flex="80">
-                                                        <p>Do you have easy access to public transport?</p>
-                                                    </div>
-                                                    <div flex="20" id="yesNoQues">
-                                                        <p>{{review.easyAccessToPublicTransport}}</p>
-                                                    </div>
+                                                <div flex="20" id="yesNoQues">
+                                                    <p>{{review.easyAccessToPublicTransport}}</p>
                                                 </div>
                                             </div>
                                         </div>
