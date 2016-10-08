@@ -1,4 +1,4 @@
-app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, $sce){
+app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
 	console.log('working');
 
   $scope.showNoStories = false;
@@ -16,7 +16,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
   }
   $scope.featuredStories = [];
 
-  db.ref('featuredStories').once('value', function(data){
+  db.ref('featuredStories/-KPmH9oIem1N1_s4qpCv').once('value', function(data){
     $timeout(function(){
       if(data.val()){
         angular.forEach(data.val(), function(value, key){
@@ -26,21 +26,26 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     },0);
   })
 
-  db.ref('coverStory/stories').once('value', function(snapshot){
+  db.ref('shortStories/-KPmH9oIem1N1_s4qpCv').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.allStories = snapshot.val();
+        console.log($scope.allStories);
         angular.forEach($scope.allStories, function(value, key){
           value.selected = true;
-          value.showMore = 'Show More';
         })
       } else {
         $scope.showNoStories = true;
       }
+      if($stateParams.from == 'locality'){
+        $scope.getLocalityPosts($stateParams.id);
+      } else if($stateParams.from == 'tag'){
+        $scope.getRelatedStories($stateParams.id);
+      }
     })
   })
 
-  db.ref('popularStories').once('value', function(snapshot){
+  db.ref('popularStories/-KPmH9oIem1N1_s4qpCv').once('value', function(snapshot){
     $timeout(function(){
       if(snapshot.val()){
         $scope.popularStories = snapshot.val();
@@ -68,7 +73,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
 
   $scope.getRelatedStories = function(tag){
     console.log(tag);
-    db.ref('coverStory/hashtags/'+tag.tagId+'/stories').once('value', function(snapshot){
+    db.ref('coverStory/hashtags/'+tag+'/stories').once('value', function(snapshot){
       $timeout(function(){
         if(snapshot.val()){
           console.log(snapshot.val());
@@ -76,7 +81,6 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
           var count = 0;
           angular.forEach($scope.allStories, function(value, key){
             count++;
-            value.showMore = 'Show More';
             if(snapshot.val()[key]){
               value.selected = true;
               storyCount++;
@@ -94,7 +98,6 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         } else {
           angular.forEach($scope.allStories, function(value, key){
             value.selected = false;
-            value.showMore = 'Show More';
           })
           $scope.showNoStories = true;
         }
@@ -105,8 +108,7 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
   $scope.getLocalityPosts = function(locality){
     console.log(locality);
     angular.forEach($scope.allStories, function(value, key){
-      value.showMore = 'Show More';
-      if(value.placeId == locality.locationId){
+      if(value.placeId == locality){
         value.selected = true;
       } else {
         value.selected = false;
@@ -114,12 +116,9 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
     })
   }
 
-  $scope.showMoreLess = function(story){
-    if(story.showMore == 'Show More'){
-      story.showMore = 'Show Less';
-    } else {
-      story.showMore = 'Show More';
-    }
+  $scope.goToStoryDetails = function(id){
+    console.log(id);
+    $state.go('story-details', {id: id});
   }
 
 })

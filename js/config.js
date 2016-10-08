@@ -15,11 +15,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('cover-stories', {
-			url: '/cover-stories',
+			url: '/cover-stories/:from/:id',
 			templateUrl: 'templates/cover-stories.html',
 			controller: 'coverStoryCtrl'
 		})
+	$stateProvider
+		.state('story-details', {
+			url: '/story-details/:id',
+			templateUrl: 'templates/story-details.html',
+			controller: 'storyDetailsCtrl'
+		})
 
-	$urlRouterProvider.otherwise('/cover-stories');
+	$urlRouterProvider.otherwise('/story-details');
 
 }]);

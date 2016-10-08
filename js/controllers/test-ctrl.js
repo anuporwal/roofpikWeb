@@ -11,7 +11,6 @@ app.controller('testCtrl', function($scope, $mdSidenav, $timeout) {
         $mdSidenav('right').open()
     }
 
-
     var h = $(window).height() - 300;
     console.log(h);
     $('.map-wrapper').css('height', h);
@@ -95,5 +94,15 @@ app.controller('testCtrl', function($scope, $mdSidenav, $timeout) {
       
 
     }, 3000)
+
+
+    // $timeout(function(){
+    // 	console.log('called');
+    // 	 map = new google.maps.Map(document.getElementById('map'), {
+    //     center: { lat: 28.4247649, lng: 76.8496963 },
+    //     zoom: 12
+    // });
+    // }, 3000)
+   
 
 })
