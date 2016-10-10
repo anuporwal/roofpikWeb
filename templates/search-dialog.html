@@ -1,0 +1,33 @@
+<style>
+  md-dialog{
+    width:100%;
+  }
+</style>
+
+<md-dialog aria-label="Search">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Search</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <i class="material-icons">close</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label>Search by project, builder, landmark or locality</label>
+          <input ng-model="searchText" ng-change="getSearchText()" type="text" placeholder="Search by project, builder, landmark or locality"/>
+        </md-input-container>
+        <md-list>
+          <md-list-item ng-repeat="item in searchObject | filter:searchText" flex="100" ng-click="selectSearchItem(item)">
+            {{item.name}}
+          </md-list-item>
+        </md-list>
+      </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

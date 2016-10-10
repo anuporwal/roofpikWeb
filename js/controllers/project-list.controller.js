@@ -123,16 +123,48 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;
     console.log(type);
-    $scope.projects = [];
+    $scope.projects = {};
     var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors'];
 
-    if ($stateParams.from == 'topRated') {
+    if($stateParams.from == 'search'){
+        var projectCount = 0;
+        db.ref('topRated').once('value', function(dataSnapshot) {
+            console.log(dataSnapshot.val());
+            $timeout(function() {
+                if($stateParams.type == 'locality'){
+                    angular.forEach(dataSnapshot.val(), function(value, key){
+                        projectCount++;
+                        if(value.localityId == $stateParams.id){
+                            $scope.projects[key] = value;
+                        }
+                        if(projectCount == Object.keys(dataSnapshot.val()).length){
+                            console.log($scope.projects);
+                            $scope.numProjects = Object.keys($scope.projects).length;
+                            $scope.initializeProjects($scope.projects);
+                        }
+                    })
+                } else if($stateParams.type == 'developer'){
+                    angular.forEach(dataSnapshot.val(), function(value, key){
+                        projectCount++;
+                        if(value.developerId == $stateParams.id){
+                            $scope.projects[key] = value;
+                        }
+                        if(projectCount == Object.keys(dataSnapshot.val()).length){
+                            console.log($scope.projects);
+                            $scope.numProjects = Object.keys($scope.projects).length;
+                            $scope.initializeProjects($scope.projects);
+                        }
+                    })
+                }
+            }, 100);
+        });
+    }else if ($stateParams.from == 'topRated') {
         db.ref('topRated').once('value', function(dataSnapshot) {
             console.log(dataSnapshot.val());
             $timeout(function() {
                 $scope.projects = dataSnapshot.val();
                 $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                $scope.numResults = Object.keys($scope.projects).length;
+                // $scope.numResults = Object.keys($scope.projects).length;
                 $scope.initializeProjects($scope.projects);
             }, 100);
         });
@@ -145,7 +177,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                         console.log(dataSnapshot.val());
                         console.log(Object.keys(dataSnapshot.val()).length);
                         $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                        $scope.numResults = Object.keys(dataSnapshot.val()).length;
+                        // $scope.numResults = Object.keys(dataSnapshot.val()).length;
                         $scope.projects = dataSnapshot.val();
                         $scope.initializeProjects($scope.projects);
                     }, 100);

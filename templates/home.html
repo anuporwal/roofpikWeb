@@ -6,7 +6,7 @@
                 <h2>  India's largest property reviewing platform </h2>
                 <div layout="row" layout-align="center center">
                     <div flex="80" class="home-search">
-                        <input type="text" placeholder="Search by project, builder, landmark or locality" />
+                        <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)"/>
                     </div>
                 </div>
             </div>
@@ -71,9 +71,7 @@
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
         <div class="featured-header" layout-align="center center" layout="row" flex>
             <div class="featured-header-wrapper" flex="80" layout-align="center center">
-                <h1>  2000+ Reviews
-
- </h1>
+                <h1>  2000+ Reviews</h1>
                 <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child. </h2>
                 <div layout="row" layout-align="center center">
                     <md-button class="md-raised md-primary" ng-click="gotoWriteReviews()">Write Review</md-button>
