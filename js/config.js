@@ -77,6 +77,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		});
 
 
-	$urlRouterProvider.otherwise('/test_new');
+	$urlRouterProvider.otherwise('/home');
 
 }]);
