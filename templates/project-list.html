@@ -21,7 +21,7 @@
                             <div class="project-info">
                                 <div class="project-name">
                                     <span class="left">{{project.projectName}}</span>
-                                    <span class="right">{{project.rating}}<i class="material-icons">&#xE838;</i></span>
+                                    <span class="right" ng-if="project.rating">{{project.rating}}<i class="material-icons">&#xE838;</i></span>
                                 </div>
                                 <div class="project-location">
                                     <span class="align-middle"> <i class="material-icons">&#xE55F;</i> {{project.displayLocation}}</span>
@@ -29,63 +29,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div flex="50" flex-xs="100" flex-sm="100">
-                        <div style="padding:10px">
-                            <div class="image-box">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                            <div class="project-info">
-                                <div class="project-name">
-                                    <span class="left">Orchid Petals</span>
-                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
-                                </div>
-                                <div class="project-location">
-                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div flex="50" flex-xs="100" flex-sm="100">
-                        <div style="padding:10px">
-                            <div class="image-box">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                            <div class="project-info">
-                                <div class="project-name">
-                                    <span class="left">Orchid Petals</span>
-                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
-                                </div>
-                                <div class="project-location">
-                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div flex="50" flex-xs="100" flex-sm="100">
-                        <div style="padding:10px">
-                            <div class="image-box">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                            <div class="project-info">
-                                <div class="project-name">
-                                    <span class="left">Orchid Petals</span>
-                                    <span class="right">4 <i class="material-icons">&#xE838;</i></span>
-                                </div>
-                                <div class="project-location">
-                                    <span class="align-middle"> <i class="material-icons">&#xE55F;</i> Sohna Road, Sector 49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="map-wrapper" flex="50">
                     <div id="map"></div>

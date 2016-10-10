@@ -1,32 +1,26 @@
-<style>
-  md-dialog{
-    width:100%;
-  }
-</style>
-
-<md-dialog aria-label="Search">
+<md-dialog aria-label="Search" id="search-dialog">
   <form ng-cloak>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Search</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <i class="material-icons">close</i>
-        </md-button>
-      </div>
-    </md-toolbar>
-
-    <md-dialog-content>
+    <md-dialog-content id="search-dialog-content">
       <div class="md-dialog-content">
-        <md-input-container class="md-block">
-          <label>Search by project, builder, landmark or locality</label>
+        <div layout="row">
+            <div flex="75" id="current-location">
+              <p>You are currently in Gurgaon</p>
+            </div>
+            <div flex="25">
+              <md-button class="md-icon-button" ng-click="cancel()" id="close-icon">
+                <i class="material-icons">close</i>
+              </md-button>
+            </div>
+        </div>
+        <md-input-container md-no-float class="md-block" id="search-input">
           <input ng-model="searchText" ng-change="getSearchText()" type="text" placeholder="Search by project, builder, landmark or locality"/>
         </md-input-container>
-        <md-list>
-          <md-list-item ng-repeat="item in searchObject | filter:searchText" flex="100" ng-click="selectSearchItem(item)">
-            {{item.name}}
-          </md-list-item>
-        </md-list>
+        <div class="search-list">
+          <div ng-repeat="item in searchObject | filter:searchText" flex="100" ng-click="selectSearchItem(item)" ng-class="{{$index%2 == 0}}?'light':'dark'">
+            <h4>{{item.name}}</h4>
+            <p >{{item.type}}<span ng-show="item.displayLocation" class="location-icon"><i class="material-icons">location_on</i>{{item.displayLocation}}</span></p>
+          </div>
+        </div>
       </div>
     </md-dialog-content>
   </form>
