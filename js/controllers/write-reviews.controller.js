@@ -1,5 +1,86 @@
 app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http, $timeout, $mdToast) {
 
+    $scope.stepsModel = [];
+    var newKey = '';
+
+    $scope.selectedFile;
+
+    $scope.getFileDetails = function(event){
+         var files = event.target.files; //FileList object
+         $scope.selectedFile = files[0];
+         for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            reader.onload = $scope.imageIsLoaded; 
+            reader.readAsDataURL(file);
+         }
+    }
+
+    $scope.imageIsLoaded = function(e){
+        $scope.$apply(function() {
+            $scope.stepsModel.push(e.target.result);
+            $scope.uploadedImage = $scope.stepsModel[0];
+        });
+    }
+
+    $scope.createPath = function(review){
+        $scope.imageKey = db.ref('coverStory/images').push().key;
+        if($scope.selectedProjectOrLocality.type == 'Project'){
+            newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id+'/'+newKey;
+        }  else if($scope.selectedProjectOrLocality.type == 'Locality'){
+            newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
+            $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id+'/'+newKey;
+        }
+        
+        console.log($scope.path);
+        $http({
+            method:'POST',
+            url:'http://139.162.3.205/api/createPath',
+            params: {
+                path: $scope.path
+            }
+        }).then(function successCallback(response){
+            console.log(response);
+            if(response.data.SuccessCode == 200){
+                console.log('Path Created');
+                $scope.upload(review);
+            }
+        }, function errorCallback(response){
+            console.log(response);
+        });
+    }
+
+    $scope.size= '800x600';
+
+    $scope.imageNames = '';
+
+    $scope.size_url = [];
+    $scope.upload = function(review){
+        console.log($scope.size);
+        console.log($scope.selectedFile);
+        $scope.imageNames = $scope.selectedFile.name;
+        fd = new FormData();
+        fd.append("uploadedFile", $scope.selectedFile);
+        $http.post('http://139.162.3.205/api/uploadImage', fd,
+        {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type' : undefined},
+            params : {
+                path : $scope.path,
+                size : $scope.size
+            }
+        })
+        .success(function(result){
+            console.log(result.URLs);
+            $scope.submitReview(result.URLs[0].imageUrl, review);
+        })
+        .error(function(err){
+            console.log(err.message);
+        });
+    }
+
+
     $scope.review = {
         ratings: {}
     }
@@ -73,7 +154,7 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         // console.log($scope.review);
     };
 
-    $scope.submitReview = function(review) {
+    $scope.submitReview = function(imageUrl, review) {
 
         var user = firebase.auth().currentUser;
         console.log(user);
@@ -82,10 +163,10 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         $scope.review.blocked = false;
         $scope.review.createdDate = new Date().getTime();
         $scope.review.status = 'live';
+        $scope.review.imageUrl = imageUrl;
         console.log($scope.selectedProjectOrLocality);
         console.log($scope.selectedProjectOrLocality.type);
         if($scope.selectedProjectOrLocality.type == 'Project'){
-            var newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
             var updates = {};
             $scope.useReviewData = {
                 projectId: $scope.selectedProjectOrLocality.id,
@@ -111,7 +192,6 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
             //     console.log('project review submitted');
             // });
         } else if($scope.selectedProjectOrLocality.type == 'Locality'){
-            var newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
             var updates = {};
             $scope.useReviewData = {
                 locationId: $scope.selectedProjectOrLocality.id,

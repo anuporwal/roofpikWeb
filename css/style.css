@@ -423,6 +423,14 @@
     font-weight: 300;
     letter-spacing: 1px;
 }
+.footer-links a{
+    text-decoration: none;
+    color: #97989d;
+}
+.footer-links a:hover{
+    text-decoration: none;
+    color: #cc0000;
+}
 
 
 /*Project details page*/

@@ -186,9 +186,20 @@ md-radio-group {
                     </md-radio-group>
                 </div>
             </div>
+            <div class="image-selected">
+                <img class="thumb" ng-src="{{uploadedImage}}" />
+            </div>
+            <div class="md-padding" layout="row">
+                <div flex>
+                    Upload Image
+                </div>
+                <div flex="75">
+                    <input type="file" name="file" onchange="angular.element(this).scope().getFileDetails(event)" style = "width: 40%" accept="image/*" single/>
+                </div>
+            </div>
         </form>
         <div layout="row" layout-align="end center">
-            <md-button class="md-raised md-warn" ng-click="submitReview(review)" ng-disabled="review-form.$invalid">Submit</md-button>
+            <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="review-form.$invalid">Submit</md-button>
         </div>
     </div>
     <div flex="25 grow" class="md-padding review-tips">
