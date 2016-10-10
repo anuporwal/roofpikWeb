@@ -47,6 +47,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'projectListCtrl'
 		})
 
-	$urlRouterProvider.otherwise('/project-details');
+	$urlRouterProvider.otherwise('/test_new');
 
 }]);

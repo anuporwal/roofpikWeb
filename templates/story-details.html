@@ -46,7 +46,7 @@
                     </md-card-header-text>
                 </md-card-header>
                 <article ng-repeat="story in popularStories" ng-click="goToStoryDetails(story.storyId)">
-                    <img src="{{story.coverImage}}" class="md-card-image" alt="Washed Out" />
+                    <img ng-src="{{story.coverImage}}" class="md-card-image" alt="Washed Out" />
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-headline">{{story.title}}</span>
