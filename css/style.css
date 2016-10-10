@@ -388,7 +388,6 @@
 
 
 /* Project List */
-<<<<<<< HEAD
 
 .map-wrapper {
     height: 600px;
@@ -634,3 +633,134 @@
   .md-dialog-content #close-icon{
     float: right;
   }
+
+html {
+    font-family: 'PT Sans', sans-serif;
+}
+
+/* About us page*/
+
+#about-us-heading {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+}
+
+#about-us-title {
+    width: 100%;
+    height: auto;
+    background-image: url('http://roofpik.com/test/newweb/images/about-roofpik.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 15%;
+}
+
+#about-us-title h1 {
+    color: #ffffff;
+}
+
+#about-us-description {
+    width: 85%;
+    margin: 0 auto;
+    padding: 50px 0px;
+}
+#about-us-description p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #888888;
+    margin: 0 0 20px;
+    line-height: 1.5;
+}
+
+#our-team {
+    width: 100%;
+    height: auto;
+}
+
+#our-team-description {
+    width: 85%;
+    height: auto;
+}
+
+#our-team-description a{
+    color: #337ab7;
+}
+
+
+/* Jobs*/
+
+#job-opening {
+    width: 85%;
+    margin: 0 auto;
+    font-family: 'PT Sans', sans-serif;
+}
+#job-opening .job-opening-title:focus {
+    outline: none;
+    border: 0;
+
+}
+#job-opening .job-opening-title {
+    background-color: #008080;
+    padding: 3%;
+    cursor: pointer;
+}
+#job-opening .job-opening-description {
+    background-color: #ffffff;
+    padding: 3% 10%;
+}
+
+#job-opening .job-opening-description ul li {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #888888;
+    margin: 0 0 20px;
+    line-height: 1.5;
+}
+
+#job-opening #life-at-roofpik-title {
+    padding: 5% 0% 3% 0%;
+}
+
+#life-at-roofpik-images img {
+    object-fit: cover;
+    width: 100%;
+    height: 250px;
+
+}
+
+
+/*Contact Us */
+
+#contact-us-map {
+    width: 100%;
+    height: 350px;
+}
+
+#contact-us-form {
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+/*FAQ*/
+
+#faq {
+    width: 85%;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+#faq .faq-question{
+    cursor: pointer;
+}
+#faq .faq-question:focus{
+    outline: none;
+    border: 0;
+}
+
+#faq .faq-answer {
+    background: #f2f2f2;
+}

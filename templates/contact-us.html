@@ -1,0 +1,47 @@
+<div layout="column" id="contact-us">
+    <div id="contact-us-map">
+        <div id="map" style="width:100%;height:350px"></div>
+    </div>
+    <md-divider></md-divider>
+    <div layout="row" layout-xs="column" id="contact-us-form">
+        <div flex="50" flex-xs="100" class="md-padding">
+            <h2>Contact Us</h2>
+            <md-input-container class="md-block">
+                <label>Title</label>
+                <input ng-model="user.name ">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input ng-model="user.email" type="email">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Phone</label>
+                <input ng-model="user.phone" type="number">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Message</label>
+                <textarea ng-model="user.message" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <div flex="100" align="right">
+                <md-button class="md-raised md-primary">Send</md-button>
+            </div>
+        </div>
+        <div flex="50 " flex-xs="100" class="md-padding">
+            <h2>Gurgaon Office</h2>
+
+            <div layout="row">
+                <div flex="5"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                <div flex>250, Vipul Trade Center,<br> Sector 48, Gurgaon</div>
+            </div><br>
+            <div layout="row">
+                <div flex="5"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                <div flex>+91 124 438 4167</div>
+            </div><br>
+            <div layout="row">
+                <div flex="5"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                <div flex>contact@roofpik.com</div>
+            </div>
+        </div>
+    </div>
+</div>
