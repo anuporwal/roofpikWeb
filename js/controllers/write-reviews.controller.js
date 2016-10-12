@@ -91,6 +91,12 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                 console.log(resp);
                 $timeout(function(){
                     $scope.uploadedImage = resp;
+                    $http.post("http://139.162.3.205/api/testupload", {path: resp})
+                        .success(function(response){
+                            console.log(response);
+                        }).error(function(err){
+                            console.log(err);
+                        })
                 },0);
                 
             });
