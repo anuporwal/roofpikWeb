@@ -1,6 +1,13 @@
 app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, $stateParams){
 	console.log($stateParams);
 	$scope.reviewName = $stateParams.typeName;
+	$scope.ratingsObject1 = {};
+	$scope.ratingsObject2 = {};
+	$scope.ratingsObject3 = {};
+	$scope.ratingsObject4 = {};
+	$scope.ratingsObject5 = {};
+	$scope.ratingsObject6 = {};
+	$scope.ratingsObject7 = {};
 	console.log('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id);
 	db.ref('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
@@ -9,43 +16,115 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 			if($scope.review.imageUrl){
 				$scope.uploadedImage = $scope.review.imageUrl;
 			}
+			$scope.ratingsObject1 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.overallRating || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback1(rating, 1);
+		        }
+		    };
+			$scope.ratingsObject2 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.security || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback2(rating, 2);
+		        }
+		    };
+			$scope.ratingsObject3 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.amenities || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback3(rating, 3);
+		        }
+		    };
+		    $scope.ratingsObject4 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.openAndGreenAreas || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback4(rating, 4);
+		        }
+		    };
+		    $scope.ratingsObject5 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.electricityAndWaterSupply || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback5(rating, 5);
+		        }
+		    };
+		    $scope.ratingsObject6 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.convenienceOfHouseMaids || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback6(rating, 6);
+		        }
+		    };
+		    $scope.ratingsObject7 = {
+		        iconOnColor: 'rgb(255,87,34)', //Optional
+		        iconOffColor: 'rgb(140, 140, 140)', //Optional
+		        rating: $scope.review.ratings.convenienceOfParking || 0, //Optional
+		        minRating: 0, //Optional
+		        readOnly: false, //Optional
+		        callback: function(rating, index) { //Mandatory    
+		            $scope.ratingsCallback7(rating, 7);
+		        }
+		    };
 		},0);
 		
 	})
 
-    $scope.ratingsObject = {
-        iconOnColor: 'rgb(255,87,34)', //Optional
-        iconOffColor: 'rgb(140, 140, 140)', //Optional
-        rating: 0, //Optional
-        minRating: 0, //Optional
-        readOnly: false, //Optional
-        callback: function(rating, index) { //Mandatory    
-            $scope.ratingsCallback(rating, index);
-        }
-    };
-
-
-    $scope.ratingsCallback = function(rating, index) {
+    $scope.ratingsCallback1 = function(rating, index) {
         console.log('Selected rating is : ', rating, ' and index is ', index);
-
-        if (index == 1) {
-            $scope.review.overallRating = rating;
-        } else if (index == 2) {
-            $scope.review.ratings.security = rating;
-        } else if (index == 3) {
-            $scope.review.ratings.amenities = rating;
-        } else if (index == 4) {
-            $scope.review.ratings.openAndGreenAreas= rating;
-        } else if (index == 5) {
-            $scope.review.ratings.electricityAndWaterSupply= rating;
-        } else if (index == 6) {
-            $scope.review.ratings.convenienceOfHouseMaids= rating;
-        } else if (index == 7) {
-            $scope.review.ratings.convenienceOfParking= rating;
-        }
+        $scope.review.overallRating = rating;
 
         // console.log($scope.review);
     };
+    $scope.ratingsCallback2 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+        $scope.review.ratings.security = rating;
+    };
+    $scope.ratingsCallback3 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+    };
+
+	$scope.ratingsCallback4 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+        $scope.review.ratings.amenities = rating;
+    };
+
+	$scope.ratingsCallback5 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+        $scope.review.ratings.openAndGreenAreas= rating;
+    };
+
+	$scope.ratingsCallback6 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+        $scope.review.ratings.convenienceOfHouseMaids= rating;
+    };
+
+	$scope.ratingsCallback7 = function(rating, index) {
+        console.log('Selected rating is : ', rating, ' and index is ', index);
+        $scope.review.ratings.convenienceOfParking= rating;
+    };
+
+
 
     $scope.stepsModel = [];
     var newKey = '';
@@ -125,6 +204,10 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
         .error(function(err){
             console.log(err.message);
         });
+    }
+
+    $scope.submit = function(review){
+    	console.log(review);
     }
 
 })
