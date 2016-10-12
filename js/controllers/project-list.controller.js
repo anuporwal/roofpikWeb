@@ -57,10 +57,10 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
         var markers = [];
         angular.forEach(projects, function(value, key){
             var data = [];
-            data = ['<div class="info_content">' +
+            data = ['<div class="info_content"><a href="#/project-details/'+value.projectId+'/'+value.projectName+'">' +
              '<img style="width:80%" src="'+value.imgUrl+'"' +
                 '<h3>'+value.projectName+'</h3>' +
-                '<p>'+value.displayLocation+'</p>' + '</div>'
+                '<p>'+value.displayLocation+'</p>' + '</a></div>'
             ];
             var markerData = [value.projectName, value.lat, value.lng];
             markers.push(markerData);
@@ -186,9 +186,9 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
         }
     }
 
-    $scope.selectProject = function(pro) {
-        console.log(pro);
-        $state.go('project-details', { id: pro.projectId, name: pro.projectName });
+    $scope.selectProject = function(id, name) {
+        console.log(id, name);
+        $state.go('project-details', { id: id, name: name });
     }
    
 

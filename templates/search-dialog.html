@@ -16,7 +16,7 @@
           <input ng-model="searchText" ng-change="getSearchText()" type="text" placeholder="Search by project, builder, landmark or locality"/>
         </md-input-container>
         <div class="search-list">
-          <div ng-repeat="item in searchObject | filter:searchText" flex="100" ng-click="selectSearchItem(item)" ng-class="{{$index%2 == 0}}?'light':'dark'">
+          <div ng-repeat="item in searchObject | filter:searchText | limitTo:10" flex="100" ng-click="selectSearchItem(item)" ng-class="{{$index%2 == 0}}?'light':'dark'">
             <h4>{{item.name}}</h4>
             <p >{{item.type}}<span ng-show="item.displayLocation" class="location-icon"><i class="material-icons">location_on</i>{{item.displayLocation}}</span></p>
           </div>

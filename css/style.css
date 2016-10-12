@@ -400,6 +400,11 @@
     width: 100%;
 }
 
+.info_content a{
+    text-decoration: none;
+    color:#000;
+}
+
 #map {
     height: 100%;
     width: 100%;

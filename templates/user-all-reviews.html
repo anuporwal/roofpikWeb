@@ -1,0 +1,10 @@
+<md-content>
+    <md-card class="md-padding" ng-repeat="review in allReviews">
+        <div class="user-review" layout="row">
+            <h3>{{review.reviewTitle}}</h3>
+            <p ng-if="review.projectName">{{review.projectName}}</p>
+            <p ng-if="review.locationName">{{review.locationName}}</p>
+            <i class="material-icons" ng-click="editReview(review)">mode_edit</i>
+        </div>
+    </md-card>
+</md-content>
