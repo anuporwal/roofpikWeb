@@ -188,8 +188,10 @@ md-radio-group {
                     </div>
                 </div>
                 <div class="image-selected">
-                    <img class="thumb" ng-src="{{uploadedImage}}" />
+                    <img class="thumb" ng-src="{{uploadedImage}}" style="width:400px;height:200px;"/>
                 </div>
+                <div class="demo"></div>
+                <md-button class="md-raised md-warn" ng-click="cropClick()" >Crop</md-button>
                 <div class="md-padding" layout="row">
                     <div flex>
                         Upload Image

@@ -4,24 +4,25 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
     var newKey = '';
 
     $scope.selectedFile;
+    $scope.uploadedImage = '';
+    var basic;
 
-    $scope.showAdvanced = function() {
-        console.log($scope.selectedFile);
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'templates/crop-image.html',
-            parent: angular.element(document.body),
-            // targetEvent: ev,
-            clickOutsideToClose:true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
-        cropImage($scope.selectedFile);
-    };
+    // $scope.showAdvanced = function() {
+    //     console.log($scope.uploadedImage);
+    //     $mdDialog.show({
+    //         controller: DialogController,
+    //         templateUrl: 'templates/crop-image.html',
+    //         parent: angular.element(document.body),
+    //         // targetEvent: ev,
+    //         clickOutsideToClose:true,
+    //         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    //     })
+    //     .then(function(answer) {
+    //         $scope.status = 'You said the information was "' + answer + '".';
+    //     }, function() {
+    //         $scope.status = 'You cancelled the dialog.';
+    //     });
+    // };
 
     $scope.getFileDetails = function(event){
          var files = event.target.files; //FileList object
@@ -32,57 +33,77 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
             reader.onload = $scope.imageIsLoaded; 
             reader.readAsDataURL(file);
          }
-        $scope.showAdvanced();
     }
 
     $scope.imageIsLoaded = function(e){
         $scope.$apply(function() {
             $scope.stepsModel.push(e.target.result);
             $scope.uploadedImage = $scope.stepsModel[0];
+            // $('.demo').croppie({
+            //     url: $scope.uploadedImage,
+            // });
+            cropImage($scope.uploadedImage);
+            // $scope.showAdvanced();
         });
     }
 
-    function cropImage(source){
-        basic = $('.demo').croppie({
-           viewport: {
-              width: 200,
-              height: 200,
-              type: 'circle'
-           }
-        });
-        basic.croppie('bind', {
-            url: source
-        });
-    }
 
-    $scope.cropClick = function(){
-        $ionicLoading.show({
-           template: 'Loading! Please wait...'
-        });
-        basic.croppie('result', {
-           type: 'canvas',
-           format: 'jpeg',
-           circle: true
-        }).then(function (resp) {
 
-        });
-    }
+    // function DialogController($scope, $mdDialog) {
+    //     console.log($scope.uploadedImage);
+    //     $scope.hide = function() {
+    //         $mdDialog.hide();
+    //     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
+    //     $scope.cancel = function() {
+    //         $mdDialog.cancel();
+    //     };
 
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
+    //     $scope.answer = function(answer) {
+    //         $mdDialog.hide(answer);
+    //     };
 
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
-        };
-    }
+
+
+    // }
+
+        function cropImage(source){
+            basic = $('.demo').croppie({
+                viewport: {
+                width: 200,
+                height: 100,
+                type: 'square'
+                }
+            });
+            basic.croppie('bind', {
+                url: source
+            });
+        }
+
+        $scope.cropClick = function(){
+            console.log('called');
+            basic.croppie('result', {
+                type: 'canvas',
+                format: 'jpeg',
+                square: true
+            }).then(function (resp) {
+                console.log('called');
+                console.log(resp);
+                $timeout(function(){
+                    $scope.uploadedImage = resp;
+                    $http.post("http://139.162.3.205/api/testupload", {path: resp})
+                        .success(function(response){
+                            console.log(response);
+                        }).error(function(err){
+                            console.log(err);
+                        })
+                },0);
+                
+            });
+        }
 
     $scope.createPath = function(review){
+        console.log($scope.selectedFile);
         $scope.imageKey = db.ref('coverStory/images').push().key;
         if($scope.selectedProjectOrLocality.type == 'Project'){
             newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
@@ -125,7 +146,7 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         console.log($scope.selectedFile);
         $scope.imageNames = $scope.selectedFile.name;
         fd = new FormData();
-        fd.append("uploadedFile", $scope.selectedFile);
+        fd.append("uploadedFile", $scope.uploadedImage);
         $http.post('http://139.162.3.205/api/uploadImage', fd,
         {
             transformRequest: angular.identity,
@@ -137,7 +158,7 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         })
         .success(function(result){
             console.log(result.URLs);
-            $scope.submitReview(result.URLs[0].imageUrl, review);
+            // $scope.submitReview(result.URLs[0].imageUrl, review);
         })
         .error(function(err){
             console.log(err.message);
