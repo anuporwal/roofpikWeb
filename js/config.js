@@ -42,6 +42,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		});
 
 	$stateProvider
+		.state('review-details', {
+			url: '/review-details/:city/:type/:typeId/:typeName/:id',
+			templateUrl: 'templates/review-details.html',
+			controller: 'reviewDetailsCtrl'
+		});
+
+	$stateProvider
+		.state('user-all-reviews', {
+			url: '/user-all-reviews',
+			templateUrl: 'templates/user-all-reviews.html',
+			controller: 'userAllReviewsCtrl'
+		});
+
+	$stateProvider
 		.state('project-list', {
 			url: '/project-list/:from/:type/:id',
 			templateUrl: 'templates/project-list.html',
@@ -77,6 +91,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		});
 
 
-	$urlRouterProvider.otherwise('/home');
+	$urlRouterProvider.otherwise('/user-all-reviews');
 
 }]);

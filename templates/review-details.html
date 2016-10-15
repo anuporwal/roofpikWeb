@@ -29,6 +29,14 @@
     background-color: #f2f2f2;
 }
 
+.colored{
+    color:rgb(255,87,34);
+}
+
+.normal {
+    color:rgb(140, 140, 140);
+}
+
 md-radio-group {
     float: right;
 }
@@ -36,37 +44,7 @@ md-radio-group {
 <md-content>
     <div layout="row" class="" layout-xs="column">
         <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box">
-            <!-- <div id="gl-review-loader-wrapper" ng-hide="loginStatus">
-            <div id="gl-review-loader-center">
-                <div class="gl-review-load">
-                    <h2>Please Login First</h2>
-                    <a ng-click="openLogin()" class="gl-btn gl-large-btn gl-btn-color-3">Login/Signup</a>
-                </div>
-            </div>
-        </div> -->
-            <form name="review-form">
-                <div layout="row" class="md-padding">
-                    <div flex>
-                        <md-input-container class="md-block">
-                            <input ng-model="selectedItem" placeholder="Select Project/Locality" ng-change="nameEntered()" required>
-                        </md-input-container>
-                        <div class="searchList" ng-show="showList">
-                            <md-list class="review-search-list">
-                                <md-list-item ng-repeat="item in projectLocality|filter:selectedItem" class="review-search-item" ng-click="selectProjectLocality(item)">
-                                    {{item.name}}
-                                </md-list-item>
-                            </md-list>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="showRequired">
-                <div layout="row">
-                    <div flex="75"></div>
-                    <div flex="25">
-                        (*Required)
-                    </div>
-                </div>
-            </div> -->
+                <h3 style="margin:10px auto;"">{{reviewName}}</h3>
                 <div layout="row" class="md-padding" layout-sm="column">
                     Are you a *
                     <span flex></span>
@@ -82,7 +60,8 @@ md-radio-group {
                         Overall rating *
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='1'></review-ratings>
+                        <!-- <div><span ng-repeat="i in [1,2,3,4,5]" ng-class="i<review.overallRating?'colored':'normal'"><i class="material-icons">star</i></span></div> -->
+                        <review-ratings ratingsobj='ratingsObject1' index='1'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -105,7 +84,7 @@ md-radio-group {
                         Security
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='2'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject2' index='2'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -114,7 +93,7 @@ md-radio-group {
                         Amenities
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='3'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject3' index='3'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -123,7 +102,7 @@ md-radio-group {
                         Open and green areas
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='4'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject4' index='4'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -132,7 +111,7 @@ md-radio-group {
                         Electricity and water supply
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='5'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject5' index='5'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -141,7 +120,7 @@ md-radio-group {
                         Convinience of housemaids
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='6'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject6' index='6'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -150,7 +129,7 @@ md-radio-group {
                         Convinience of parking
                     </div>
                     <div layout="row" flex layout-align="end center">
-                        <review-ratings ratingsobj='ratingsObject' index='7'></review-ratings>
+                        <review-ratings ratingsobj='ratingsObject7' index='7'></review-ratings>
                     </div>
                 </div>
                 <md-divider></md-divider>
@@ -200,7 +179,7 @@ md-radio-group {
                 </div>
             </form>
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="review-form.$invalid">Submit</md-button>
+                <md-button class="md-raised md-warn" ng-click="submit(review)" ng-disabled="review-form.$invalid">Submit</md-button>
             </div>
         </div>
         <div flex="25 grow" class="md-padding review-tips">
