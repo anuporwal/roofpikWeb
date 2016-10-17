@@ -1,3 +1,8 @@
+html, body {
+ font-size: 14px;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
 /* Header */
 
 .md-header {
@@ -243,6 +248,7 @@
     text-decoration: none;
 }
 
+
 /* Home Page */
 
 
@@ -309,20 +315,26 @@
     text-align: center;
 }
 
+.home-category {
+    padding: 80px 0 120px 0;
+}
+
 .home-category h2 {
     font-size: 20px;
     font-weight: 300;
     color: #888888;
     margin: 0px;
     text-align: center;
+    padding: 0px 0px 40px 0;
 }
 
 .home-category h1 {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 400;
     color: #454545;
     margin: 0 0 10px;
     text-align: center;
+    padding: 0px;
 }
 
 .home-category-wrapper .image {
@@ -347,17 +359,22 @@
     transform: scale(1.1);
 }
 
+
 .home-category-wrapper .image {
-    height: 300px;
     position: relative;
     width: 100%;
-}
+    max-height: 300px;
+   }
 
 .home-category-wrapper .image h2 {
     position: absolute;
-    top: 200px;
+    bottom: 0px;
     left: 0;
+    padding: 0px;
     width: 100%;
+    color: #fff;
+    background: rgba(29, 29, 29, 0.57);
+    
 }
 
 .project-name {
@@ -386,6 +403,35 @@
     vertical-align: bottom;
 }
 
+.write-reviews {
+    background: url('http://roofpik.com/test/newweb/images/bg5.jpg') center center no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+}
+
+.write-reviews .reviews-wrapper {
+    background: rgba(25, 25, 25, 0.51);
+    padding: 30px 0 50px;
+}
+
+.write-reviews .reviews-wrapper h1 {
+    font-size: 45px;
+    font-weight: 100;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 10px;
+    width: auto;
+}
+
+.write-reviews .reviews-wrapper h2 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #dadada;
+    text-align: center;
+    margin: 20px 0 60px;
+    width: auto;
+}
+
 
 /* Project List */
 
@@ -410,6 +456,7 @@
     width: 100%;
 }
 
+
 /* Footer */
 
 .footer {
@@ -427,12 +474,15 @@
     line-height: 26px;
     font-weight: 300;
     letter-spacing: 1px;
+    margin: 0px 0px 20px;
 }
-.footer-links a{
+
+.footer-links a {
     text-decoration: none;
     color: #97989d;
 }
-.footer-links a:hover{
+
+.footer-links a:hover {
     text-decoration: none;
     color: #cc0000;
 }
@@ -440,7 +490,7 @@
 
 /*Project details page*/
 
-.project-details-page ul{
+.project-details-page ul {
     list-style-type: none;
 }
 
@@ -461,18 +511,20 @@
 }
 
 .golden {
-  color:#ffdb4d;
+    color: #ffdb4d;
 }
 
 .grey {
-  color:#a6a6a6;
+    color: #a6a6a6;
 }
 
 #reviewHeading {
-  margin-top:40px;
+    margin-top: 40px;
 }
 
-.overall-rating, .overview-wrapper, .all-rating-summary {
+.overall-rating,
+.overview-wrapper,
+.all-rating-summary {
     background-color: #ffffff;
     padding: 40px 25px 50px;
     border: 1px solid #f2f2f2;
@@ -482,7 +534,8 @@
     margin: 25px;
 }
 
-.overview-wrapper ul li, .all-rating-summary ul li{
+.overview-wrapper ul li,
+.all-rating-summary ul li {
     padding: 15px 0;
     font-size: 12px;
     font-weight: 300;
@@ -490,8 +543,8 @@
     border-top: 1px solid #f3f3f3
 }
 
-.overview-wrapper ul li span{
-    padding:10px;
+.overview-wrapper ul li span {
+    padding: 10px;
     font-size: 12px;
     font-weight: 500;
     color: #888888;
@@ -502,20 +555,22 @@
 }
 
 .overall-ratings {
-  float:right;
+    float: right;
 }
 
 .overall-ratings-headings {
     border-bottom: 1px solid #e6e6e6;
 }
 
-.overall-ratings-headings, .overview-heading, .all-rating-summary-heading {
-    text-align:center;
+.overall-ratings-headings,
+.overview-heading,
+.all-rating-summary-heading {
+    text-align: center;
 }
 
 #yesNoQues {
-  text-align:right;
-  padding-right:5px;
+    text-align: right;
+    padding-right: 5px;
 }
 
 .progress-bar {
@@ -523,7 +578,7 @@
     width: 100%;
     height: 15px;
     margin: 5px;
-    position:relative;
+    position: relative;
 }
 
 .my-progress {
@@ -533,41 +588,46 @@
 }
 
 .tagcloud .tag-btn {
-    margin:8px;
-    padding:8px;
+    margin: 8px;
+    padding: 8px;
 }
 
 .tagcloud span.tag-btn {
-    display:inline-block;
+    display: inline-block;
 }
 
 .tagcloud span.tag-btn:nth-child(1) {
-  background-color: rgba(34, 168, 244, 0.1);
-  color: #22a8f4;
+    background-color: rgba(34, 168, 244, 0.1);
+    color: #22a8f4;
 }
+
 .tagcloud span.tag-btn:nth-child(2) {
-  background-color: rgba(255, 141, 69, 0.1);
-  color: #ff8d3b;
+    background-color: rgba(255, 141, 69, 0.1);
+    color: #ff8d3b;
 }
+
 .tagcloud span.tag-btn:nth-child(3) {
-  background-color: rgba(157, 49, 197, 0.1);
-  color: #9d31c5;
+    background-color: rgba(157, 49, 197, 0.1);
+    color: #9d31c5;
 }
+
 .tagcloud span.tag-btn:nth-child(4) {
-  background-color: rgba(74, 197, 182, 0.1);
-  color: #4ac5b6;
+    background-color: rgba(74, 197, 182, 0.1);
+    color: #4ac5b6;
 }
+
 .tagcloud span.tag-btn:nth-child(5) {
-  background-color: rgba(237, 52, 174, 0.1);
-  color: #ed34ae;
+    background-color: rgba(237, 52, 174, 0.1);
+    color: #ed34ae;
 }
+
 .tagcloud span.tag-btn:nth-child(6) {
-  background-color: rgba(52, 104, 137, 0.1);
-  color: #3468ed;
+    background-color: rgba(52, 104, 137, 0.1);
+    color: #3468ed;
 }
 
 .status-n-bhk p {
-    float:right;
+    float: right;
 }
 
 .project-status {
@@ -576,11 +636,11 @@
     font-size: 14px;
     padding: 15px 20px;
     border-radius: 5px;
-    margin-right:10px;
+    margin-right: 10px;
     font-weight: 500;
 }
 
-.bhk-available{
+.bhk-available {
     background-color: #FC313A;
     color: #fff;
     font-size: 14px;
@@ -589,67 +649,72 @@
     font-weight: 500;
 }
 
+
 /*Search modal*/
-  #search-dialog md-dialog-content{
-    background-color:#F3F3F3;
-    height:60%;
-  }
-  #search-dialog{
-    width:100%;
-  }
 
-  .light{
-    background-color:#ECFCFA;
-    padding: 10px 30px;
-  }
+#search-dialog md-dialog-content {
+    background-color: #F3F3F3;
+    height: 60%;
+}
 
-  .dark{
-    background-color:#F5FDFC;
+#search-dialog {
+    width: 100%;
+}
+
+.light {
+    background-color: #ECFCFA;
     padding: 10px 30px;
-  }
-  #search-input input {
+}
+
+.dark {
+    background-color: #F5FDFC;
+    padding: 10px 30px;
+}
+
+#search-input input {
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: 2px 5px 2px rgba(0, 0, 0, 0.1), inset 2px 2px 1px #f0f0f0;
-  }
+}
 
-  #search-input {
+#search-input {
     margin: 0px 0px -10px 0px;
-  }
+}
 
-  .search-list p{
+.search-list p {
     font-family: 'PT Sans', sans-serif;
     font-size: 14px;
     font-weight: 300;
     color: #888888;
-  }
+}
 
-  .search-list h4{
+.search-list h4 {
     font-weight: 400;
-  }
+}
 
-  .search-list .location-icon {
-    float:right;
-    padding-right:40px;
-  }
-
-  .search-list .location-icon i{
-    font-size: 18px;
-    color:#41b9aa;
-  }
-
-  .md-dialog-content #current-location{
-    text-align: center;
-  }
-
-  .md-dialog-content #close-icon{
+.search-list .location-icon {
     float: right;
-  }
+    padding-right: 40px;
+}
+
+.search-list .location-icon i {
+    font-size: 18px;
+    color: #41b9aa;
+}
+
+.md-dialog-content #current-location {
+    text-align: center;
+}
+
+.md-dialog-content #close-icon {
+    float: right;
+}
 
 html {
     font-family: 'PT Sans', sans-serif;
 }
+
 
 /* About us page*/
 
@@ -678,6 +743,7 @@ html {
     margin: 0 auto;
     padding: 50px 0px;
 }
+
 #about-us-description p {
     font-size: 14px;
     font-weight: 300;
@@ -696,7 +762,7 @@ html {
     height: auto;
 }
 
-#our-team-description a{
+#our-team-description a {
     color: #337ab7;
 }
 
@@ -708,16 +774,18 @@ html {
     margin: 0 auto;
     font-family: 'PT Sans', sans-serif;
 }
+
 #job-opening .job-opening-title:focus {
     outline: none;
     border: 0;
-
 }
+
 #job-opening .job-opening-title {
     background-color: #008080;
     padding: 3%;
     cursor: pointer;
 }
+
 #job-opening .job-opening-description {
     background-color: #ffffff;
     padding: 3% 10%;
@@ -740,7 +808,6 @@ html {
     object-fit: cover;
     width: 100%;
     height: 250px;
-
 }
 
 
@@ -758,6 +825,7 @@ html {
     background-color: #ffffff;
 }
 
+
 /*FAQ*/
 
 #faq {
@@ -766,10 +834,11 @@ html {
     background-color: #ffffff;
 }
 
-#faq .faq-question{
+#faq .faq-question {
     cursor: pointer;
 }
-#faq .faq-question:focus{
+
+#faq .faq-question:focus {
     outline: none;
     border: 0;
 }

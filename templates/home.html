@@ -6,71 +6,62 @@
                 <h2>  India's largest property reviewing platform </h2>
                 <div layout="row" layout-align="center center">
                     <div flex="80" class="home-search">
-                        <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)"/>
+                        <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)" />
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
-        <div class="home-category" layout-align="center center" layout-sm="column" layout-xs="column" layout-gt-sm="row" flex>
-            <div flex="80" layout-align="center center" flex-xs="100" flex-sm="100">
+    <section layout="row" layout-align="center center">
+        <div class="home-category" layout-align="center center" layout-gt-sm="row" flex="80" layout-wrap>
+            <div flex="100" layout-align="center center">
                 <h1>  Find the best projects for!! </h1>
                 <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
-                <div layout-sm="column" layout-xs="column" layout-gt-sm="row" layout-align="center center">
-                    <div flex="100" class="home-category-wrapper" layout-sm="column" layout-xs="column" layout-gt-sm="row">
-                        <div flex="80" layout="column" flex-xs="100" flex-sm="100">
-                            <div flex="100" layout-sm="column" layout-xs="column" layout-gt-sm="row">
-                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('justMarried')">
-                                    <div class="image">
-                                        <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                    </div>
-                                </div>
-                                <div flex="33" class="image-box" flex-xs="100" flex-sm="100">
-                                    <div class="image">
-                                        <img src="http://roofpik.com/test/newweb/images/newlymarried.jpg" alt="" />
-                                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div flex="100" layout-sm="column" layout-xs="column" layout-gt-sm="row">
-                                <div flex="33" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('kids')">
-                                    <div class="image">
-                                        <img src="http://roofpik.com/test/newweb/images/kids.jpg" alt="" />
-                                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                    </div>
-                                </div>
-                                <div flex="66" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('bachelors')">
-                                    <div class="image">
-                                        <img src="http://roofpik.com/test/newweb/images/bachelors.jpg" alt="" />
-                                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div flex="20" flex-xs="100" flex-sm="100">
-                            <div class="image-box" ng-click="takeToProjectList('oldAgeFriendly')">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/old.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                            <div class="image-box">
-                                <div class="image">
-                                    <img src="http://roofpik.com/test/newweb/images/old.jpg" alt="" />
-                                    <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+            <div class="home-category-wrapper" layout="row" layout-align="center center" flex="100" layout-wrap>
+                <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('justMarried')">
+                    <div class="image">
+                        <img src="images/home/family.jpg" alt="" />
+                        <h2>Family</h2>
+                    </div>
+                </div>
+                   <div  class="image-box" flex="20" ng-click="takeToProjectList('bachelors')" flex-xs="100" flex-sm="100">
+                    <div class="image">
+                        <img src="http://roofpik.com/test/newweb/images/old.jpg" alt="" />
+                        <h2>Elderly</h2>
+                    </div>
+                </div>
+                <div flex="30" class="image-box" flex-xs="100" flex-sm="100">
+                    <div class="image">
+                        <img src="images/home/married.jpg" alt="" />
+                        <h2>Married</h2>
+                    </div>
+                </div>
+             
+                <div flex="30" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('kids')">
+                    <div class="image">
+                        <img src="http://roofpik.com/test/newweb/images/kids.jpg" alt="" />
+                        <h2>Children</h2>
+                    </div>
+                </div>
+                <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('bachelors')">
+                    <div class="image">
+                        <img src="http://roofpik.com/test/newweb/images/bachelors.jpg" alt="" />
+                        <h2>Bachelors</h2>
+                    </div>
+                </div>
+                 <div  class="image-box" flex="20" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('bachelors')">
+                    <div class="image">
+                        <img src="http://www.thegrandpet.com/wp-content/uploads/2010/04/dog-running-with-ball.jpg" alt="" />
+                        <h2>Pet Friendly</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
-        <div class="featured-header" layout-align="center center" layout="row" flex>
-            <div class="featured-header-wrapper" flex="80" layout-align="center center">
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="write-reviews">
+        <div layout-align="center center" layout="row" flex>
+            <div class="reviews-wrapper" flex="80" layout-align="center center">
                 <h1>  2000+ Reviews</h1>
                 <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child. </h2>
                 <div layout="row" layout-align="center center">
@@ -110,5 +101,4 @@
             </div>
         </div>
     </section>
-
 </div>
