@@ -126,62 +126,84 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     $scope.projects = {};
     var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors'];
 
-    if($stateParams.from == 'search'){
+
+    $scope.storeProjects = function(data){
         var projectCount = 0;
-        db.ref('topRated').once('value', function(dataSnapshot) {
-            console.log(dataSnapshot.val());
-            $timeout(function() {
-                if($stateParams.type == 'locality'){
-                    angular.forEach(dataSnapshot.val(), function(value, key){
-                        projectCount++;
-                        if(value.localityId == $stateParams.id){
-                            $scope.projects[key] = value;
-                        }
-                        if(projectCount == Object.keys(dataSnapshot.val()).length){
-                            console.log($scope.projects);
-                            $scope.numProjects = Object.keys($scope.projects).length;
-                            $scope.initializeProjects($scope.projects);
-                        }
-                    })
-                } else if($stateParams.type == 'developer'){
-                    angular.forEach(dataSnapshot.val(), function(value, key){
-                        projectCount++;
-                        if(value.developerId == $stateParams.id){
-                            $scope.projects[key] = value;
-                        }
-                        if(projectCount == Object.keys(dataSnapshot.val()).length){
-                            console.log($scope.projects);
-                            $scope.numProjects = Object.keys($scope.projects).length;
-                            $scope.initializeProjects($scope.projects);
-                        }
-                    })
+         if($stateParams.type == 'locality'){
+            angular.forEach(data, function(value, key){
+                projectCount++;
+                if(value.localityId == $stateParams.id){
+                    $scope.projects[key] = value;
                 }
-            }, 100);
-        });
+                if(projectCount == Object.keys(data).length){
+                    console.log($scope.projects);
+                    $scope.numProjects = Object.keys($scope.projects).length;
+                    $scope.initializeProjects($scope.projects);
+                }
+            })
+        } else if($stateParams.type == 'developer'){
+            angular.forEach(data, function(value, key){
+                projectCount++;
+                if(value.developerId == $stateParams.id){
+                    $scope.projects[key] = value;
+                }
+                if(projectCount == Object.keys(data).length){
+                    console.log($scope.projects);
+                    $scope.numProjects = Object.keys($scope.projects).length;
+                    $scope.initializeProjects($scope.projects);
+                }
+            })
+        }
+    }
+
+    if($stateParams.from == 'search'){
+        if(!checkCookie('topRatedObject')){
+            db.ref('topRated').once('value', function(dataSnapshot) {
+                setCookie('topRatedObject', JSON.stringify(dataSnapshot.val()), 1);
+                $timeout(function(){
+                    $scope.storeProjects(dataSnapshot.val());
+                },0);
+            })
+        } else {
+            var data = JSON.parse((getCookie('topRatedObject')) || {});
+            $scope.storeProjects(data);
+        }
     }else if ($stateParams.from == 'topRated') {
-        db.ref('topRated').once('value', function(dataSnapshot) {
-            console.log(dataSnapshot.val());
-            $timeout(function() {
-                $scope.projects = dataSnapshot.val();
-                $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                // $scope.numResults = Object.keys($scope.projects).length;
-                $scope.initializeProjects($scope.projects);
-            }, 100);
-        });
+        if(!checkCookie('topRatedObject')){
+            db.ref('topRated').once('value', function(dataSnapshot) {
+                $timeout(function(){
+                    $scope.projects = dataSnapshot.val();
+                    $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                    setCookie('topRatedObject', JSON.stringify(dataSnapshot.val()), 1);
+                    setCookie('numProjectsObject', JSON.stringify($scope.numProjects), 1);
+                    $scope.initializeProjects($scope.projects);
+                },0);
+            })
+        } else {
+            var data = JSON.parse((getCookie('topRatedObject')) || {});
+            $scope.projects = data;
+            $scope.numProjects = Object.keys(data).length;
+        }
     } else {
         for (var i = 0; i < 5; i++) {
             if ($stateParams.from == types[i]) {
                 console.log($stateParams.from + 'List');
-                db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
-                    $timeout(function() {
-                        console.log(dataSnapshot.val());
-                        console.log(Object.keys(dataSnapshot.val()).length);
-                        $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                        // $scope.numResults = Object.keys(dataSnapshot.val()).length;
-                        $scope.projects = dataSnapshot.val();
-                        $scope.initializeProjects($scope.projects);
-                    }, 100);
-                })
+                if(!checkCookie($stateParams.from + 'ListObject')){
+                    db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
+                        $timeout(function() {
+                            $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                            $scope.projects = dataSnapshot.val();
+                            setCookie($stateParams.from + 'ListObject', JSON.stringify($scope.projects), 1);
+                            setCookie('numProjectsObject', JSON.stringify($scope.numProjects), 1);
+                            $scope.initializeProjects($scope.projects);
+                        }, 100);
+                    })                  
+                } else {
+                    var data = JSON.parse((getCookie($stateParams.from + 'ListObject')) || {});
+                    $scope.numProjects = Object.keys(data).length;
+                    $scope.projects = data;
+                    $scope.initializeProjects($scope.projects);
+                }
             }
         }
     }
