@@ -4,29 +4,38 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
     var newKey = '';
 
     $scope.selectedFile;
-    $scope.uploadedImage = '';
     var basic;
 
-    // $scope.showAdvanced = function() {
-    //     console.log($scope.uploadedImage);
-    //     $mdDialog.show({
-    //         controller: DialogController,
-    //         templateUrl: 'templates/crop-image.html',
-    //         parent: angular.element(document.body),
-    //         // targetEvent: ev,
-    //         clickOutsideToClose:true,
-    //         fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //     })
-    //     .then(function(answer) {
-    //         $scope.status = 'You said the information was "' + answer + '".';
-    //     }, function() {
-    //         $scope.status = 'You cancelled the dialog.';
-    //     });
-    // };
+    $scope.showAdvanced = function(imageUrl) {
+        // console.log($scope.uploadedImage);
+        console.log('called');
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'templates/crop-image.html',
+            parent: angular.element(document.body),
+            // targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
+            locals:{
+                imageUrl: imageUrl
+            }
+        })
+        .then(function(answer) {
+            $timeout(function(){
+                $scope.uploadedImage = answer;
+            },0);
+            $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
 
     $scope.getFileDetails = function(event){
+        $scope.selectedFile;
+        $scope.uploadedImage = '';
          var files = event.target.files; //FileList object
          $scope.selectedFile = files[0];
+         console.log($scope.selectedFile);
          for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var reader = new FileReader();
@@ -36,42 +45,51 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
     }
 
     $scope.imageIsLoaded = function(e){
+        $scope.stepsModel = [];
         $scope.$apply(function() {
             $scope.stepsModel.push(e.target.result);
-            $scope.uploadedImage = $scope.stepsModel[0];
-            // $('.demo').croppie({
-            //     url: $scope.uploadedImage,
-            // });
-            cropImage($scope.uploadedImage);
-            // $scope.showAdvanced();
+            $timeout(function(){
+                $scope.uploadedImage = $scope.stepsModel[0];
+                console.log($scope.uploadedImage);
+                $scope.showAdvanced($scope.uploadedImage);
+            },0);
         });
     }
+    
 
+    function DialogController($scope, $mdDialog, locals) {
+        $scope.locals = locals;
+        console.log($scope.locals);
+        $('.demo').croppie({
+            url: $scope.locals.imageUrl,
+        });
 
+        console.log($('.demo').html());
+        $timeout(function(){
+            cropImage($scope.locals.imageUrl);
+        },0);
 
-    // function DialogController($scope, $mdDialog) {
-    //     console.log($scope.uploadedImage);
-    //     $scope.hide = function() {
-    //         $mdDialog.hide();
-    //     };
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
 
-    //     $scope.cancel = function() {
-    //         $mdDialog.cancel();
-    //     };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
 
-    //     $scope.answer = function(answer) {
-    //         $mdDialog.hide(answer);
-    //     };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
 
-
-
-    // }
+        var basic;
 
         function cropImage(source){
-            basic = $('.demo').croppie({
+            console.log(source);
+            console.log($('.demo').html());
+             basic = $('.demo').croppie({
                 viewport: {
-                width: 200,
-                height: 100,
+                width: 250,
+                height: 250,
                 type: 'square'
                 }
             });
@@ -90,17 +108,16 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                 console.log('called');
                 console.log(resp);
                 $timeout(function(){
-                    $scope.uploadedImage = resp;
-                    $http.post("http://139.162.3.205/api/testupload", {path: resp})
-                        .success(function(response){
-                            console.log(response);
-                        }).error(function(err){
-                            console.log(err);
-                        })
+                    $scope.answer(resp);
+                    // $scope.uploadedImage = resp;
                 },0);
                 
             });
         }
+
+
+
+    }
 
     $scope.createPath = function(review){
         console.log($scope.selectedFile);
@@ -125,8 +142,9 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
             }).then(function successCallback(response){
                 console.log(response);
                 if(response.data.SuccessCode == 200){
+                    $scope.path = response.data.path;
                     console.log('Path Created');
-                    $scope.upload(review);
+                    $scope.upload(review, $scope.path);
                 }
             }, function errorCallback(response){
                 console.log(response);
@@ -141,28 +159,38 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
     $scope.imageNames = '';
 
     $scope.size_url = [];
-    $scope.upload = function(review){
-        console.log($scope.size);
-        console.log($scope.selectedFile);
-        $scope.imageNames = $scope.selectedFile.name;
-        fd = new FormData();
-        fd.append("uploadedFile", $scope.uploadedImage);
-        $http.post('http://139.162.3.205/api/uploadImage', fd,
-        {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type' : undefined},
-            params : {
-                path : $scope.path,
-                size : $scope.size
-            }
-        })
-        .success(function(result){
-            console.log(result.URLs);
-            // $scope.submitReview(result.URLs[0].imageUrl, review);
-        })
-        .error(function(err){
-            console.log(err.message);
-        });
+    $scope.upload = function(review, path){
+        console.log(typeof($scope.uploadedImage));
+
+        // console.log($scope.size);
+        // console.log($scope.selectedFile);
+        // $scope.imageNames = $scope.selectedFile.name;
+        // fd = new FormData();
+        // fd.append("uploadedFile", $scope.uploadedImage);
+        // $http.post('http://139.162.3.205/api/uploadImage', fd,
+        // {
+        //     transformRequest: angular.identity,
+        //     headers: { 'Content-Type' : undefined},
+        //     params : {
+        //         path : $scope.path,
+        //         size : $scope.size
+        //     }
+        // })
+        // .success(function(result){
+        //     console.log(result.URLs);
+        //     // $scope.submitReview(result.URLs[0].imageUrl, review);
+        // })
+        // .error(function(err){
+        //     console.log(err.message);
+        // });
+        // $http.post("http://139.162.3.205/api/testupload", {
+        //     path: $scope.uploadedImage
+        // }).success(function(response){
+        //     // $scope.submitReview(result.URLs[0].imageUrl, review);
+        //     console.log(response);
+        // }).error(function(err){
+        //     console.log(err);
+        // })
     }
 
 
@@ -173,28 +201,35 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
 
     $scope.projectLocality = [];
 
-    db.ref('search').once('value', function(snapshot){
-        console.log(snapshot.val());
-        var count = 0;
-        $timeout(function(){
-            angular.forEach(snapshot.val(), function(value, key){
-                count++;
-                if(value.type != 'Developer'){
-                    $scope.projectLocality.push(value);
-                }
-                if(count ==Object.keys(snapshot.val()).length){
-                    // console.log($scope.projectLocality);
-                }
-            })
-        },100);
-    })
+    $scope.pushToProjectLocality = function(data){
+        console.log(data);
+        $scope.projectLocality = [];
+        angular.forEach(data, function(value, key){
+            if(value.type != 'Developer'){
+                $scope.projectLocality.push(value);
+            }
+        })
+    }
+
+    if(!checkCookie('searchObject')){
+        db.ref('search').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
+                $scope.pushToProjectLocality(dataSnapshot.val());
+            }, 0);
+        })
+    } else {
+        $scope.pushToProjectLocality(JSON.parse(getCookie('searchObject')) || {});
+    }
 
     $scope.nameEntered = function(){
         // console.log($scope.selectedItem);
-        if($scope.selectedItem.length > 0){
-            $scope.showList = true;
-        } else {
-            $scope.showList = false;
+        if($scope.selectedItem){
+            if($scope.selectedItem.length > 0){
+                $scope.showList = true;
+            } else {
+                $scope.showList = false;
+            }
         }
     }
 
@@ -275,9 +310,6 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                     $mdToast.show($mdToast.simple().textContent('Your review has been successfully submitted'));
                 },50);
             })
-            // db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push($scope.review).then(function(){
-            //     console.log('project review submitted');
-            // });
         } else if($scope.selectedProjectOrLocality.type == 'Locality'){
             var updates = {};
             $scope.useReviewData = {
@@ -300,9 +332,6 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                     $mdToast.show($mdToast.simple().textContent('Your review has been successfully submitted'));
                 },50);
             })
-            // db.ref('reviews/-KPmH9oIem1N1_s4qpCv/locality/'+$scope.selectedProjectOrLocality.id).push($scope.review).then(function(){
-            //     console.log('locality review submitted');
-            // });
         }
     }
 

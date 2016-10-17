@@ -52,7 +52,7 @@ md-radio-group {
                         </md-input-container>
                         <div class="searchList" ng-show="showList">
                             <md-list class="review-search-list">
-                                <md-list-item ng-repeat="item in projectLocality|filter:selectedItem" class="review-search-item" ng-click="selectProjectLocality(item)">
+                                <md-list-item ng-repeat="item in projectLocality|filter:selectedItem track by $index" class="review-search-item" ng-click="selectProjectLocality(item)">
                                     {{item.name}}
                                 </md-list-item>
                             </md-list>
@@ -187,11 +187,11 @@ md-radio-group {
                         </md-radio-group>
                     </div>
                 </div>
-                <div class="image-selected">
-                    <img class="thumb" ng-src="{{uploadedImage}}" style="width:400px;height:200px;"/>
+                <div class="image-selected" ng-show="uploadedImage">
+                    <img class="thumb" ng-src="{{uploadedImage}}"/>
                 </div>
-                <div class="demo"></div>
-                <md-button class="md-raised md-warn" ng-click="cropClick()" >Crop</md-button>
+<!--                 <div class="demo"></div>
+                <md-button class="md-raised md-warn" ng-click="cropClick()" >Crop</md-button> -->
                 <div class="md-padding" layout="row">
                     <div flex>
                         Upload Image
