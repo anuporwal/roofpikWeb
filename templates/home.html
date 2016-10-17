@@ -107,7 +107,7 @@
                 <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
             </div>
             <div flex="100" layout-align="center center" layout-wrap layout="row">
-                <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'">
+                <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)">
                     <img ng-src="{{story.coverImage}}" alt="" />
                     <h2 style="padding-bottom:0px;">{{story.placeName}}</h2>
                     <h2>{{story.createdDate | date: 'dd-MM-yy'}}</h2>

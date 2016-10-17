@@ -120,6 +120,11 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog){
         });
     };
 
+    $scope.goToStory = function(val){
+        console.log(val);
+        $state.go('story-details', {id: val.storyId});
+    }
+
     function DialogController($scope, $mdDialog) {
         $scope.searchObject = [];
         var count = 0;
