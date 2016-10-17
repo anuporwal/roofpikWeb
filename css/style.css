@@ -2,6 +2,11 @@ html, body {
  font-size: 12px;
 }
 
+.home-container, .footer, .md-header{
+    display: none;
+}
+
+
 /* Header */
 
 .md-header {
@@ -857,4 +862,16 @@ html {
 
 #faq .faq-answer {
     background: #f2f2f2;
+}
+
+
+/* auth */
+
+.auth-nav{
+    position: fixed;
+}
+
+md-toolbar h1 span{
+    position: absolute;
+    right: 10px;
 }

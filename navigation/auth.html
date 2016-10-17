@@ -1,16 +1,119 @@
-<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
-    <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools">Sidenav Right</h1>
-    </md-toolbar>
-    <md-content  layout-padding>
-        <form>
-            <md-input-container>
-                <label for="testInput">Test input</label>
-                <input type="text" id="testInput" ng-model="data" md-autofocus>
-            </md-input-container>
-        </form>
-        <md-button ng-click="close()" class="md-primary">
-            Close Sidenav Right
-        </md-button>
-    </md-content>
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp auth-nav" md-component-id="right">
+    <div ng-controller="authCtrl">
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Sidenav Right
+             <span ng-click="close()">
+            Close
+        </span>
+        </h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <div class="gl-side-menu-widget-wrap">
+                <div class="gl-login-form-wrapper login">
+                    <h3>User Login</h3>
+                    <!--         <p>Login to add new listing </p> -->
+                    <div class="gl-login-form login">
+                        <form autocomplete="off" ng-submit="login()">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Email</label>
+                                <input type="text" name="gl-user-name" id="gl-user-input" ng-model="user.email" placeholder="Enter your email" autocomplete="off">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Password</label>
+                                <input type="password" name="gl-user-password" id="gl-user-password" ng-model="user.password" placeholder="password" autocomplete="off">
+                            </md-input-container>
+                            <button type="submit">Login</button>
+                        </form>
+                    </div>
+                    <!--     <div class="gl-social-login-opt">
+                    <a href="#" class="gl-social-login-btn gl-facebook-login">Login with Facebook</a>
+                    <a href="#" class="gl-social-login-btn gl-google-login">Login with Google</a>
+                </div> -->
+                    <div class="gl-other-options">
+                        <a ng-click="showForgetPassword()" class="gl-forgot-pass">Forget Password ?</a>
+                        <a ng-click="showSignup()" class="gl-signup">Sign up</a>
+                    </div>
+                </div>
+                <div class="gl-login-form-wrapper signup">
+                    <h3>User Signup</h3>
+                    <!--         <p>Login to add new listing </p> -->
+                    <div class="gl-login-form">
+                        <form autocomplete="off" name="signUp" ng-submit="register()">
+                            <!-- <input type="text" name="gl-user-fname" id="signup-user-input" placeholder="First Name" required>
+                        <input type="text" name="gl-user-lname" id="signup-user-input" placeholder="Last Name">
+                        <input type="text" name="gl-user-email" id="signup-user-input" placeholder="Email">
+                        <input type="text" name="gl-user-mobile" id="signup-user-input" placeholder="Mobile">
+                        <input type="password" name="gl-user-password" id="signup-user-password" placeholder="password">
+                        <button type="submit">Sign Up</button> -->
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>First Name *</label>
+                                <input required md-no-asterisk name="firstname" ng-model="user.firstname" placeholder="enter your first name">
+                                <div ng-messages="signUp.firstname.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Last Name *</label>
+                                <input required md-no-asterisk name="lastname" ng-model="user.lastname" placeholder="Enter your last name">
+                                <div ng-messages="signUp.lastname.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Mobile</label>
+                                <input name="mobile" ng-model="user.mobile" placeholder="10 Digit Mobile Number" required ng-pattern="/^[0-9]{10}$/" type="number">
+                                <div ng-messages="signUp.mobile.$error" role="alert" multiple>
+                                    <div ng-message="required" class="my-message">You must supply a mobile number.</div>
+                                    <div ng-message="pattern" class="my-message">That doesn't look like a valid mobile number.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input required type="email" name="clientEmail" ng-model="user.email" minlength="6" maxlength="100" ng-pattern="/^.+@.+\..+$/" placeholder="john@email.com" />
+                                <div ng-messages="signUp.clientEmail.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your email must be between 6 and 100 characters long and look like an e-mail address.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Password *</label>
+                                <input required md-no-asterisk name="password" type="password" placeholder="must be more than 6 characters" ng-model="user.password" minlength="6">
+                                <div ng-messages="signUp.password.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="minlength">The password must be more than 6 characters long.</div>
+                                </div>
+                            </md-input-container>
+                            <div>
+                                <md-button type="submit">Submit</md-button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--     <div class="gl-social-login-opt">
+                    <a href="#" class="gl-social-login-btn gl-facebook-login">Sign up with Facebook</a>
+                    <a href="#" class="gl-social-login-btn gl-google-login">Sign up with Google</a>
+                </div> -->
+                    <div class="gl-other-options">
+                        <a ng-click="showForgetPassword()" class="gl-forgot-pass">Forget Password ?</a>
+                        <a ng-click="showLogin()" class="gl-signup">Login</a>
+                    </div>
+                </div>
+                <div class="gl-login-form-wrapper forgetpassword">
+                    <h3>Forget Password</h3>
+                    <!--         <p>Login to add new listing </p> -->
+                    <div class="gl-login-form">
+                        <form autocomplete="off" ng-submit="forgetPassword()">
+                            <input type="text" name="gl-user-name" id="forgot-user-input" placeholder="Enter your email" autocomplete="off" ng-model="user.email">
+                            <button type="submit">Reset Password</button>
+                        </form>
+                    </div>
+                    <div class="gl-other-options">
+                        <a ng-click="showLogin()" class="gl-forgot-pass">Login</a>
+                        <a ng-click="showSignup()" class="gl-signup">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </div>
 </md-sidenav>
