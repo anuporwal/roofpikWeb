@@ -6,6 +6,23 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog){
     }
 
     $scope.topRated = {};
+    $scope.shortStories = [];
+
+    db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
+        .orderByChild('createdDate')
+        .limitToLast(4)
+        .once('value', function(snapshot){
+            // console.log(snapshot.val());
+            $timeout(function(){
+                // $scope.shortStories = snapshot.val();
+                // console.log($scope.shortStories);
+                snapshot.forEach(function(childSnapshot){
+                    $scope.shortStories.push(childSnapshot.val());
+                    // console.log(childSnapshot.val());
+
+                })
+            },0);
+        })
 
     if(!checkCookie('familyListObject')){
         db.ref('familyList').once('value', function(dataSnapshot) {
@@ -47,9 +64,17 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog){
             }, 0);
         })
     }
+    if(!checkCookie('petFriendlyObject')){
+        db.ref('petFriendlyList').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                $scope.petFriendlyObject = dataSnapshot.val();
+                setCookie('petFriendlyObject', JSON.stringify($scope.petFriendlyObject), 1);
+            }, 0);
+        })
+    }
 
     if(checkCookie('topRatedObject')){
-        console.log(JSON.parse(getCookie('topRatedObject')) || {});
+        // console.log(JSON.parse(getCookie('topRatedObject')) || {});
         $scope.topRated = JSON.parse((getCookie('topRatedObject')) || {});
         $scope.numProjects = JSON.parse((getCookie('numProjectsObject')) || {});
     } else {
@@ -76,7 +101,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog){
     }
 
     $scope.openSearch = function(){
-        console.log('open search called');
+        // console.log('open search called');
     }
 
     $scope.showAdvanced = function(ev) {
@@ -133,11 +158,11 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog){
         };
 
         $scope.getSearchText = function(){
-            console.log($scope.searchText);
+            // console.log($scope.searchText);
         }
 
         $scope.selectSearchItem = function(val){
-            console.log(val);
+            // console.log(val);
             if(val.type == 'Project'){
                 $mdDialog.cancel();
                 $state.go('project-details', { id: val.id, name: val.name});
@@ -223,7 +248,7 @@ function checkCookie(val) {
 }
 
 function deleteCookie(val){
-    console.log('delete cookie called');
+    // console.log('delete cookie called');
     setCookie(val, {}, 0);
 }
 
