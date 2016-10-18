@@ -903,6 +903,10 @@ html {
     float: right;
 }
 
+.review-details-page .image-selected {
+    padding-left:30px !important;
+}
+
 /*User All Reviews Page*/
 .user-all-reviews-page #user-review-card {
    margin:8px 40px; 
@@ -954,4 +958,8 @@ html {
 
 .write-review-page md-radio-group {
     float: right;
+}
+
+.write-review-page .image-selected {
+    padding-left:30px !important;
 }

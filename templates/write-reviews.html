@@ -1,14 +1,6 @@
 <md-content class="write-review-page">
     <div layout="row" class="" layout-xs="column">
         <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box">
-            <!-- <div id="gl-review-loader-wrapper" ng-hide="loginStatus">
-            <div id="gl-review-loader-center">
-                <div class="gl-review-load">
-                    <h2>Please Login First</h2>
-                    <a ng-click="openLogin()" class="gl-btn gl-large-btn gl-btn-color-3">Login/Signup</a>
-                </div>
-            </div>
-        </div> -->
             <form name="review-form">
                 <div layout="row" class="md-padding">
                     <div flex>
@@ -24,14 +16,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="showRequired">
-                <div layout="row">
-                    <div flex="75"></div>
-                    <div flex="25">
-                        (*Required)
-                    </div>
-                </div>
-            </div> -->
                 <div layout="row" class="md-padding" layout-sm="column">
                     Are you a *
                     <span flex></span>
@@ -158,10 +142,10 @@
 <!--                 <div class="demo"></div>
                 <md-button class="md-raised md-warn" ng-click="cropClick()" >Crop</md-button> -->
                 <div class="md-padding" layout="row">
-                    <div flex>
+                    <div flex = "25" flex-xs="100" flex-sm="100">
                         Upload Image
                     </div>
-                    <div flex="75">
+                    <div flex="75" flex-xs="100" flex-sm="100">
                         <input type="file" name="file" onchange="angular.element(this).scope().getFileDetails(event)" style="width: 40%" accept="image/*" single/>
                     </div>
                 </div>
