@@ -187,22 +187,20 @@ app.controller('writeReviewsCtrl', function($scope, $http, $timeout, $mdToast, $
         })
     }
 
-    // if(!checkCookie('searchObject')){
-    //     db.ref('search').once('value', function(dataSnapshot) {
-    //         $timeout(function() {
-    //             setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
-    //             $scope.pushToProjectLocality(dataSnapshot.val());
-    //         }, 0);
-    //     })
-    // } else {
-    //     $scope.pushToProjectLocality(JSON.parse(getCookie('searchObject')) || {});
-    // }
-    db.ref('search').once('value', function(dataSnapshot) {
-        $timeout(function() {
-            // setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
-            $scope.pushToProjectLocality(dataSnapshot.val());
-        }, 0);
-    })
+    if (!checkLocalStorage('search')) {
+        console.log('from firebase');
+        db.ref('search').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                $scope.searchObject = dataSnapshot.val();
+                setLocalStorage('search', $scope.searchObject, 1);
+                $scope.pushToProjectLocality($scope.searchObject);
+            }, 0);
+        })
+    } else {
+        console.log('from localstorage');
+        var data = getLocalStorage('searchObject');
+        $scope.pushToProjectLocality(data);
+    }
 
     $scope.nameEntered = function(){
         // console.log($scope.selectedItem);
