@@ -858,3 +858,100 @@ html {
 #faq .faq-answer {
     background: #f2f2f2;
 }
+
+
+/*Review Details Page*/
+.review-details-page .review-tips {
+    background-color: #dddddd;
+}
+
+.review-details-page .review-form {
+    background-color: #ffffff;
+}
+
+.review-details-page .rating span {
+    font-size: 30px;
+}
+
+.review-details-page .searchList {
+    max-height: 200px;
+    overflow: scroll;
+    border: 1px solid #f2f2f2;
+    margin: -16px auto 8px auto;
+    width: 100%;
+    box-shadow: 5px 6px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.review-details-page .review-search-list {
+    padding: 0px;
+}
+
+.review-details-page .review-search-item {
+    border-bottom: 1px solid #e6e6e6;
+    background-color: #f2f2f2;
+}
+
+.review-details-page .colored{
+    color:rgb(255,87,34);
+}
+
+.review-details-page .normal {
+    color:rgb(140, 140, 140);
+}
+
+.review-details-page md-radio-group {
+    float: right;
+}
+
+/*User All Reviews Page*/
+.user-all-reviews-page #user-review-card {
+   margin:8px 40px; 
+}
+.user-all-reviews-page #edit-review-btn {
+    text-align: center;
+}
+.user-all-reviews-page #edit-review-btn i {
+    font-size:30px;
+}
+.user-all-reviews-page .user-review p{
+    font-size:16px;
+}
+.user-all-reviews-page md-progress-circular {
+    top:50%;
+    margin: auto;
+}
+
+/*Write Reviews*/
+.write-review-page .review-tips {
+    background-color: #dddddd;
+}
+
+.write-review-page .review-form {
+    background-color: #ffffff;
+}
+
+.write-review-page .rating span {
+    font-size: 30px;
+}
+
+.write-review-page .searchList {
+    max-height: 200px;
+    overflow: scroll;
+    border: 1px solid #f2f2f2;
+    margin: -16px auto 8px auto;
+    width: 100%;
+    box-shadow: 5px 6px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.write-review-page .review-search-list {
+    padding: 0px;
+}
+
+.write-review-page .review-search-item {
+    border-bottom: 1px solid #e6e6e6;
+    background-color: #f2f2f2;
+}
+
+.write-review-page md-radio-group {
+    float: right;
+}
