@@ -1,10 +1,27 @@
+<style>
+	#edit-review-btn {
+		text-align: center;
+	}
+	#edit-review-btn i {
+		font-size:30px;
+	}
+</style>
 <md-content>
     <md-card class="md-padding" ng-repeat="review in allReviews">
-        <div class="user-review" layout="row">
-            <h3>{{review.reviewTitle}}</h3>
-            <p ng-if="review.projectName">{{review.projectName}}</p>
-            <p ng-if="review.locationName">{{review.locationName}}</p>
-            <i class="material-icons" ng-click="editReview(review)">mode_edit</i>
+        <div class="user-review">
+            <h4>{{review.reviewTitle}}</h4>
+            <div layout="row">
+            	<div flex="33">
+            		<p ng-if="review.projectName">{{review.projectName}}</p>
+            		<p ng-if="review.locationName">{{review.locationName}}</p>
+            	</div>
+            	<div flex="33">
+            		<p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yy'}}</p>
+            	</div>
+            	<div flex="33" id="edit-review-btn" class="roofpikGreen">
+            		<i class="material-icons" ng-click="editReview(review)">mode_edit</i>
+            	</div>
+            </div>
         </div>
     </md-card>
 </md-content>
