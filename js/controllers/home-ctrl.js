@@ -73,7 +73,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
         })
     }
 
-    console.log(checkLocalStorage('search'));
+    // console.log(checkLocalStorage('search'));
     if (!checkLocalStorage('search')) {
         db.ref('search').once('value', function(dataSnapshot) {
             $timeout(function() {
@@ -84,13 +84,13 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     }
 
     $scope.getRequiredTopRated = function(data){
-        console.log(data);
+        // console.log(data);
         $scope.topRated[0] = data[0];
         $scope.topRated[1] = data[1];
         $scope.topRated[2] = data[2];
     }
     if (!checkLocalStorage('topRated')) {
-        console.log('top rated not found');
+        // console.log('top rated not found');
         db.ref('topRated').once('value', function(dataSnapshot) {
             $timeout(function() {
                 $scope.numProjects = Object.keys(dataSnapshot.val()).length;
@@ -101,7 +101,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
             }, 0);
         })
     } else {
-        console.log('top rated found');
+        // console.log('top rated found');
         $scope.topRatedObject = getLocalStorage('topRatedObject');
         $scope.numProjects = getLocalStorage('numProjectsObject');
         $scope.getRequiredTopRated($scope.topRatedObject);
@@ -137,22 +137,22 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     };
 
     $scope.goToStory = function(val) {
-        console.log(val);
+        // console.log(val);
         $state.go('story-details', { id: val.storyId });
     }
 
     function DialogController($scope, $mdDialog) {
         $scope.searchObject = [];
         var count = 0;
-        console.log(checkLocalStorage('search'));
+        // console.log(checkLocalStorage('search'));
         if(checkLocalStorage('search')){
-            console.log('if called');
+            // console.log('if called');
             var data = getLocalStorage('searchObject');
             angular.forEach(data, function(value, key){
                 $scope.searchObject.push(value);
             })
         } else {
-            console.log('else called');
+            // console.log('else called');
             db.ref('search').once('value', function(snapshot){
                 $timeout(function(){
                     setLocalStorage('search', snapshot.val());
@@ -261,7 +261,7 @@ function deleteLocalStorage(val){
 }
 
 function getLocalStorage(val){
-    console.log(val);
-    console.log(JSON.parse(localStorage.getItem(val)));
+    // console.log(val);
+    // console.log(JSON.parse(localStorage.getItem(val)));
     return JSON.parse(localStorage.getItem(val)).value;
 }

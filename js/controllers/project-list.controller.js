@@ -122,7 +122,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;
-    console.log(type);
+    // console.log(type);
     $scope.projects = {};
     var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors', 'petFriendly'];
 
@@ -136,7 +136,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
-                    console.log($scope.projects);
+                    // console.log($scope.projects);
                     $scope.numProjects = Object.keys($scope.projects).length;
                     $scope.initializeProjects($scope.projects);
                 }
@@ -148,7 +148,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
-                    console.log($scope.projects);
+                    // console.log($scope.projects);
                     $scope.numProjects = Object.keys($scope.projects).length;
                     $scope.initializeProjects($scope.projects);
                 }
@@ -158,7 +158,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     if($stateParams.from == 'search'){
         if (!checkLocalStorage('topRated')) {
-            console.log('from database');
+            // console.log('from database');
             db.ref('topRated').once('value', function(dataSnapshot) {
                 $timeout(function() {
                     $scope.numProjects = Object.keys(dataSnapshot.val()).length;
@@ -169,7 +169,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                 }, 0);
             })
         } else {
-            console.log('from localstorage');
+            // console.log('from localstorage');
             $scope.topRatedObject = getLocalStorage('topRatedObject');
             $scope.numProjects = getLocalStorage('numProjectsObject');
             $scope.storeProjects($scope.topRatedObject);
@@ -194,7 +194,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
         for (var i = 0; i < 6; i++) {
             if ($stateParams.from == types[i]) {
                 if(!checkLocalStorage($stateParams.from)){
-                    console.log('from firebase');
+                    // console.log('from firebase');
                     db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
                         $timeout(function(){
                            $scope.numProjects = Object.keys(dataSnapshot.val()).length;
@@ -205,7 +205,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                         }, 0);
                     })
                 } else {
-                    console.log('from localstorage');
+                    // console.log('from localstorage');
                     $scope.projects = getLocalStorage($stateParams.from+'Object');
                     $scope.numProjects = getLocalStorage('numProjectsObject'); 
                     $scope.initializeProjects($scope.projects);
@@ -215,7 +215,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     }
 
     $scope.selectProject = function(id, name) {
-        console.log(id, name);
+        // console.log(id, name);
         $state.go('project-details', { id: id, name: name });
     }
 })

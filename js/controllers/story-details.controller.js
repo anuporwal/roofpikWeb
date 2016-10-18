@@ -1,8 +1,8 @@
 app.controller('storyDetailsCtrl', function($scope, $timeout, $stateParams, $sce, $state){
-	console.log($stateParams);
+	// console.log($stateParams);
 	$scope.currentStory = {};
 	db.ref('coverStory/stories/'+$stateParams.id).once('value', function(snapshot){
-		console.log(snapshot.val());
+		// console.log(snapshot.val());
 		$timeout(function(){
 			$scope.currentStory = snapshot.val();
 		},0);
@@ -35,17 +35,17 @@ app.controller('storyDetailsCtrl', function($scope, $timeout, $stateParams, $sce
 	}
 
 	$scope.goToStoryDetails = function(id){
-		console.log(id);
+		// console.log(id);
 		$state.go('story-details', {id: id});
 	}
 
 	$scope.getLocalityPosts = function(locality){
-		console.log(locality);
+		// console.log(locality);
 		$state.go('cover-stories', {from:'locality', id: locality.locationId});
 	}
 
 	$scope.getRelatedStories = function(tag){
-		console.log(tag);
+		// console.log(tag);
 		$state.go('cover-stories', {from:'tag', id: tag.tagId});
 	}
 	

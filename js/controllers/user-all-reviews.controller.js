@@ -9,7 +9,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 		$timeout(function(){
 			angular.forEach(snapshot.val(), function(value, key){
 				count++;
-				console.log(value, key);
+				// console.log(value, key);
 				angular.forEach(value, function(value1, key1){
 					if(key == 'residential'){
 						value1.type = 'residential',
@@ -22,7 +22,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 					}
 				})
 				if(count == Object.keys(snapshot.val()).length){
-					console.log($scope.allReviews);
+					// console.log($scope.allReviews);
 					$scope.dataloaded = true;
 				}
 			})
@@ -31,7 +31,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 
 
 	$scope.editReview = function(review){
-		console.log(review.id);
+		// console.log(review.id);
 		var reviewTypeId = '';
 		if(review.type == 'residential'){
 			reviewTypeId = review.projectId;

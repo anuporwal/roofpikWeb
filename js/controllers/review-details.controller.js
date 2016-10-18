@@ -1,5 +1,5 @@
 app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, $stateParams, $mdDialog){
-	console.log($stateParams);
+	// console.log($stateParams);
     $scope.dataloaded = false;
 	$scope.reviewName = $stateParams.typeName;
 	$scope.ratingsObject1 = {};
@@ -9,10 +9,10 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 	$scope.ratingsObject5 = {};
 	$scope.ratingsObject6 = {};
 	$scope.ratingsObject7 = {};
-	console.log('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id);
+	// console.log('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id);
 	db.ref('reviews/'+$stateParams.city+'/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id).once('value', function(snapshot){
 		$timeout(function(){
-			console.log(snapshot.val());
+			// console.log(snapshot.val());
 			$scope.review = snapshot.val();
 			if($scope.review.imageUrl){
 				$scope.uploadedImage = $scope.review.imageUrl;
@@ -93,37 +93,37 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 	})
 
     $scope.ratingsCallback1 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.overallRating = rating;
 
         // console.log($scope.review);
     };
     $scope.ratingsCallback2 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.security = rating;
     };
     $scope.ratingsCallback3 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.amenities = rating;
     };
 
 	$scope.ratingsCallback4 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.openAndGreenAreas = rating;
     };
 
 	$scope.ratingsCallback5 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.electricityAndWaterSupply= rating;
     };
 
 	$scope.ratingsCallback6 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.convenienceOfHouseMaids= rating;
     };
 
 	$scope.ratingsCallback7 = function(rating, index) {
-        console.log('Selected rating is : ', rating, ' and index is ', index);
+        // console.log('Selected rating is : ', rating, ' and index is ', index);
         $scope.review.ratings.convenienceOfParking= rating;
     };
 
@@ -139,7 +139,7 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 
     $scope.showAdvanced = function(imageUrl) {
         // console.log($scope.uploadedImage);
-        console.log('called');
+        // console.log('called');
         $mdDialog.show({
             controller: cropImageCtrl,
             templateUrl: 'templates/crop-image.html',
@@ -154,8 +154,8 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
         .then(function(answer) {
             $timeout(function(){
                 $scope.uploadedImage = answer;
-                alert(JSON.stringify($scope.uploadedImage));
-                console.log($scope.uploadedImage);
+                // alert(JSON.stringify($scope.uploadedImage));
+                // console.log($scope.uploadedImage);
             },0);
             $scope.status = 'You said the information was "' + answer + '".';
         }, function() {
@@ -165,12 +165,12 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 
 
     $scope.getFileDetails = function(event){
-        console.log('getFileDetails called');
+        // console.log('getFileDetails called');
         $scope.selectedFile;
         $scope.uploadedImage = '';
          var files = event.target.files; //FileList object
          $scope.selectedFile = files[0];
-         console.log($scope.selectedFile);
+         // console.log($scope.selectedFile);
          for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var reader = new FileReader();
@@ -180,13 +180,13 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
     }
 
     $scope.imageIsLoaded = function(e){
-        console.log('imageIsLoaded called');
+        // console.log('imageIsLoaded called');
         $scope.stepsModel = [];
         $scope.$apply(function() {
             $scope.stepsModel.push(e.target.result);
             $timeout(function(){
                 $scope.uploadedImage = $scope.stepsModel[0];
-                console.log($scope.uploadedImage);
+                // console.log($scope.uploadedImage);
                 $scope.showAdvanced($scope.uploadedImage);
             },0);
         });
@@ -194,12 +194,12 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 
     function cropImageCtrl($scope, $mdDialog, locals) {
         $scope.locals = locals;
-        console.log($scope.locals);
+        // console.log($scope.locals);
         $('.demo').croppie({
             url: $scope.locals.imageUrl,
         });
 
-        console.log($('.demo').html());
+        // console.log($('.demo').html());
         $timeout(function(){
             cropImage($scope.locals.imageUrl);
         },0);
@@ -219,8 +219,8 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
         var basic;
 
         function cropImage(source){
-            console.log(source);
-            console.log($('.demo').html());
+            // console.log(source);
+            // console.log($('.demo').html());
              basic = $('.demo').croppie({
                 viewport: {
                 width: 250,
@@ -234,14 +234,14 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
         }
 
         $scope.cropClick = function(){
-            console.log(' crop click called');
+            // console.log(' crop click called');
             basic.croppie('result', {
                 type: 'canvas',
                 format: 'jpeg',
                 square: true
             }).then(function (resp) {
-                console.log('called');
-                console.log(resp);
+                // console.log('called');
+                // console.log(resp);
                 $timeout(function(){
                     $scope.answer(resp);
                     // $scope.uploadedImage = resp;
@@ -253,12 +253,12 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
     
 
     $scope.createPath = function(review){
-        console.log(review);
-        console.log($scope.selectedFile);
+        // console.log(review);
+        // console.log($scope.selectedFile);
         $scope.path = 'reviews/-KPmH9oIem1N1_s4qpCv/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id;
         // $scope.path = ''
         if($scope.selectedFile){
-            console.log('called');
+            // console.log('called');
             $http({
                 method:'POST',
                 url:'http://139.162.3.205/api/createPath',
@@ -268,11 +268,12 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
             }).then(function successCallback(response){
                 if(response.data.SuccessCode == 200){
                     $scope.path = response.data.path;
-                    console.log('Path Created');
+                    // console.log('Path Created');
                     $scope.upload(review, $scope.path);
                 }
             }, function errorCallback(response){
-                console.log(response);
+                // console.log(response);
+                sweetAlert("Cannot submit review", "Something went wrong!", "error");
             });
         } else {
             $scope.submitReview('no-image', review);
@@ -287,13 +288,14 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
     $scope.upload = function(review, path){
         $http.post("http://139.162.3.205/api/testupload", {path: JSON.stringify($scope.uploadedImage)})
         .success(function(response){
-            console.log(response);
+            // console.log(response);
             if(response.StatusCode == 200){
                 $scope.submitReview(response.Message, review);
             }
         })
         .error(function(err){
-            console.log(err);
+            sweetAlert("Cannot submit review", "Something went wrong!", "error");
+            // console.log(err);
         })
     }
 
@@ -307,9 +309,19 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
         updates['reviews/-KPmH9oIem1N1_s4qpCv/'+$stateParams.type+'/'+$stateParams.typeId+'/'+$stateParams.id] = review;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/createdDate'] = review.createdDate;
         updates['userReviews/'+review.userId+'/'+$stateParams.type+'/'+$stateParams.id+'/reviewTitle'] = review.reviewTitle;
-        console.log(updates);
+        // console.log(updates);
         db.ref().update(updates).then(function(){
-            console.log('updated review');
+            // console.log('updated review');
+            swal({
+                title: "Done",
+                text: "Your review was successfully submitted!",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#AEDEF4",
+                confirmButtonText: "OK",
+                closeOnConfirm: false }, function(){   
+                    window.location.reload(true);
+                });
         });
     }
 
