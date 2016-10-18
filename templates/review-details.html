@@ -1,47 +1,4 @@
-<style type="text/css">
-.review-tips {
-    background-color: #dddddd;
-}
-
-.review-form {
-    background-color: #ffffff;
-}
-
-.rating span {
-    font-size: 30px;
-}
-
-.searchList {
-    max-height: 200px;
-    overflow: scroll;
-    border: 1px solid #f2f2f2;
-    margin: -16px auto 8px auto;
-    width: 100%;
-    box-shadow: 5px 6px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.review-search-list {
-    padding: 0px;
-}
-
-.review-search-item {
-    border-bottom: 1px solid #e6e6e6;
-    background-color: #f2f2f2;
-}
-
-.colored{
-    color:rgb(255,87,34);
-}
-
-.normal {
-    color:rgb(140, 140, 140);
-}
-
-md-radio-group {
-    float: right;
-}
-</style>
-<md-content>
+<md-content class="review-details-page">
     <div layout="row" class="" layout-xs="column">
         <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box">
                 <h3 style="margin:10px auto;"">{{reviewName}}</h3>
@@ -179,7 +136,7 @@ md-radio-group {
                 </div>
             </form>
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn" ng-click="submit(review)" ng-disabled="review-form.$invalid">Submit</md-button>
+                <md-button class="md-raised md-warn" ng-click="createPath(review)" ng-disabled="review-form.$invalid">Update</md-button>
             </div>
         </div>
         <div flex="25 grow" class="md-padding review-tips">

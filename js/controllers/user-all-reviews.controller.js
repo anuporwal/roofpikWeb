@@ -3,12 +3,13 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 
 	$scope.allReviews = {};
 	var count = 0;
+	$scope.dataloaded = false;
 	// db.ref('userReviews/'+user.uid).once('value', function(snapshot){
 	db.ref('userReviews/2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2').once('value', function(snapshot){
 		$timeout(function(){
 			angular.forEach(snapshot.val(), function(value, key){
 				count++;
-				console.log(value, key);
+				// console.log(value, key);
 				angular.forEach(value, function(value1, key1){
 					if(key == 'residential'){
 						value1.type = 'residential',
@@ -21,7 +22,8 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 					}
 				})
 				if(count == Object.keys(snapshot.val()).length){
-					console.log($scope.allReviews);
+					// console.log($scope.allReviews);
+					$scope.dataloaded = true;
 				}
 			})
 		},0);
@@ -29,7 +31,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 
 
 	$scope.editReview = function(review){
-		console.log(review.id);
+		// console.log(review.id);
 		var reviewTypeId = '';
 		if(review.type == 'residential'){
 			reviewTypeId = review.projectId;

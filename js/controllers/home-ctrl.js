@@ -1,11 +1,13 @@
 app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     // console.log('working');
+
     $timeout(function() {
         $('.md-header').fadeIn();
         $('.home-container').fadeIn();
         $('.footer').fadeIn();
 
     }, 2000);
+
 
     $scope.takeToProjectList = function(param) {
         $state.go('project-list', { from: param });
@@ -17,87 +19,106 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
         .orderByChild('createdDate')
         .limitToLast(4)
-        .once('value', function(snapshot){
-            // console.log(snapshot.val());
-            $timeout(function(){
-                // $scope.shortStories = snapshot.val();
-                // console.log($scope.shortStories);
-                snapshot.forEach(function(childSnapshot){
+        .once('value', function(snapshot) {
+            $timeout(function() {
+                snapshot.forEach(function(childSnapshot) {
                     $scope.shortStories.push(childSnapshot.val());
-                    // console.log(childSnapshot.val());
-
                 })
-            },0);
+            }, 0);
         })
 
-    if (!checkCookie('familyListObject')) {
+
+    if (!checkLocalStorage('family')) {
         db.ref('familyList').once('value', function(dataSnapshot) {
             $timeout(function() {
-                $scope.familyListObject = dataSnapshot.val();
-                setCookie('familyListObject', JSON.stringify($scope.familyListObject), 1);
+                $scope.familyObject = dataSnapshot.val();
+                setLocalStorage('family', $scope.familyObject, 1);
             }, 0);
         })
     }
-    if (!checkCookie('justMarriedListObject')) {
-        db.ref('justMarriedList').once('value', function(dataSnapshot) {
-            $timeout(function() {
-                $scope.justMarriedListObject = dataSnapshot.val();
-                setCookie('justMarriedListObject', JSON.stringify($scope.justMarriedListObject), 1);
-            }, 0);
-        })
-    }
-    if (!checkCookie('oldAgeFriendlyListObject')) {
-        db.ref('oldAgeFriendlyList').once('value', function(dataSnapshot) {
-            $timeout(function() {
-                $scope.oldAgeFriendlyListObject = dataSnapshot.val();
-                setCookie('oldAgeFriendlyListObject', JSON.stringify($scope.oldAgeFriendlyListObject), 1);
-            }, 0);
-        })
-    }
-    if (!checkCookie('kidsListObject')) {
+
+
+    if (!checkLocalStorage('kids')) {
         db.ref('kidsList').once('value', function(dataSnapshot) {
             $timeout(function() {
-                $scope.kidsListObject = dataSnapshot.val();
-                setCookie('kidsListObject', JSON.stringify($scope.kidsListObject), 1);
+                $scope.kidsObject = dataSnapshot.val();
+                setLocalStorage('kids', $scope.kidsObject, 1);
             }, 0);
         })
     }
-    if (!checkCookie('bachelorsListObject')) {
+
+
+    if (!checkLocalStorage('justMarried')) {
+        db.ref('justMarriedList').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                $scope.justMarriedObject = dataSnapshot.val();
+                setLocalStorage('justMarried', $scope.justMarriedObject, 1);
+            }, 0);
+        })
+    }
+
+
+    if (!checkLocalStorage('oldAgeFriendly')) {
+        db.ref('oldAgeFriendlyList').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                $scope.oldAgeFriendlyObject = dataSnapshot.val();
+                setLocalStorage('oldAgeFriendly', $scope.oldAgeFriendlyObject, 1);
+            }, 0);
+        })
+    }
+
+    if (!checkLocalStorage('bachelors')) {
         db.ref('bachelorsList').once('value', function(dataSnapshot) {
             $timeout(function() {
-                $scope.bachelorsListObject = dataSnapshot.val();
-                setCookie('bachelorsListObject', JSON.stringify($scope.bachelorsListObject), 1);
+                $scope.bachelorsObject = dataSnapshot.val();
+                setLocalStorage('bachelors', $scope.bachelorsObject, 1);
             }, 0);
         })
     }
-    if(!checkCookie('petFriendlyObject')){
+
+    if (!checkLocalStorage('petFriendly')) {
         db.ref('petFriendlyList').once('value', function(dataSnapshot) {
             $timeout(function() {
                 $scope.petFriendlyObject = dataSnapshot.val();
-                setCookie('petFriendlyObject', JSON.stringify($scope.petFriendlyObject), 1);
+                setLocalStorage('petFriendly', $scope.petFriendlyObject, 1);
             }, 0);
         })
     }
 
-
-    if(checkCookie('topRatedObject')){
-        // console.log(JSON.parse(getCookie('topRatedObject')) || {});
-        $scope.topRated = JSON.parse((getCookie('topRatedObject')) || {});
-        $scope.numProjects = JSON.parse((getCookie('numProjectsObject')) || {});
-    } else {
-        db.ref('topRated').once('value', function(snapshot) {
+    // console.log(checkLocalStorage('search'));
+    if (!checkLocalStorage('search')) {
+        db.ref('search').once('value', function(dataSnapshot) {
             $timeout(function() {
-                $scope.numProjects = Object.keys(snapshot.val()).length;
-                setCookie('numProjectsObject', JSON.stringify($scope.numProjects), 1);
-                var count = 0;
-                // console.log(snapshot.val()[0]);
-                $scope.topRated[0] = snapshot.val()[0];
-                $scope.topRated[1] = snapshot.val()[1];
-                $scope.topRated[2] = snapshot.val()[2];
-                setCookie('topRatedObject', JSON.stringify($scope.topRated), 1);
+                $scope.searchObject = dataSnapshot.val();
+                setLocalStorage('search', $scope.searchObject, 1);
             }, 0);
         })
     }
+
+    $scope.getRequiredTopRated = function(data){
+        // console.log(data);
+        $scope.topRated[0] = data[0];
+        $scope.topRated[1] = data[1];
+        $scope.topRated[2] = data[2];
+    }
+    if (!checkLocalStorage('topRated')) {
+        // console.log('top rated not found');
+        db.ref('topRated').once('value', function(dataSnapshot) {
+            $timeout(function() {
+                $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                $scope.topRatedObject = dataSnapshot.val();
+                setLocalStorage('topRated', $scope.topRatedObject, 1);
+                setLocalStorage('numProjects', $scope.numProjects, 1);
+                $scope.getRequiredTopRated($scope.topRatedObject);
+            }, 0);
+        })
+    } else {
+        // console.log('top rated found');
+        $scope.topRatedObject = getLocalStorage('topRatedObject');
+        $scope.numProjects = getLocalStorage('numProjectsObject');
+        $scope.getRequiredTopRated($scope.topRatedObject);
+    }
+
 
     $scope.gotoWriteReviews = function() {
         $state.go('write-reviews');
@@ -107,8 +128,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
         $state.go('project-details', { id: project.projectId, name: project.projectName });
     }
 
-
-    $scope.openSearch = function(){
+    $scope.openSearch = function() {
         // console.log('open search called');
     }
 
@@ -128,32 +148,29 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
             });
     };
 
-    $scope.goToStory = function(val){
-        console.log(val);
-        $state.go('story-details', {id: val.storyId});
+    $scope.goToStory = function(val) {
+        // console.log(val);
+        $state.go('story-details', { id: val.storyId });
     }
 
     function DialogController($scope, $mdDialog) {
         $scope.searchObject = [];
         var count = 0;
-        if (checkCookie('searchObject')) {
-            console.log(JSON.parse(getCookie('searchObject')) || {});
-            var data = JSON.parse((getCookie('searchObject')) || {});
-            angular.forEach(data, function(value, key) {
+        // console.log(checkLocalStorage('search'));
+        if(checkLocalStorage('search')){
+            // console.log('if called');
+            var data = getLocalStorage('searchObject');
+            angular.forEach(data, function(value, key){
                 $scope.searchObject.push(value);
             })
         } else {
-            db.ref('search').once('value', function(snapshot) {
-                console.log(snapshot.val());
-                $timeout(function() {
-                    // $scope.searchObject = snapshot.val();
-                    setCookie('searchObject', JSON.stringify(snapshot.val()), 1);
+            // console.log('else called');
+            db.ref('search').once('value', function(snapshot){
+                $timeout(function(){
+                    setLocalStorage('search', snapshot.val());
                     angular.forEach(snapshot.val(), function(value, key) {
                         count++;
                         $scope.searchObject.push(value);
-                        if (count == Object.keys(snapshot.val()).length) {
-
-                        }
                     })
                 }, 0);
             })
@@ -170,15 +187,13 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
             $mdDialog.hide(answer);
         };
 
-
         $scope.getSearchText = function() {
-            console.log($scope.searchText);
+            // console.log($scope.searchText);
         }
 
-        $scope.selectSearchItem = function(val){
+        $scope.selectSearchItem = function(val) {
             // console.log(val);
-            if(val.type == 'Project'){
-
+            if (val.type == 'Project') {
                 $mdDialog.cancel();
                 $state.go('project-details', { id: val.id, name: val.name });
             } else if (val.type == 'Locality') {
@@ -194,43 +209,38 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 })
 
 
+function setLocalStorage(name, value){
+    var newField = name+'Version';
 
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+    var dataStored = {
+        value: value,
+        createdDate: new Date().getTime(),
+         version: versions[newField]
     }
-    return "";
+
+    localStorage.setItem(name+'Object' , JSON.stringify(dataStored));
 }
 
-
-function checkCookie(val) {
-    var data = getCookie(val);
-    if (data != "") {
-        // console.log(data);
-        return true;
-    } else {
-        console.log('data not found');
+function checkLocalStorage(val){
+    var currentDate = new Date().getTime();
+    var factor = 604800000;
+    var checkingValue = val+'Version';
+    if (localStorage.getItem(val+'Object') === null) {
         return false;
+    } else if(JSON.parse(localStorage.getItem(val+'Object')).createdDate+ factor < currentDate || JSON.parse(localStorage.getItem(val+'Object')).version != versions[checkingValue]){
+        deleteLocalStorage(val+'Object');
+        return false;
+    } else {
+        return true;
     }
 }
 
+function deleteLocalStorage(val){
+    localStorage.removeItem(val);
+}
 
-function deleteCookie(val){
-    // console.log('delete cookie called');
-    setCookie(val, {}, 0);
+function getLocalStorage(val){
+    // console.log(val);
+    // console.log(JSON.parse(localStorage.getItem(val)));
+    return JSON.parse(localStorage.getItem(val)).value;
 }

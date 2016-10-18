@@ -122,7 +122,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;
-    console.log(type);
+    // console.log(type);
     $scope.projects = {};
     var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors', 'petFriendly'];
 
@@ -136,7 +136,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
-                    console.log($scope.projects);
+                    // console.log($scope.projects);
                     $scope.numProjects = Object.keys($scope.projects).length;
                     $scope.initializeProjects($scope.projects);
                 }
@@ -148,7 +148,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
-                    console.log($scope.projects);
+                    // console.log($scope.projects);
                     $scope.numProjects = Object.keys($scope.projects).length;
                     $scope.initializeProjects($scope.projects);
                 }
@@ -157,51 +157,57 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     }
 
     if($stateParams.from == 'search'){
-        if(!checkCookie('topRatedObject')){
+        if (!checkLocalStorage('topRated')) {
+            // console.log('from database');
             db.ref('topRated').once('value', function(dataSnapshot) {
-                setCookie('topRatedObject', JSON.stringify(dataSnapshot.val()), 1);
-                $timeout(function(){
+                $timeout(function() {
+                    $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                    $scope.topRatedObject = dataSnapshot.val();
+                    setLocalStorage('topRated', $scope.topRatedObject);
+                    setLocalStorage('numProjects', $scope.numProjects);
                     $scope.storeProjects(dataSnapshot.val());
-                },0);
+                }, 0);
             })
         } else {
-            var data = JSON.parse((getCookie('topRatedObject')) || {});
-            $scope.storeProjects(data);
+            // console.log('from localstorage');
+            $scope.topRatedObject = getLocalStorage('topRatedObject');
+            $scope.numProjects = getLocalStorage('numProjectsObject');
+            $scope.storeProjects($scope.topRatedObject);
         }
     }else if ($stateParams.from == 'topRated') {
-        if(!checkCookie('topRatedObject')){
+        if(!checkLocalStorage('topRated')){
             db.ref('topRated').once('value', function(dataSnapshot) {
                 $timeout(function(){
                     $scope.projects = dataSnapshot.val();
                     $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                    setCookie('topRatedObject', JSON.stringify(dataSnapshot.val()), 1);
-                    setCookie('numProjectsObject', JSON.stringify($scope.numProjects), 1);
+                    setLocalStorage('topRated', dataSnapshot.val());
+                    setLocalStorage('numProjects', $scope.numProjects);
                     $scope.initializeProjects($scope.projects);
                 },0);
             })
         } else {
-            var data = JSON.parse((getCookie('topRatedObject')) || {});
-            $scope.projects = data;
-            $scope.numProjects = Object.keys(data).length;
+            $scope.projects = getLocalStorage('topRatedObject');
+            $scope.numProjects = getLocalStorage('numProjectsObject');
+            $scope.initializeProjects($scope.projects);
         }
     } else {
         for (var i = 0; i < 6; i++) {
             if ($stateParams.from == types[i]) {
-                console.log($stateParams.from + 'List');
-                if(!checkCookie($stateParams.from + 'ListObject')){
+                if(!checkLocalStorage($stateParams.from)){
+                    // console.log('from firebase');
                     db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
-                        $timeout(function() {
-                            $scope.numProjects = Object.keys(dataSnapshot.val()).length;
-                            $scope.projects = dataSnapshot.val();
-                            setCookie($stateParams.from + 'ListObject', JSON.stringify($scope.projects), 1);
-                            setCookie('numProjectsObject', JSON.stringify($scope.numProjects), 1);
-                            $scope.initializeProjects($scope.projects);
-                        }, 100);
-                    })                  
+                        $timeout(function(){
+                           $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                           $scope.projects = dataSnapshot.val();
+                           setLocalStorage($stateParams.from, $scope.projects);
+                           setLocalStorage('numProjects', $scope.numProjects);
+                           $scope.initializeProjects($scope.projects);
+                        }, 0);
+                    })
                 } else {
-                    var data = JSON.parse((getCookie($stateParams.from + 'ListObject')) || {});
-                    $scope.numProjects = Object.keys(data).length;
-                    $scope.projects = data;
+                    // console.log('from localstorage');
+                    $scope.projects = getLocalStorage($stateParams.from+'Object');
+                    $scope.numProjects = getLocalStorage('numProjectsObject'); 
                     $scope.initializeProjects($scope.projects);
                 }
             }
@@ -209,9 +215,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     }
 
     $scope.selectProject = function(id, name) {
-        console.log(id, name);
+        // console.log(id, name);
         $state.go('project-details', { id: id, name: name });
     }
-   
-
 })
