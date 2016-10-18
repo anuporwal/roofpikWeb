@@ -1,22 +1,36 @@
 <style>
+    #user-review-card {
+       margin:8px 40px; 
+    }
 	#edit-review-btn {
 		text-align: center;
 	}
 	#edit-review-btn i {
 		font-size:30px;
 	}
+    .user-review p{
+        font-size:16px;
+    }
+    md-progress-circular {
+        top:50%;
+        margin: auto;
+    }
 </style>
 <md-content>
-    <md-card class="md-padding" ng-repeat="review in allReviews">
+    <!-- <md-progress-circular ng-disabled="false" class="md-hue-2" md-diameter="60"></md-progress-circular> -->
+    <div layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular ng-hide="dataloaded" class="md-warn md-hue-3" md-diameter="60"></md-progress-circular>
+    </div>
+    <md-card class="md-padding" ng-repeat="review in allReviews" id="user-review-card" ng-show="dataloaded">
         <div class="user-review">
-            <h4>{{review.reviewTitle}}</h4>
+            <h1>{{review.reviewTitle}}</h1>
             <div layout="row">
             	<div flex="33">
             		<p ng-if="review.projectName">{{review.projectName}}</p>
             		<p ng-if="review.locationName">{{review.locationName}}</p>
             	</div>
             	<div flex="33">
-            		<p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yy'}}</p>
+            		<p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yyyy'}}</p>
             	</div>
             	<div flex="33" id="edit-review-btn" class="roofpikGreen">
             		<i class="material-icons" ng-click="editReview(review)">mode_edit</i>

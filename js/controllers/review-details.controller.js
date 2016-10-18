@@ -1,5 +1,6 @@
 app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, $stateParams, $mdDialog){
 	console.log($stateParams);
+    $scope.dataloaded = false;
 	$scope.reviewName = $stateParams.typeName;
 	$scope.ratingsObject1 = {};
 	$scope.ratingsObject2 = {};
@@ -86,6 +87,7 @@ app.controller('reviewDetailsCtrl', function($scope, $http, $timeout, $mdToast, 
 		            $scope.ratingsCallback7(rating, 7);
 		        }
 		    };
+            $scope.dataloaded = true;
 		},0);
 		
 	})

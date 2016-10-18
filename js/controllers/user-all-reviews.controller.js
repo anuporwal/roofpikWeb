@@ -3,6 +3,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 
 	$scope.allReviews = {};
 	var count = 0;
+	$scope.dataloaded = false;
 	// db.ref('userReviews/'+user.uid).once('value', function(snapshot){
 	db.ref('userReviews/2cQ2XQ7w7pdT9WGq2nyGJhrPSOo2').once('value', function(snapshot){
 		$timeout(function(){
@@ -22,6 +23,7 @@ app.controller('userAllReviewsCtrl', function($scope, $timeout, $state){
 				})
 				if(count == Object.keys(snapshot.val()).length){
 					console.log($scope.allReviews);
+					$scope.dataloaded = true;
 				}
 			})
 		},0);
