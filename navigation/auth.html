@@ -1,17 +1,16 @@
 <md-sidenav class="md-sidenav-right md-whiteframe-4dp auth-nav" md-component-id="right">
     <div ng-controller="authCtrl">
         <md-toolbar class="md-theme-light">
-            <h1 class="md-toolbar-tools">Sidenav Right
+            <h3 class="md-toolbar-tools">Login / Signup
              <span ng-click="close()">
             Close
         </span>
-        </h1>
+        </h3>
         </md-toolbar>
         <md-content layout-padding>
             <div class="gl-side-menu-widget-wrap">
                 <div class="gl-login-form-wrapper login">
                     <h3>User Login</h3>
-                    <!--         <p>Login to add new listing </p> -->
                     <div class="gl-login-form login">
                         <form autocomplete="off" ng-submit="login()">
                             <md-input-container class="md-block" flex-gt-sm>
@@ -22,13 +21,9 @@
                                 <label>Password</label>
                                 <input type="password" name="gl-user-password" id="gl-user-password" ng-model="user.password" placeholder="password" autocomplete="off">
                             </md-input-container>
-                            <button type="submit">Login</button>
+                             <md-button class="md-raised md-primary" type="submit">Login</md-button>
                         </form>
                     </div>
-                    <!--     <div class="gl-social-login-opt">
-                    <a href="#" class="gl-social-login-btn gl-facebook-login">Login with Facebook</a>
-                    <a href="#" class="gl-social-login-btn gl-google-login">Login with Google</a>
-                </div> -->
                     <div class="gl-other-options">
                         <a ng-click="showForgetPassword()" class="gl-forgot-pass">Forget Password ?</a>
                         <a ng-click="showSignup()" class="gl-signup">Sign up</a>
@@ -36,15 +31,8 @@
                 </div>
                 <div class="gl-login-form-wrapper signup">
                     <h3>User Signup</h3>
-                    <!--         <p>Login to add new listing </p> -->
                     <div class="gl-login-form">
                         <form autocomplete="off" name="signUp" ng-submit="register()">
-                            <!-- <input type="text" name="gl-user-fname" id="signup-user-input" placeholder="First Name" required>
-                        <input type="text" name="gl-user-lname" id="signup-user-input" placeholder="Last Name">
-                        <input type="text" name="gl-user-email" id="signup-user-input" placeholder="Email">
-                        <input type="text" name="gl-user-mobile" id="signup-user-input" placeholder="Mobile">
-                        <input type="password" name="gl-user-password" id="signup-user-password" placeholder="password">
-                        <button type="submit">Sign Up</button> -->
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>First Name *</label>
                                 <input required md-no-asterisk name="firstname" ng-model="user.firstname" placeholder="enter your first name">
@@ -90,10 +78,6 @@
                             </div>
                         </form>
                     </div>
-                    <!--     <div class="gl-social-login-opt">
-                    <a href="#" class="gl-social-login-btn gl-facebook-login">Sign up with Facebook</a>
-                    <a href="#" class="gl-social-login-btn gl-google-login">Sign up with Google</a>
-                </div> -->
                     <div class="gl-other-options">
                         <a ng-click="showForgetPassword()" class="gl-forgot-pass">Forget Password ?</a>
                         <a ng-click="showLogin()" class="gl-signup">Login</a>
@@ -101,7 +85,6 @@
                 </div>
                 <div class="gl-login-form-wrapper forgetpassword">
                     <h3>Forget Password</h3>
-                    <!--         <p>Login to add new listing </p> -->
                     <div class="gl-login-form">
                         <form autocomplete="off" ng-submit="forgetPassword()">
                             <input type="text" name="gl-user-name" id="forgot-user-input" placeholder="Enter your email" autocomplete="off" ng-model="user.email">

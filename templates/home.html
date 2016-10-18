@@ -19,19 +19,19 @@
                 <h2>  Know how to build websites? Then you already know how to build mobile apps! Ionic offers quality web and native app components for building highly interactive native and progressive web apps with Angular. </h2>
             </div>
             <div class="home-category-wrapper" layout="row" layout-align="center center" flex="100" layout-wrap>
-                <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('justMarried')">
+                <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('family')">
                     <div class="image">
                         <img src="images/home/family.jpg" alt="" />
                         <h2>Family</h2>
                     </div>
                 </div>
-                <div class="image-box" flex="20" ng-click="takeToProjectList('bachelors')" flex-xs="100" flex-sm="100">
+                <div class="image-box" flex="20" ng-click="takeToProjectList('oldAgeFriendly')" flex-xs="100" flex-sm="100">
                     <div class="image">
                         <img src="http://roofpik.com/test/newweb/images/old.jpg" alt="" />
                         <h2>Elderly</h2>
                     </div>
                 </div>
-                <div flex="30" class="image-box" flex-xs="100" flex-sm="100">
+                <div flex="30" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('justMarried')">
                     <div class="image">
                         <img src="images/home/married.jpg" alt="" />
                         <h2>Married</h2>
@@ -49,7 +49,7 @@
                         <h2>Bachelors</h2>
                     </div>
                 </div>
-                <div class="image-box" flex="20" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('bachelors')">
+                <div class="image-box" flex="20" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('petFriendly')">
                     <div class="image">
                         <img src="http://www.thegrandpet.com/wp-content/uploads/2010/04/dog-running-with-ball.jpg" alt="" />
                         <h2>Pet Friendly</h2>
@@ -107,7 +107,13 @@
                 <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
             </div>
             <div flex="100" layout-align="center center" layout-wrap layout="row">
-                <div flex="25" flex-xs="100" flex-sm="100">
+                <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)">
+                    <img ng-src="{{story.coverImage}}" alt="" />
+                    <h2 style="padding-bottom:0px;">{{story.placeName}}</h2>
+                    <h2>{{story.createdDate | date: 'dd-MM-yy'}}</h2>
+                    <h2>{{story.title}}</h2>
+                </div>
+<!--                 <div flex="25" flex-xs="100" flex-sm="100">
                     <img src="https://1005776689.rsc.cdn77.org/images/projects/-KPmH9oIem1N1_s4qpCv/5/da9a68a5-07b0-47fe-9991-8ff4bc987479.JPEG" alt="" />
                     <h2>projects in Gurgaon</h2>
                 </div>
@@ -118,57 +124,7 @@
                 <div flex="25" flex-xs="100" flex-sm="100">
                     <img src="https://1005776689.rsc.cdn77.org/images/projects/-KPmH9oIem1N1_s4qpCv/5/da9a68a5-07b0-47fe-9991-8ff4bc987479.JPEG" alt="" />
                     <h2>projects in Gurgaon</h2>
-                </div>
-                <div flex="25" flex-xs="100" flex-sm="100">
-                    <img src="https://1005776689.rsc.cdn77.org/images/projects/-KPmH9oIem1N1_s4qpCv/5/da9a68a5-07b0-47fe-9991-8ff4bc987479.JPEG" alt="" />
-                    <h2>projects in Gurgaon</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section layout="row" layout-align="center center">
-        <div class="home-category" layout-align="center center" layout-wrap>
-            <div flex="100" layout-align="center center">
-                <h1>  Explore Projects </h1>
-                <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
-            </div>
-            <div flex="100" layout-align="center center" layout-wrap layout="row">
-                <md-tab flex="80">
-                    <md-tab label="Micro Markets">
-                        <md-content class="md-padding" layout-wrap layout="row">
-                            <div flex="30" flex-xs="100" flex-sm="100">
-                                <ul>
-                                    <li>
-                                        Item 1
-                                    </li>
-                                    <li>
-                                        Item 2
-                                    </li>
-                                    <li>
-                                        Item 3
-                                    </li>
-                                </ul>
-                            </div>
-                            <div flex="70" flex-xs="100" flex-sm="100">
-                                <div id="micro-market-map"></div>
-                            </div>
-                        </md-content>
-                    </md-tab>
-                    <md-tab label="Work Places">
-                        <md-content class="md-padding">
-                            <h1 class="md-display-2">Tab Two</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-                            <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-                            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-                        </md-content>
-                    </md-tab>
-                    <md-tab label="Schools">
-                        <md-content class="md-padding">
-                            <h1 class="md-display-2">Tab Three</h1>
-                            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-                        </md-content>
-                    </md-tab>
-                </md-tabs>
+                </div> -->
             </div>
         </div>
     </section>

@@ -124,7 +124,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     var id = $stateParams.id || null;
     console.log(type);
     $scope.projects = {};
-    var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors'];
+    var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors', 'petFriendly'];
 
 
     $scope.storeProjects = function(data){
@@ -185,7 +185,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             $scope.numProjects = Object.keys(data).length;
         }
     } else {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 6; i++) {
             if ($stateParams.from == types[i]) {
                 console.log($stateParams.from + 'List');
                 if(!checkCookie($stateParams.from + 'ListObject')){

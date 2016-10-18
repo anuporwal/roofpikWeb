@@ -1,4 +1,4 @@
-var app = angular.module('NewApp', ['ngMaterial', 'ui.router', 'jkAngularCarousel']);
+var app = angular.module('NewApp', ['ngMaterial', 'ui.router', 'ngMessages']);
 var db = firebase.database();
 
 
