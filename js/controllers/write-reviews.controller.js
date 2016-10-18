@@ -1,4 +1,4 @@
-app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http, $timeout, $mdToast, $mdDialog) {
+app.controller('writeReviewsCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog) {
 
     $scope.stepsModel = [];
     var newKey = '';
@@ -23,6 +23,7 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         .then(function(answer) {
             $timeout(function(){
                 $scope.uploadedImage = answer;
+                console.log($scope.uploadedImage);
             },0);
             $scope.status = 'You said the information was "' + answer + '".';
         }, function() {
@@ -99,7 +100,7 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         }
 
         $scope.cropClick = function(){
-            console.log('called');
+            console.log(' crop click called');
             basic.croppie('result', {
                 type: 'canvas',
                 format: 'jpeg',
@@ -114,13 +115,9 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                 
             });
         }
-
-
-
     }
 
     $scope.createPath = function(review){
-        console.log($scope.selectedFile);
         $scope.imageKey = db.ref('coverStory/images').push().key;
         if($scope.selectedProjectOrLocality.type == 'Project'){
             newKey = db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id).push().key;
@@ -160,37 +157,16 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
 
     $scope.size_url = [];
     $scope.upload = function(review, path){
-        console.log(typeof($scope.uploadedImage));
-
-        // console.log($scope.size);
-        // console.log($scope.selectedFile);
-        // $scope.imageNames = $scope.selectedFile.name;
-        // fd = new FormData();
-        // fd.append("uploadedFile", $scope.uploadedImage);
-        // $http.post('http://139.162.3.205/api/uploadImage', fd,
-        // {
-        //     transformRequest: angular.identity,
-        //     headers: { 'Content-Type' : undefined},
-        //     params : {
-        //         path : $scope.path,
-        //         size : $scope.size
-        //     }
-        // })
-        // .success(function(result){
-        //     console.log(result.URLs);
-        //     // $scope.submitReview(result.URLs[0].imageUrl, review);
-        // })
-        // .error(function(err){
-        //     console.log(err.message);
-        // });
-        // $http.post("http://139.162.3.205/api/testupload", {
-        //     path: $scope.uploadedImage
-        // }).success(function(response){
-        //     // $scope.submitReview(result.URLs[0].imageUrl, review);
-        //     console.log(response);
-        // }).error(function(err){
-        //     console.log(err);
-        // })
+        $http.post("http://139.162.3.205/api/testupload", {path: JSON.stringify($scope.uploadedImage)})
+        .success(function(response){
+            console.log(response);
+            if(response.StatusCode == 200){
+                $scope.submitReview(response.Message, review);
+            }
+        })
+        .error(function(err){
+            console.log(err);
+        })
     }
 
 
@@ -211,16 +187,22 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         })
     }
 
-    if(!checkCookie('searchObject')){
-        db.ref('search').once('value', function(dataSnapshot) {
-            $timeout(function() {
-                setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
-                $scope.pushToProjectLocality(dataSnapshot.val());
-            }, 0);
-        })
-    } else {
-        $scope.pushToProjectLocality(JSON.parse(getCookie('searchObject')) || {});
-    }
+    // if(!checkCookie('searchObject')){
+    //     db.ref('search').once('value', function(dataSnapshot) {
+    //         $timeout(function() {
+    //             setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
+    //             $scope.pushToProjectLocality(dataSnapshot.val());
+    //         }, 0);
+    //     })
+    // } else {
+    //     $scope.pushToProjectLocality(JSON.parse(getCookie('searchObject')) || {});
+    // }
+    db.ref('search').once('value', function(dataSnapshot) {
+        $timeout(function() {
+            // setCookie('searchObject', JSON.stringify(dataSnapshot.val()), 1);
+            $scope.pushToProjectLocality(dataSnapshot.val());
+        }, 0);
+    })
 
     $scope.nameEntered = function(){
         // console.log($scope.selectedItem);
@@ -279,7 +261,9 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
         var user = firebase.auth().currentUser;
         console.log(user);
         $scope.review.userName = user.displayName;
+        // $scope.review.userName = 'Anu';
         $scope.review.userId = user.uid;
+        // $scope.review.userId = '1234';
         $scope.review.blocked = false;
         $scope.review.createdDate = new Date().getTime();
         $scope.review.status = 'live';
@@ -296,7 +280,8 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                 cityId: '-KPmH9oIem1N1_s4qpCv',
                 cityName: 'Gurgaon',
                 reviewTitle: $scope.review.reviewTitle,
-                status : 'live'
+                status : 'live',
+                createdDate: $scope.review.createdDate
             }
             updates['reviews/-KPmH9oIem1N1_s4qpCv/residential/'+$scope.selectedProjectOrLocality.id+'/'+newKey] = $scope.review;
             updates['userReviews/'+user.uid+'/residential/'+newKey] = $scope.useReviewData
@@ -318,7 +303,8 @@ app.controller('writeReviewsCtrl', function($scope, $rootScope, $q, $log, $http,
                 cityId: '-KPmH9oIem1N1_s4qpCv',
                 cityName: 'Gurgaon',
                 reviewTitle: $scope.review.reviewTitle,
-                status : 'live'
+                status : 'live',
+                createdDate: $scope.review.createdDate
             }
             updates['reviews/-KPmH9oIem1N1_s4qpCv/locality/'+$scope.selectedProjectOrLocality.id+'/'+newKey] = $scope.review;
             updates['userReviews/'+user.uid+'/locality/'+newKey] = $scope.useReviewData;
