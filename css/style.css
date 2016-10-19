@@ -560,12 +560,12 @@ body {
 }
 
 .overview-wrapper ul li,
-.all-rating-summary ul li, {
+.all-rating-summary ul li {
     padding: 15px 0;
     font-size: 12px;
     font-weight: 300;
     color: #888888;
-    border-top: 1px solid #f3f3f3
+    border-top: 1px solid #f3f3f3;
 }
 
 .rating-summary p {
@@ -626,7 +626,6 @@ body {
      background-color: #ffffff;
     padding: 40px 25px 50px;
     border: 1px solid #f2f2f2;
-    /* width: 100%; */
     display: block;
     overflow: hidden;
     margin: 25px;   
@@ -725,6 +724,12 @@ body {
     padding: 15px 20px;
     border-radius: 5px;
     font-weight: 500;
+}
+
+.more-review-btn {
+    text-align:center;
+    color: #1ab0d3;
+    font-size:14px;
 }
 
 

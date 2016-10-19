@@ -1,6 +1,8 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope){
    // $rootScope.loading = true;
-   $('.project-details-page').hide();
+    $('.project-details-page').hide();
+    $('.footer').hide();
+    $('.md-header').hide();
    $scope.projectDetails = {
    	name: 'Vipul Greens',
    	id: 1
@@ -22,6 +24,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         $('.footer').fadeIn();
 
     }, 2000);
+
+
+    $scope.viewReviews = 5;
 
     db.ref('projects/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId).once('value', function(snapshot) {
         console.log(snapshot.val());
@@ -62,6 +67,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             // console.log(snapshot.val());
             $timeout(function() {
                 $scope.reviews = snapshot.val();
+                if(Object.keys(snapshot.val()).length > 5){
+                    $scope.showReviewBtn = true;
+                }
                 // $rootScope.loading = false;
             }, 100);
         }).then(function() {
@@ -79,6 +87,16 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             })
         })
     })
+
+
+    $scope.showMoreReviews = function(){
+        $scope.viewReviews += 5;
+        if(Object.keys($scope.reviews).length > $scope.viewReviews){
+            $scope.showReviewBtn = true;
+        } else {
+            $scope.showReviewBtn = false;
+        }
+    }
 
     $scope.starrating = function(rating) {
         rating = Math.round(rating);
