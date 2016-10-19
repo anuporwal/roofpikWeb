@@ -581,9 +581,32 @@ html, body {
 
 .overall-ratings-headings,
 .overview-heading,
-.all-rating-summary-heading {
+.all-rating-summary-heading,
+.rating-summary-heading,
+.other-website-links-heading {
     text-align: center;
 }
+
+.rating-summary {
+    background-color: #ffffff;
+    padding: 40px 16px 50px;
+    border: 1px solid #f2f2f2;
+    /* width: 100%; */
+    display: block;
+    overflow: hidden;
+    margin: 25px;
+}
+
+.other-website-links {
+     background-color: #ffffff;
+    padding: 40px 25px 50px;
+    border: 1px solid #f2f2f2;
+    /* width: 100%; */
+    display: block;
+    overflow: hidden;
+    margin: 25px;   
+}
+
 
 #yesNoQues {
     text-align: right;
