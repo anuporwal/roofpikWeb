@@ -1,8 +1,11 @@
-html, body {
- font-size: 12px;
+html,
+body {
+    font-size: 12px;
 }
 
-.home-container, .footer, .md-header{
+.home-container,
+.footer,
+.md-header {
     display: none;
 }
 
@@ -17,7 +20,7 @@ html, body {
     max-width: 120px;
 }
 
-.md-header .md-button{
+.md-header .md-button {
     font-size: 12px;
     min-width: auto;
 }
@@ -335,7 +338,7 @@ html, body {
     text-align: center;
     padding: 0px 0px 40px 0;
     margin: 20px 0px 50px;
-        line-height: 24px;
+    line-height: 24px;
 }
 
 .home-category h1 {
@@ -369,12 +372,11 @@ html, body {
     transform: scale(1.1);
 }
 
-
 .home-category-wrapper .image {
     position: relative;
     width: 100%;
     max-height: 300px;
-   }
+}
 
 .home-category-wrapper .image h2 {
     position: absolute;
@@ -384,7 +386,6 @@ html, body {
     width: 100%;
     color: #fff;
     background: rgba(29, 29, 29, 0.57);
-    
 }
 
 .project-name {
@@ -431,7 +432,6 @@ html, body {
     text-align: center;
     margin: 0 0 10px;
     width: auto;
-
 }
 
 .write-reviews .reviews-wrapper h2 {
@@ -441,14 +441,14 @@ html, body {
     text-align: center;
     margin: 20px 0 60px;
     width: auto;
-     padding: 0px 20px;
+    padding: 0px 20px;
 }
 
-
-#micro-market-map{
+#micro-market-map {
     height: 100%;
     width: 100%;
 }
+
 
 /* Project List */
 
@@ -463,9 +463,9 @@ html, body {
     width: 100%;
 }
 
-.info_content a{
+.info_content a {
     text-decoration: none;
-    color:#000;
+    color: #000;
 }
 
 #map {
@@ -867,27 +867,29 @@ html {
 
 /* auth */
 
-.auth-nav{
+.auth-nav {
     position: fixed;
 }
 
-md-toolbar h3 span{
+md-toolbar h3 span {
     position: absolute;
     right: 10px;
-    top:20px;
-
+    top: 20px;
 }
 
-.gl-other-options{
+.gl-other-options {
     text-align: center;
     margin-top: 30px;
     font-size: 16px;
 }
 
-.gl-signup{
-        margin-left: 30px;
+.gl-signup {
+    margin-left: 30px;
 }
+
+
 /*Review Details Page*/
+
 .review-details-page .review-tips {
     background-color: #dddddd;
 }
@@ -918,12 +920,12 @@ md-toolbar h3 span{
     background-color: #f2f2f2;
 }
 
-.review-details-page .colored{
-    color:rgb(255,87,34);
+.review-details-page .colored {
+    color: rgb(255, 87, 34);
 }
 
 .review-details-page .normal {
-    color:rgb(140, 140, 140);
+    color: rgb(140, 140, 140);
 }
 
 .review-details-page md-radio-group {
@@ -931,28 +933,36 @@ md-toolbar h3 span{
 }
 
 .review-details-page .image-selected {
-    padding-left:30px !important;
+    padding-left: 30px !important;
 }
 
+
 /*User All Reviews Page*/
+
 .user-all-reviews-page #user-review-card {
-   margin:8px 40px; 
+    margin: 8px 40px;
 }
+
 .user-all-reviews-page #edit-review-btn {
     text-align: center;
 }
+
 .user-all-reviews-page #edit-review-btn i {
-    font-size:30px;
+    font-size: 30px;
 }
-.user-all-reviews-page .user-review p{
-    font-size:16px;
+
+.user-all-reviews-page .user-review p {
+    font-size: 16px;
 }
+
 .user-all-reviews-page md-progress-circular {
-    top:50%;
+    top: 50%;
     margin: auto;
 }
 
+
 /*Write Reviews*/
+
 .write-review-page .review-tips {
     background-color: #dddddd;
 }
@@ -988,5 +998,48 @@ md-toolbar h3 span{
 }
 
 .write-review-page .image-selected {
-    padding-left:30px !important;
+    padding-left: 30px !important;
+}
+
+
+/* Cover Story */
+
+.cover-story {
+    position: relative;
+    width: 100%;
+    max-height: 400px;
+}
+
+.cover-story img {
+    position: relative;
+    width: 100%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.cover-desc {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    padding: 0px 10px;
+    width: 100%;
+    color: #fff;
+    background: rgba(29, 29, 29, 0.57);
+}
+
+.cover-desc h3 {
+    font-size: 18px;
+}
+
+.cover-desc h3,
+.cover-desc h4 {
+    padding: 0px;
+    margin: 5px 0;
+}
+
+.show-more-btn{
+    padding: 40px 0 0;
+text-align: center;
 }

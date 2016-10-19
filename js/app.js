@@ -19,8 +19,6 @@ app.run(function($rootScope, $timeout) {
         }
         // An error happened.
     });
-
-
 });
 
 var versions = {

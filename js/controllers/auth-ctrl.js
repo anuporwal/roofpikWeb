@@ -1,8 +1,8 @@
 app.controller('authCtrl', function($scope, authentication, $q, $rootScope, $mdSidenav) {
     // console.log("log");
     // swal("Welcome!", "You have successfully registered!", "success");
-     $('.forgetpassword').hide();
-        $('.signup').hide();
+    $('.forgetpassword').hide();
+    $('.signup').hide();
 
     $scope.showSignup = function() {
         $('.login').hide();
@@ -51,32 +51,24 @@ app.controller('authCtrl', function($scope, authentication, $q, $rootScope, $mdS
 
 
     $scope.login = function() {
-        $('#gl-circle-loader-wrapper').show();
         var q = $q.defer();
         var login = authentication.login($scope.user.email, $scope.user.password, q);
         login.then(function(response) {
-            $('#gl-side-menu-close-button').click();
-            $('#gl-circle-loader-wrapper').hide();
             $rootScope.loginStatus = true;
             swal("Welcome!", "You have successfully loged in!", "success");
+            $mdSidenav('right').close();
         }, function(error) {
-            $('#gl-circle-loader-wrapper').hide();
             swal("Not Logged In!", "Invalid email or password!", "error");
         })
     };
 
     $scope.forgetPassword = function() {
-        $('#gl-circle-loader-wrapper').fadeIn();
         var q = $q.defer();
         var reset = authentication.forgetPassword($scope.user.email, q);
         reset.then(function(response) {
-            $('#gl-side-menu-close-button').click();
-            $('#gl-circle-loader-wrapper').hide();
             swal("Email sent!", "Please check your email to reset your password!", "success");
         }, function(error) {
-            $('#gl-circle-loader-wrapper').hide();
             swal("Email not sent!", "Invalid email!", "error");
-            console.log(error);
         })
 
     }
@@ -118,6 +110,7 @@ app.controller('authCtrl', function($scope, authentication, $q, $rootScope, $mdS
                     // $('#gl-circle-loader-wrapper').hide();
                     swal("Welcome!", "You have successfully registered!", "success");
                     $rootScope.loginStatus = true;
+                    $mdSidenav('right').close();
 
                 })
             } else {
@@ -141,9 +134,27 @@ app.controller('authCtrl', function($scope, authentication, $q, $rootScope, $mdS
 
 
 
-app.controller('headerCtrl', function($scope, $mdSidenav) {
+app.controller('headerCtrl', function($scope, $mdSidenav, $rootScope) {
+    $scope.login = {};
+    $scope.$watch('loginStatus', function() {
+        $scope.login.status = $rootScope.loginStatus;
+        console.log($scope.login.status);
+    });
     $scope.toggleRight = function() {
         $mdSidenav('right').open()
+    }
+
+    $scope.logout = function() {
+        $rootScope.loginStatus = false;
+
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            //    $scope.login.status = false;
+            //   $rootScope.loginStatus = false;
+        }, function(error) {
+            //  $rootScope.loginStatus = false;
+            // An error happened.
+        });
     }
 });
 

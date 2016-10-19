@@ -1,6 +1,9 @@
 <md-content class="write-review-page">
     <div layout="row" class="" layout-xs="column">
-        <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box">
+        <div flex="75" flex-xs="100" class="md-padding review-form" ng-show="!login.status">
+            <h1>To wrtite review please login first</h1>
+        </div>
+        <div flex="75" flex-xs="100" class="md-padding review-form" id="outer-box" ng-show="login.status">
             <form name="review-form">
                 <div layout="row" class="md-padding">
                     <div flex>
@@ -137,12 +140,12 @@
                     </div>
                 </div>
                 <div class="image-selected" ng-show="uploadedImage">
-                    <img class="thumb" ng-src="{{uploadedImage}}"/>
+                    <img class="thumb" ng-src="{{uploadedImage}}" />
                 </div>
-<!--                 <div class="demo"></div>
+                <!--                 <div class="demo"></div>
                 <md-button class="md-raised md-warn" ng-click="cropClick()" >Crop</md-button> -->
                 <div class="md-padding" layout="row">
-                    <div flex = "25" flex-xs="100" flex-sm="100">
+                    <div flex="25" flex-xs="100" flex-sm="100">
                         Upload Image
                     </div>
                     <div flex="75" flex-xs="100" flex-sm="100">

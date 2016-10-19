@@ -97,6 +97,9 @@
                         </div>
                     </div>
                 </div>
+                 <div class="show-more-btn">
+                <md-button class="md-raised">Show More</md-button>
+                </div>
             </div>
         </div>
     </section>
@@ -107,13 +110,16 @@
                 <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
             </div>
             <div flex="100" layout-align="center center" layout-wrap layout="row">
-                <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)">
+                <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)" class="cover-story">
                     <img ng-src="{{story.coverImage}}" alt="" />
-                    <h2 style="padding-bottom:0px;">{{story.placeName}}</h2>
-                    <h2>{{story.createdDate | date: 'dd-MM-yy'}}</h2>
-                    <h2>{{story.title}}</h2>
+                       <div class="cover-desc">
+                    <h3>{{story.placeName}}</h3>
+                    <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
+                    <h4>{{story.title}}</h4>
+                    </div>
                 </div>
-<!--                 <div flex="25" flex-xs="100" flex-sm="100">
+
+                <!--                 <div flex="25" flex-xs="100" flex-sm="100">
                     <img src="https://1005776689.rsc.cdn77.org/images/projects/-KPmH9oIem1N1_s4qpCv/5/da9a68a5-07b0-47fe-9991-8ff4bc987479.JPEG" alt="" />
                     <h2>projects in Gurgaon</h2>
                 </div>
@@ -125,6 +131,9 @@
                     <img src="https://1005776689.rsc.cdn77.org/images/projects/-KPmH9oIem1N1_s4qpCv/5/da9a68a5-07b0-47fe-9991-8ff4bc987479.JPEG" alt="" />
                     <h2>projects in Gurgaon</h2>
                 </div> -->
+            </div>
+            <div class="show-more-btn">
+            <md-button class="md-raised">Show More</md-button>
             </div>
         </div>
     </section>
