@@ -1,5 +1,6 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope){
    // $rootScope.loading = true;
+   $('.project-details-page').hide();
    $scope.projectDetails = {
    	name: 'Vipul Greens',
    	id: 1
@@ -14,6 +15,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.buyLinks = {};
     $scope.rentLinks = {};
     console.log('working');
+
+      $timeout(function() {
+        $('.md-header').fadeIn();
+        $('.project-details-page').fadeIn();
+        $('.footer').fadeIn();
+
+    }, 2000);
 
     db.ref('projects/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId).once('value', function(snapshot) {
         console.log(snapshot.val());

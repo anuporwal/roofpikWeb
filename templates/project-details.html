@@ -27,12 +27,12 @@
                 </div>
         </article>
     </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="review-details md-padding">
-        <div flex-gt-sm="66" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="column">
-            <div layout-sm="column" layout-xs="column" layout-gt-sm="row">
+    <section  layout="row" class="review-details md-padding"  layout-wrap>
+        <div flex-gt-sm="66" flex-xs="100" flex-sm="100"  layout="row" layout-wrap>
+            
                 <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
                     <div class="overall-rating">
-                        <h4 class="overall-ratings-headings">Overall Rating ({{allRatings.overallRating}})</h4>
+                        <h2 class="overall-ratings-headings">Overall Rating ({{allRatings.overallRating}})</h2>
                         <h3>
                             <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(allRatings.overallRating-1))?'golden':'grey'" style="font-size:12px;">grade</i></span>
                         </h3>
@@ -41,7 +41,7 @@
                 </article>
                 <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
                      <div class="overview-wrapper">
-                        <h4 class="overview-heading">Overview</h4>
+                        <h2 class="overview-heading">Overview</h2>
                         <ul>
                             <li>Area <span>{{project.area.min}} Sq.Ft. - {{project.area.max}} Sq.Ft.</span></li>
                             <li>Buy <span>&#8377;{{project.price.buy.min}} - &#8377;{{project.price.buy.max}}</span></li>
@@ -50,31 +50,29 @@
                         </ul>
                     </div>
                 </article>
-            </div>
-            <div layout-sm="column" layout-xs="column" layout-gt-sm="row" flex>
-                <div>
-                    <div class="gl-comments" ng-repeat="review in reviews">
-                        <div class="gl-user-img">
-                            <img src="images/noImage.png" alt="User" class="gl-lazy">
+     
+            <div flex="100">
+                <div class="all-reviews">
+                    <h2 class="all-reviews-heading">Reviews</h2>
+                    <div class="user-review" ng-repeat="review in reviews" layout="row" layout-wrap>
+                        <div class="user-img" flex-gt-sm="20" flex-xs="100" flex-sm="100">
+                            <img src="images/noImage.png" alt="User">
                         </div>
-                        
-                        <div class="gl-comment-text">
-                            <div class="gl-username-date">
-                                <div class="gl-comment-title-description">
-                                    <h3>
-                                        <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                                   
-                                    </h3>
-                                    <h3 ng-show="!review.anonymous">{{review.reviewTitle}}</h3>
-                                </div>
-                                <div class="gl-comment-title-description">
-                                    <h4 ng-show="!review.anonymous">{{review.userName}}</h4>
-                                    <h4 ng-show="review.anonymous">Anonymous</h4>
-                                    <p class="gl-comments-date">| {{review.createdDate | date:'medium'}}</p>
-                                </div>
+                        <div class="" flex-gt-sm="80" flex-xs="100" flex-sm="100">
+                            <div class="rating-title">
+                                <h3>
+                                    <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
+                               
+                                </h3>
+                                <h3 ng-show="!review.anonymous">{{review.reviewTitle}}</h3>
+                            </div>
+                            <div class="review-detail-basic">
+                                <p ng-show="!review.anonymous"><b>{{review.userName}}</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                                <p ng-show="review.anonymous"><b>Anonymous</b> | {{review.createdDate | date:'MMM dd, yy'}}</p>
+                                <!-- <p class="gl-comments-date">| {{review.createdDate | date:'medium'}}</p> -->
                             </div>
                             <p>{{review.reviewText}}</p>
-                            <div layout="row">
+<!--                             <div layout="row">
                                 <div flex="80">
                                     <p>Is the project conveniently located?</p>
                                 </div>
@@ -89,15 +87,14 @@
                                 <div flex="20" id="yesNoQues">
                                     <p>{{review.easyAccessToPublicTransport}}</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
-        <div flex-gt-sm="33" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="column" layout-align="start" layout="column">
-            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+        <div flex-gt-sm="33" flex-xs="100" flex-sm="100" layout-align="start start" layout="row" layout-wrap>
+            <article flex="100">
                     <div class="all-rating-summary">
                         <h4 class="all-rating-summary-heading">User Ratings</h4>
                         <ul>
@@ -129,7 +126,7 @@
                         </ul>
                     </div>
             </article>
-            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+            <article  flex="100">
                 <div class="rating-summary">
                     <h4 class="rating-summary-heading">Rating Summary</h4>
                     <p ng-show="allRatings.amenities">
@@ -182,7 +179,7 @@
                     </p>
                 </div>
             </article>
-            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+<!--             <article flex="100">
                 <div class="other-website-links">
                     <h3 class="other-website-links-heading">Are you looking for?</h3>
                     <ul>
@@ -208,7 +205,7 @@
                         </li>
                     </ul>
                 </div>
-            </article>
+            </article> -->
         </div>
     </section>
 

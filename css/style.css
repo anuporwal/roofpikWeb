@@ -583,7 +583,7 @@ body {
 .overview-heading,
 .all-rating-summary-heading,
 .rating-summary-heading,
-.other-website-links-heading {
+.other-website-links-heading{
     text-align: center;
 }
 
@@ -607,6 +607,29 @@ body {
     margin: 25px;   
 }
 
+.all-reviews {
+     background-color: #ffffff;
+    padding: 40px 25px 50px;
+    border: 1px solid #f2f2f2;
+    /* width: 100%; */
+    display: block;
+    overflow: hidden;
+    margin: 25px;   
+}
+
+
+.user-review {
+    margin: 30px 0px;
+}
+
+.user-img {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.user-img img{
+    border-radius:50%;
+}
 
 #yesNoQues {
     text-align: right;

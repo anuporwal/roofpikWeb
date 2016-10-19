@@ -1,5 +1,4 @@
 app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, $sce, $stateParams){
-	console.log('working');
 
   $scope.showNoStories = false;
 
