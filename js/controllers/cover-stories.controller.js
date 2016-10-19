@@ -41,6 +41,8 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
         $scope.getLocalityPosts($stateParams.id);
       } else if($stateParams.from == 'tag'){
         $scope.getRelatedStories($stateParams.id);
+      } else if($stateParams.from == 'home'){
+        $scope.showAllStories();
       }
     })
   })
@@ -69,6 +71,12 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
 
   $scope.toTrustedHTML = function( html ){
     return $sce.trustAsHtml( html );
+  }
+
+  $scope.showAllStories = function(){
+    angular.forEach($scope.allStories, function(value, key){
+      value.selected = true;
+    })
   }
 
   $scope.getRelatedStories = function(tag){
