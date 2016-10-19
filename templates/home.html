@@ -3,9 +3,7 @@
         <div class="featured-header" layout-align="center center" layout="row" flex>
             <div class="featured-header-wrapper" flex="80" layout-align="center center">
                 <h1>   Discover Best Projects and Localities in Gurgaon </h1>
-                     
                 <h2>  India's Premier Property Reviews and Ratings by Residents </h2>
-
                 <div layout="row" layout-align="center center">
                     <div flex="80" class="home-search">
                         <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)" />
@@ -69,7 +67,6 @@
                 <br>
                 <strong>All the reviews are verified by our team.</strong>
                  </h2>
-              
                 <div layout="row" layout-align="center center">
                     <md-button class="md-raised md-primary" ng-click="gotoWriteReviews()">Write Review</md-button>
                 </div>
@@ -82,7 +79,6 @@
                 <h1>  Top Rated Projects </h1>
                 <h2> Zero focus on listing/ classifieds that get you reviews that are <strong>unbiased and neutral.  </strong>
  </h2>
-
                 <div layout-sm="column" layout-xs="column" layout-gt-sm="row" layout-align="center center">
                     <div flex="100" class="home-category-wrapper" layout-sm="column" layout-xs="column" layout-gt-sm="row">
                         <div flex="33" flex-xs="100" flex-sm="100" ng-repeat="project in topRated" ng-click="takeToProjectDetails(project)">
@@ -106,8 +102,8 @@
                         </div>
                     </div>
                 </div>
-                 <div class="show-more-btn">
-                <md-button class="md-raised" ng-click="takeToProjectList('topRated')">Show More</md-button>
+                <div class="show-more-btn">
+                    <md-button class="md-raised" ng-click="takeToProjectList('topRated')">Show More</md-button>
                 </div>
             </div>
         </div>
@@ -123,10 +119,10 @@
             <div flex="100" layout-align="center center" layout-wrap layout="row">
                 <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)" class="cover-story">
                     <img ng-src="{{story.coverImage}}" alt="" />
-                       <div class="cover-desc">
-                    <h3>{{story.placeName}}</h3>
-                    <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
-                    <h4>{{story.title}}</h4>
+                    <div class="cover-desc">
+                        <h3>{{story.placeName}}</h3>
+                        <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
+                        <h4>{{story.title}}</h4>
                     </div>
                 </div>
             </div>
