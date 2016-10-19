@@ -1,6 +1,6 @@
 html,
 body {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .home-container,
@@ -539,6 +539,14 @@ body {
     margin-top: 40px;
 }
 
+.review-details h3 {
+    color: #888888;;
+}
+
+.user-review p{
+    color:#888;
+}
+
 .overall-rating,
 .overview-wrapper,
 .all-rating-summary {
@@ -552,12 +560,19 @@ body {
 }
 
 .overview-wrapper ul li,
-.all-rating-summary ul li {
+.all-rating-summary ul li, {
     padding: 15px 0;
     font-size: 12px;
     font-weight: 300;
     color: #888888;
     border-top: 1px solid #f3f3f3
+}
+
+.rating-summary p {
+    padding: 10px 0;
+    font-size: 12px;
+    font-weight: 300;
+    color: #888888;
 }
 
 .overview-wrapper ul li span {
