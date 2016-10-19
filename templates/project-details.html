@@ -18,19 +18,6 @@
             </div>
         </article>
     </section>
-<!--     <section class="gl-page-header-wrapper">
-        <div class="container">
-            <div class="row" id="reviewHeading">
-                <h1>{{projectName}}</h1>
-                <p><i class="material-icons">location_on</i>{{project.projectDetails.address.displayLocation}}</p>
-                <span class="gl-item-rating"><i class="material-icons" >grade</i>4.5</span>
-                <div class="gl-page-head-btn-wrapper">
-                    <a href="#" class="gl-btn gl-icon-btn gl-share-btn">{{project.projectStatus}}</a>
-                    <a href="#" class="gl-btn gl-icon-btn">{{bhkAvailable}}</a>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
         <article flex="100" flex-xs="100" flex-sm="100">
                 <div class="featured-caption-content">
@@ -40,44 +27,76 @@
                 </div>
         </article>
     </section>
-    
-<!--     <section class="gl-tab-profile-meta-section">
-        <div class="container">
-            <div class="row">
-                <div class="gl-tab-nav-wrapper col-md-12 col-sm-12 col-xs-12">
-                    <div layout="row" class="gl-search-meta-wrapper" ng-show="project.standoutFeatures">
-                        <div class="gl-search-tags">
-                            <a class="gl-tag-btn" ng-repeat="tag in features">{{tag}}</a>
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="review-details md-padding">
+        <div flex-gt-sm="66" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="column">
+            <div layout-sm="column" layout-xs="column" layout-gt-sm="row">
+                <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
+                    <div class="overall-rating">
+                        <h4 class="overall-ratings-headings">Overall Rating ({{allRatings.overallRating}})</h4>
+                        <h3>
+                            <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(allRatings.overallRating-1))?'golden':'grey'" style="font-size:12px;">grade</i></span>
+                        </h3>
+                        <h5>Ratings from {{allRatings.overallRatingNum}} reviews</h5>
+                    </div>
+                </article>
+                <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
+                     <div class="overview-wrapper">
+                        <h4 class="overview-heading">Overview</h4>
+                        <ul>
+                            <li>Area <span>{{project.area.min}} Sq.Ft. - {{project.area.max}} Sq.Ft.</span></li>
+                            <li>Buy <span>&#8377;{{project.price.buy.min}} - &#8377;{{project.price.buy.max}}</span></li>
+                            <li>Rent <span>&#8377;{{project.price.rent.min}} - &#8377;{{project.price.rent.max}}</span></li>
+                            <li>Address <span>{{project.projectDetails.address.addressLine1}} {{project.projectDetails.address.addressLine2}}</span></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+            <div layout-sm="column" layout-xs="column" layout-gt-sm="row" flex>
+                <div>
+                    <div class="gl-comments" ng-repeat="review in reviews">
+                        <div class="gl-user-img">
+                            <img src="images/noImage.png" alt="User" class="gl-lazy">
                         </div>
+                        
+                        <div class="gl-comment-text">
+                            <div class="gl-username-date">
+                                <div class="gl-comment-title-description">
+                                    <h3>
+                                        <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(review.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
+                                   
+                                    </h3>
+                                    <h3 ng-show="!review.anonymous">{{review.reviewTitle}}</h3>
+                                </div>
+                                <div class="gl-comment-title-description">
+                                    <h4 ng-show="!review.anonymous">{{review.userName}}</h4>
+                                    <h4 ng-show="review.anonymous">Anonymous</h4>
+                                    <p class="gl-comments-date">| {{review.createdDate | date:'medium'}}</p>
+                                </div>
+                            </div>
+                            <p>{{review.reviewText}}</p>
+                            <div layout="row">
+                                <div flex="80">
+                                    <p>Is the project conveniently located?</p>
+                                </div>
+                                <div flex="20" id="yesNoQues">
+                                    <p>{{review.projectConvenientlyLocated}}</p>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <div flex="80">
+                                    <p>Do you have easy access to public transport?</p>
+                                </div>
+                                <div flex="20" id="yesNoQues">
+                                    <p>{{review.easyAccessToPublicTransport}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="review-details md-padding">
-        <div flex-gt-sm="66" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="row" >
-            <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
-                <div class="overall-rating">
-                    <h4 class="overall-ratings-headings">Overall Rating ({{allRatings.overallRating}})</h4>
-                    <h3>
-                        <span ng-repeat="rate in [1,2,3,4,5] track by $index"><i class="material-icons" ng-class="($index<=(allRatings.overallRating-1))?'golden':'grey'" style="font-size:20px;">grade</i></span>
-                    </h3>
-                    <h5>Ratings from {{allRatings.overallRatingNum}} reviews</h5>
-                </div>
-            </article>
-            <article flex-gt-sm="50" flex-xs="100" flex-sm="100">
-                 <div class="overview-wrapper">
-                    <h4 class="overview-heading">Overview</h4>
-                    <ul>
-                        <li>Area <span>{{project.area.min}} Sq.Ft. - {{project.area.max}} Sq.Ft.</span></li>
-                        <li>Buy <span>&#8377;{{project.price.buy.min}} - &#8377;{{project.price.buy.max}}</span></li>
-                        <li>Rent <span>&#8377;{{project.price.rent.min}} - &#8377;{{project.price.rent.max}}</span></li>
-                        <li>Address <span>{{project.projectDetails.address.addressLine1}} {{project.projectDetails.address.addressLine2}}</span></li>
-                    </ul>
-                </div>
-            </article>
-        </div>
-        <div flex-gt-sm="33" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="row" >
+        <div flex-gt-sm="33" flex-xs="100" flex-sm="100" layout-sm="column" layout-xs="column" layout-gt-sm="column" layout-align="start" layout="column">
             <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
                     <div class="all-rating-summary">
                         <h4 class="all-rating-summary-heading">User Ratings</h4>
@@ -109,6 +128,86 @@
                             </li>
                         </ul>
                     </div>
+            </article>
+            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                <div class="rating-summary">
+                    <h4 class="rating-summary-heading">Rating Summary</h4>
+                    <p ng-show="allRatings.amenities">
+                        <span>Amenities <span class="roofpikGreen">({{allRatings.amenities}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                    <i class="material-icons" ng-class="($index<=(allRatings.amenities-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                    <p ng-show="allRatings.security">
+                        <span>Security <span class="roofpikGreen">({{allRatings.security}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                    <i class="material-icons" ng-class="($index<=(allRatings.security-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                    <p ng-show="allRatings.openAndGreenAreas">
+                        <span>Open And Green Areas <span class="roofpikGreen">({{allRatings.openAndGreenAreas}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                    <i class="material-icons" ng-class="($index<=(allRatings.openAndGreenAreas-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                    <p ng-show="allRatings.electricityAndWaterSupply">
+                        <span>Electricity And Water Supply <span class="roofpikGreen">({{allRatings.electricityAndWaterSupply}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                <i class="material-icons" ng-class="($index<=(allRatings.electricityAndWaterSupply-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                    <p ng-show="allRatings.convenienceOfHouseMaids">
+                        <span>Convenience Of House Maids <span class="roofpikGreen">({{allRatings.convenienceOfHouseMaids}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                    <i class="material-icons" ng-class="($index<=(allRatings.convenienceOfHouseMaids-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                    <p ng-show="allRatings.convenienceOfParking">
+                        <span>Convenience Of Parking <span class="roofpikGreen">({{allRatings.convenienceOfParking}})</span></span>
+                        <span class="overall-ratings">
+                                <span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                                    <i class="material-icons" ng-class="($index<=(allRatings.convenienceOfParking-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                                </span>
+                        </span>
+                    </p>
+                </div>
+            </article>
+            <article flex-gt-sm="100" flex-xs="100" flex-sm="100">
+                <div class="other-website-links">
+                    <h3 class="other-website-links-heading">Are you looking for?</h3>
+                    <ul>
+                        <li>
+                            <span ng-click="selectBuyRent('buy')">Buy  <i class="material-icons" ng-show="buySelected">check_circle</i></span>
+                            <span ng-click="selectBuyRent('rent')">Rent  <i class="material-icons" ng-show="rentSelected">check_circle</i></span>
+                        </li>
+                        
+                        <li>
+                            <a href="{{buyLinks.cf}}" target="_blank" g-show="buySelected"> 
+                                <img src="images/cf.png">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{buyLinks.mb}}" target="_blank">
+                                <img src="images/mb.png">
+                            </a>
+                        </li>
+                        <li>
+                         <a href="{{buyLinks.acres}}" target="_blank">
+                                <img src="images/acres.png">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </article>
         </div>
     </section>
