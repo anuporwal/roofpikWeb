@@ -91,6 +91,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		});
 
 
-	$urlRouterProvider.otherwise('/user-all-reviews');
+	$urlRouterProvider.otherwise('/home');
 
 }]);

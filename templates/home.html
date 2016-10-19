@@ -2,13 +2,14 @@
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
         <div class="featured-header" layout-align="center center" layout="row" flex>
             <div class="featured-header-wrapper" flex="80" layout-align="center center">
-                <h1>  Write a review about your project or locality </h1>
-                <h2>  India's largest property reviewing platform </h2>
+                <h1>   Discover Best Projects and Localities in Gurgaon </h1>
+                <h2>  India's Premier Property Reviews and Ratings by Residents </h2>
                 <div layout="row" layout-align="center center">
                     <div flex="80" class="home-search">
                         <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)" />
                     </div>
                 </div>
+                <h2> Share your experience </h2>
             </div>
         </div>
     </section>
@@ -16,7 +17,7 @@
         <div class="home-category" layout-align="center center" layout-gt-sm="row" flex="80" layout-wrap>
             <div flex="100" layout-align="center center">
                 <h1>  Find the best projects for!! </h1>
-                <h2>  Know how to build websites? Then you already know how to build mobile apps! Ionic offers quality web and native app components for building highly interactive native and progressive web apps with Angular. </h2>
+                <h2>  <strong>First time ever</strong> touching the life’s of residents to generate reviews and experiences on living, buying and selling a property.</h2>
             </div>
             <div class="home-category-wrapper" layout="row" layout-align="center center" flex="100" layout-wrap>
                 <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('family')">
@@ -62,7 +63,10 @@
         <div layout-align="center center" layout="row" flex>
             <div class="reviews-wrapper" flex="80" layout-align="center center">
                 <h1>  2000+ Reviews</h1>
-                <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child. </h2>
+                <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child.
+                <br>
+                <strong>All the reviews are verified by our team.</strong>
+                 </h2>
                 <div layout="row" layout-align="center center">
                     <md-button class="md-raised md-primary" ng-click="gotoWriteReviews()">Write Review</md-button>
                 </div>
@@ -73,7 +77,8 @@
         <div class="home-category" layout-align="center center" layout-sm="column" layout-xs="column" layout-gt-sm="row" flex>
             <div flex="80" layout-align="center center" flex-xs="100" flex-sm="100">
                 <h1>  Top Rated Projects </h1>
-                <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
+                <h2> Zero focus on listing/ classifieds that get you reviews that are <strong>unbiased and neutral.  </strong>
+ </h2>
                 <div layout-sm="column" layout-xs="column" layout-gt-sm="row" layout-align="center center">
                     <div flex="100" class="home-category-wrapper" layout-sm="column" layout-xs="column" layout-gt-sm="row">
                         <div flex="33" flex-xs="100" flex-sm="100" ng-repeat="project in topRated" ng-click="takeToProjectDetails(project)">
@@ -97,8 +102,8 @@
                         </div>
                     </div>
                 </div>
-                 <div class="show-more-btn">
-                <md-button class="md-raised" ng-click="takeToProjectList('topRated')">Show More</md-button>
+                <div class="show-more-btn">
+                    <md-button class="md-raised" ng-click="takeToProjectList('topRated')">Show More</md-button>
                 </div>
             </div>
         </div>
@@ -107,15 +112,17 @@
         <div class="home-category" layout-align="center center" layout-wrap>
             <div flex="100" layout-align="center center">
                 <h1>  Cover Stories </h1>
-                <h2>  Checkout and enjoy the biggest unlimited possiblities </h2>
+                <h2>  
+                When you rent or buy a house it's not just a place it's a journey of accomplishment
+            <br>   <strong> Sneak Peek into the lives of our users. </strong> </h2>
             </div>
             <div flex="100" layout-align="center center" layout-wrap layout="row">
                 <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)" class="cover-story">
                     <img ng-src="{{story.coverImage}}" alt="" />
-                       <div class="cover-desc">
-                    <h3>{{story.placeName}}</h3>
-                    <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
-                    <h4>{{story.title}}</h4>
+                    <div class="cover-desc">
+                        <h3>{{story.placeName}}</h3>
+                        <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
+                        <h4>{{story.title}}</h4>
                     </div>
                 </div>
             </div>
