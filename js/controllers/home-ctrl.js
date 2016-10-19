@@ -128,6 +128,10 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
         $state.go('project-details', { id: project.projectId, name: project.projectName });
     }
 
+    $scope.showCoverStories = function(){
+        $state.go('cover-stories',{from:'home', id: '-KPmH9oIem1N1_s4qpCv'});
+    }
+
     $scope.openSearch = function() {
         // console.log('open search called');
     }
