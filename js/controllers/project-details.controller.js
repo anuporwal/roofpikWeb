@@ -1,12 +1,9 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope){
    // $rootScope.loading = true;
     $('.project-details-page').hide();
-    $('.footer').hide();
+    $('.new-footer').hide();
     $('.md-header').hide();
-   $scope.projectDetails = {
-   	name: 'Vipul Greens',
-   	id: 1
-   }
+
     var rates = [1, 2, 3, 4, 5];
     $scope.projectName = $stateParams.name;
     $scope.projectId = $stateParams.id;
@@ -21,7 +18,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
       $timeout(function() {
         $('.md-header').fadeIn();
         $('.project-details-page').fadeIn();
-        $('.footer').fadeIn();
+        $('.new-footer').fadeIn();
 
     }, 2000);
 

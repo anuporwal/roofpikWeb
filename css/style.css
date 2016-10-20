@@ -14,6 +14,7 @@ body {
 
 .md-header {
     margin: 0px 0px;
+    position: fixed;
 }
 
 .md-header .logo {
@@ -333,12 +334,11 @@ body {
 
 .home-category h2 {
     font-size: 16px;
-    font-weight: 300;
     color: #5d5d5d;
     text-align: center;
     padding: 0px 0px 40px 0;
     margin: 20px 0px 50px;
-    line-height: 24px;
+    line-height: 30px;
 }
 
 .home-category h1 {
@@ -380,7 +380,7 @@ body {
 
 .home-category-wrapper .image h2 {
     position: absolute;
-    bottom: 0px;
+    bottom: -46px;
     left: 0;
     padding: 0px;
     width: 100%;
@@ -476,16 +476,17 @@ body {
 
 /* Footer */
 
-.footer {
+.new-footer {
     color: #97989d;
-    background: #ebedf3;
+    background: #fff;
+    padding:80px 0px 0px 0px;
 }
 
-.footer-wrapper {
+.new-footer-wrapper {
     padding: 60px 0;
 }
 
-.footer-wrapper h4 {
+.new-footer-wrapper h4 {
     color: #20232c;
     font-size: 21px;
     line-height: 26px;
@@ -494,15 +495,81 @@ body {
     margin: 0px 0px 20px;
 }
 
-.footer-links a {
+.new-footer-links a,
+.copyright a {
     text-decoration: none;
-    color: #97989d;
+    color: #5b5b5b
 }
 
-.footer-links a:hover {
+.new-footer-links a:hover {
     text-decoration: none;
     color: #cc0000;
 }
+
+#roofpik-mail {
+    text-decoration:none;
+    color: #5b5b5b;
+}
+
+.contact-info-footer h3,
+.footer-links-wrapper h3 {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #5b5b5b;
+    display: block;
+    line-height: 1;
+    margin: 0 0 25px;
+}
+
+.contact-info-footer p,
+.footer-links-wrapper p {
+    overflow: hidden;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #5b5b5b;
+    position: relative;
+}
+
+.footer-icons {
+    font-size:14px !important;
+    position:absolute;
+    top: 4px;
+}
+
+.footer-contact-text{
+    padding-left: 30px;
+}
+
+.footer-roofpik-logo,
+.contact-info-footer,
+.footer-links-wrapper{
+    height:206px;
+}
+
+.footer-roofpik-logo {
+    text-align:center;
+    padding-top: 40px;
+
+}
+
+.contact-info-footer,
+.footer-links-wrapper {
+    border-left:1px solid #ccc;
+    padding: 5px 25px;
+}
+
+.new-footer .copyright{
+    background-color: #1d1d1d;
+    padding:35px 0;
+    margin-top:80px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #5b5b5b;
+}
+
 
 
 /*Project details page*/
@@ -1092,7 +1159,7 @@ md-toolbar h3 span {
 
 .cover-desc {
     position: absolute;
-    bottom: 0px;
+    bottom: 4px;
     left: 0;
     padding: 0px 10px;
     width: 100%;
@@ -1108,6 +1175,11 @@ md-toolbar h3 span {
 .cover-desc h4 {
     padding: 0px;
     margin: 5px 0;
+}
+
+.cover-desc .story-created-date {
+    float: right;
+    padding-right: 20px;
 }
 
 .show-more-btn{

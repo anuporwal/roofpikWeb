@@ -3,13 +3,13 @@ app.controller('contactUsCtrl', function($timeout) {
 
     $('.md-header').hide();
     $('.contact-us-page').hide();
-    $('.footer').hide();
+    $('.new-footer').hide();
     
 	$timeout(function() {
         $('.md-header').fadeIn();
         myMap();
         $('.contact-us-page').fadeIn();
-        $('.footer').fadeIn();
+        $('.new-footer').fadeIn();
 
     }, 500);
 

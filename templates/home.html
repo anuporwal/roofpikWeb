@@ -121,8 +121,8 @@
                     <img ng-src="{{story.coverImage}}" alt="" />
                     <div class="cover-desc">
                         <h3>{{story.placeName}}</h3>
-                        <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4>
-                        <h4>{{story.title}}</h4>
+                        <!-- <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4> -->
+                        <h4>{{story.title}} <span class="story-created-date">{{story.createdDate | date: 'MMM dd, yyyy'}}</span></h4>
                     </div>
                 </div>
             </div>

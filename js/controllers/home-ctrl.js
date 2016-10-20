@@ -3,12 +3,12 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
     $('.md-header').hide();
     $('.home-container').hide();
-    $('.footer').hide();
+    $('.new-footer').hide();
 
     $timeout(function() {
         $('.md-header').fadeIn();
         $('.home-container').fadeIn();
-        $('.footer').fadeIn();
+        $('.new-footer').fadeIn();
 
     }, 2000);
 

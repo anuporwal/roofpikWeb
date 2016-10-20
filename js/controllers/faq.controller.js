@@ -1,12 +1,12 @@
 app.controller('faqCtrl', function($timeout){
     $('.md-header').hide();
     $('.faq-page').hide();
-    $('.footer').hide();
+    $('.new-footer').hide();
     
 	$timeout(function() {
         $('.md-header').fadeIn();
         $('.faq-page').fadeIn();
-        $('.footer').fadeIn();
+        $('.new-footer').fadeIn();
 
     }, 500);
 });
