@@ -118,13 +118,21 @@
             </div>
             <div flex="100" layout-align="center center" layout-wrap layout="row">
                 <div flex="25" flex-xs="100" flex-sm="100" ng-repeat="story in shortStories | orderBy :'-'" ng-click="goToStory(story)" class="cover-story">
-                    <img ng-src="{{story.coverImage}}" alt="" />
+                     <div class="image-box">
+                        <div class="image">
+                            <img ng-src="{{story.coverImage}}" alt="" />
+                            <div class="cover-desc">
+                                <h3>{{story.placeName}}</h3>
+                                <h4>{{story.title}} <span class="story-created-date">{{story.createdDate | date: 'MMM dd, yyyy'}}</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <img ng-src="{{story.coverImage}}" alt="" class="image"/>
                     <div class="cover-desc">
                         <h3>{{story.placeName}}</h3>
-                        <!-- <h4>{{story.createdDate | date: 'dd-MM-yy'}}</h4> -->
                         <h4>{{story.title}} <span class="story-created-date">{{story.createdDate | date: 'MMM dd, yyyy'}}</span></h4>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="show-more-btn">
                 <md-button class="md-raised" ng-click="showCoverStories()">Show More</md-button>
