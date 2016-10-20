@@ -39,20 +39,6 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             map.setCenter(center);
         });
 
-
-        // Info Window Content
-        // var infoWindowContent = [
-        //     ['<div class="info_content">' +
-        //     	'<img style="width:80%" src="http://roofpik.com/test/newweb/images/newlymarried.jpg"' +
-        //         '<h3>London Eye</h3>' +
-        //         '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
-        //     ],
-        //     ['<div class="info_content">' +
-        //         '<h3>Palace of Westminster</h3>' +
-        //         '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-        //         '</div>'
-        //     ]
-        // ];
         var infoWindowContent = [];
         var markers = [];
         angular.forEach(projects, function(value, key){
@@ -69,11 +55,6 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
 
         var image = 'https://wiki.smu.edu.sg/is480/img_auth.php/thumb/0/00/Change-Makers_home-icon.png/40px-Change-Makers_home-icon.png';
-        // var markers = [
-        //     ['Gurgaon, India', 28.465168, 77.0296213],
-        //     ['Delhi, India', 28.4111889, 77.040829]
-        // ];
-
 
         var infoWindow = new google.maps.InfoWindow(),
             marker, i;

@@ -13,7 +13,7 @@
             </div>
         </div>
         <md-input-container md-no-float class="md-block" id="search-input">
-          <input ng-model="searchText" ng-change="getSearchText()" type="text" placeholder="Search by project, builder, landmark or locality"/>
+          <input id="search-input-box" ng-model="searchText" ng-change="getSearchText()" type="text" placeholder="Search by project, builder, landmark or locality" autofocus="true" />
         </md-input-container>
         <div class="search-list">
           <div ng-repeat="item in searchObject | filter:searchText | limitTo:10" flex="100" ng-click="selectSearchItem(item)" ng-class="{{$index%2 == 0}}?'light':'dark'">

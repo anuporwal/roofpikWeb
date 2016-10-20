@@ -1,6 +1,10 @@
 app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     // console.log('working');
 
+    $('.md-header').hide();
+    $('.home-container').hide();
+    $('.footer').hide();
+
     $timeout(function() {
         $('.md-header').fadeIn();
         $('.home-container').fadeIn();
@@ -153,22 +157,21 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     };
 
     $scope.goToStory = function(val) {
-        // console.log(val);
         $state.go('story-details', { id: val.storyId });
     }
 
-    function DialogController($scope, $mdDialog) {
+    function DialogController($scope, $mdDialog, $timeout) {
+        $timeout(function(){
+            $('#search-input-box').focus();
+        },500);
         $scope.searchObject = [];
         var count = 0;
-        // console.log(checkLocalStorage('search'));
         if(checkLocalStorage('search')){
-            // console.log('if called');
             var data = getLocalStorage('searchObject');
             angular.forEach(data, function(value, key){
                 $scope.searchObject.push(value);
             })
         } else {
-            // console.log('else called');
             db.ref('search').once('value', function(snapshot){
                 $timeout(function(){
                     setLocalStorage('search', snapshot.val());
@@ -179,6 +182,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
                 }, 0);
             })
         }
+        
         $scope.hide = function() {
             $mdDialog.hide();
         };
