@@ -268,7 +268,7 @@ body {
 
 .featured-header {
     background-size: cover !important;
-    background: url('http://roofpik.com/test/newweb/images/bg3.jpg') center center no-repeat;
+    background: url('../images/home/bg3.jpg') center center no-repeat;
     padding: 150px 0 125px;
 }
 
@@ -415,7 +415,7 @@ body {
 }
 
 .write-reviews {
-    background: url('http://roofpik.com/test/newweb/images/bg5.jpg') center center no-repeat;
+    background: url('../images/home/bg5.jpg') center center no-repeat;
     background-size: cover;
     padding: 100px 0;
 }
@@ -582,6 +582,10 @@ body {
     color: #888888;
 }
 
+.overall-rating p{
+    color: #888888;
+}
+
 .overall-rating {
     text-align: center;
 }
@@ -590,8 +594,8 @@ body {
     float: right;
 }
 
-.overall-ratings-headings {
-    border-bottom: 1px solid #e6e6e6;
+.overall-ratings-headings, .rating-summary-heading {
+    border-bottom: 1px solid #f2f2f2;
 }
 
 .overall-ratings-headings,
@@ -810,7 +814,7 @@ html {
 #about-us-title {
     width: 100%;
     height: auto;
-    background-image: url('http://roofpik.com/test/newweb/images/about-roofpik.jpg');
+    background-image: url('../images/about-roofpik.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -819,6 +823,7 @@ html {
 
 #about-us-title h1 {
     color: #ffffff;
+    font-size:30px;
 }
 
 #about-us-description {
