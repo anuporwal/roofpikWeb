@@ -6,6 +6,16 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                 $log.debug("close RIGHT is done");
             });
     };
+    $('.md-header').hide();
+    $('.project-list-page').hide();
+    $('.new-footer').hide();
+
+    $timeout(function() {
+        $('.md-header').fadeIn();
+        $('.project-list-page').fadeIn();
+        $('.new-footer').fadeIn();
+
+    }, 2000);
 
     $scope.toggleRight = function() {
         $mdSidenav('right').open()
