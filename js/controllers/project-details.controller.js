@@ -22,6 +22,30 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
 
     }, 2000);
 
+    function convertCurrency(value){
+        valueLen = getlength(value);
+        var denomination = '';
+
+        if(valueLen <= 5){
+            return value;
+        } else if(valueLen> 5 && valueLen <= 7){
+            denomination = ' L';
+            value = value/100000;
+            value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+            return value+denomination;
+        } else if(valueLen> 7 && valueLen <= 9){
+            denomination = ' Cr';
+            value = value/10000000;
+            value = parseFloat(Math.round(value * 100) / 100).toFixed(2);
+            return value+denomination;
+        }
+   }
+
+   function getlength(number) {
+       return number.toString().length;
+   }
+
+
 
     $scope.viewReviews = 5;
 
@@ -29,9 +53,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
-            // console.log($scope.project);
-            // console.log($scope.project.images.main['2100x800']);
-            // $('.gl-page-header-wrapper').css('background-image','url('+$scope.project.images.main['2100x800']+')');
+            $scope.buyMin = convertCurrency($scope.project.price.buy.min);
+            $scope.buyMax = convertCurrency($scope.project.price.buy.max);
+            $scope.rentMin = convertCurrency($scope.project.price.rent.min);
+            $scope.rentMax = convertCurrency(100000);
+
             angular.forEach($scope.project.standoutFeatures, function(value, key) {
                 $scope.features.push(key);
             })
@@ -47,9 +73,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 $scope.buyLinks.mb = $scope.project.pricingLinks.magicBricks.buy;
                 $scope.rentLinks.mb = $scope.project.pricingLinks.magicBricks.rent;
             }
-            // console.log($scope.buyLinks);
-
-            // console.log($scope.project.bhk);
             angular.forEach($scope.project.bhk, function(value, key) {
                 if (value) {
                     $scope.bhkAvailable = $scope.bhkAvailable + key + ', ';
