@@ -129,7 +129,8 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     }
 
     $scope.takeToProjectDetails = function(project) {
-        $state.go('project-details', { id: project.projectId, name: project.projectName });
+        $scope.newPath = ["Gurgaon"];
+        $state.go('project-details', { id: project.projectId, name: project.projectName, path: JSON.stringify($scope.newPath)});
     }
 
     $scope.showCoverStories = function(){

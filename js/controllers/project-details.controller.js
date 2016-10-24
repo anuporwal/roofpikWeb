@@ -14,7 +14,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.buyLinks = {};
     $scope.rentLinks = {};
     // console.log(JSON.parse($stateParams.path));
-    $scope.path = JSON.parse($stateParams.path);
+    $scope.path = JSON.parse($stateParams.path || null);
     $scope.path.push(">");
     $scope.path.push($scope.projectName);
     // console.log($scope.path);

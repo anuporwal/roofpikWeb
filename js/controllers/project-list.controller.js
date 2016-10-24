@@ -216,7 +216,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                 } else if(types[i] == 'petFriendly'){
                     cat = 'Pet Friendly';
                 }
-                $scope.filterPath = ["Gurgaon >", cat];
+                $scope.filterPath = ["Gurgaon",">", cat];
                 if(!checkLocalStorage($stateParams.from)){
                     // console.log('from firebase');
                     db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
