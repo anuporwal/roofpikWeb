@@ -29,7 +29,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('project-details', {
-			url: '/project-details/:id/:name',
+			url: '/project-details/:id/:name/:path',
 			templateUrl: 'templates/project-details.html',
 			controller: 'projectDetailsCtrl'
 		});
@@ -57,7 +57,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('project-list', {
-			url: '/project-list/:from/:type/:id',
+			url: '/project-list/:from/:type/:id/:name',
 			templateUrl: 'templates/project-list.html',
 			controller: 'projectListCtrl'
 		});

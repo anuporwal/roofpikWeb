@@ -33,9 +33,32 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
         // Display a map on the page
         //  map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        var infoWindowContent = [];
+        var markers = [];
+        var latLngCount = 0;
+        var latSum = 0;
+        var lngSum = 0;
+        angular.forEach(projects, function(value, key){
+            latLngCount++;
+            var data = [];
+            data = ['<div class="info_content"><a href="#/project-details/'+value.projectId+'/'+value.projectName+'">' +
+             '<img style="width:80%" src="'+value.imgUrl+'"' +
+                '<h3>'+value.projectName+'</h3>' +
+                '<p>'+value.displayLocation+'</p>' + '</a></div>'
+            ];
+            var markerData = [value.projectName, value.lat, value.lng];
+            latSum += value.lat;
+            lngSum += value.lng;
+            if(latLngCount == Object.keys(projects).length){
+                latSum = latSum/latLngCount;
+                lngSum = lngSum/latLngCount;
+            }
+            markers.push(markerData);
+            infoWindowContent.push(data);
+        })
 
 
-        var uluru = { lat: 28.4479248, lng: 77.0582817 };
+        var uluru = { lat: latSum, lng: lngSum};
         map = new google.maps.Map(document.getElementById('map'), {
             center: uluru,
             zoom: 12
@@ -48,21 +71,6 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             google.maps.event.trigger(map, "resize");
             map.setCenter(center);
         });
-
-        var infoWindowContent = [];
-        var markers = [];
-        angular.forEach(projects, function(value, key){
-            var data = [];
-            data = ['<div class="info_content"><a href="#/project-details/'+value.projectId+'/'+value.projectName+'">' +
-             '<img style="width:80%" src="'+value.imgUrl+'"' +
-                '<h3>'+value.projectName+'</h3>' +
-                '<p>'+value.displayLocation+'</p>' + '</a></div>'
-            ];
-            var markerData = [value.projectName, value.lat, value.lng];
-            markers.push(markerData);
-            infoWindowContent.push(data);
-        })
-
 
         var image = 'https://wiki.smu.edu.sg/is480/img_auth.php/thumb/0/00/Change-Makers_home-icon.png/40px-Change-Makers_home-icon.png';
 
@@ -113,14 +121,22 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;
+    var name = $stateParams.name || null;
+    $scope.filterPath = [];
     // console.log(type);
     $scope.projects = {};
     var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors', 'petFriendly'];
 
+    function capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
 
     $scope.storeProjects = function(data){
         var projectCount = 0;
          if($stateParams.type == 'locality'){
+            $scope.filterPath = ["Gurgaon",">", $stateParams.name];
+            // $scope.filterPath[0] = 'Gurgaon > '
+            // $scope.filterPath[1] = $stateParams.name;
             angular.forEach(data, function(value, key){
                 projectCount++;
                 if(value.localityId == $stateParams.id){
@@ -133,6 +149,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                 }
             })
         } else if($stateParams.type == 'developer'){
+            $scope.filterPath = ["Gurgaon",">", $stateParams.name];
             angular.forEach(data, function(value, key){
                 projectCount++;
                 if(value.developerId == $stateParams.id){
@@ -166,6 +183,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             $scope.storeProjects($scope.topRatedObject);
         }
     }else if ($stateParams.from == 'topRated') {
+        $scope.filterPath = ["Gurgaon",">","Top Rated"];
         if(!checkLocalStorage('topRated')){
             db.ref('topRated').once('value', function(dataSnapshot) {
                 $timeout(function(){
@@ -184,6 +202,21 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     } else {
         for (var i = 0; i < 6; i++) {
             if ($stateParams.from == types[i]) {
+                var cat;
+                if(types[i] == 'family'){
+                    cat = 'Family';
+                }else if(types[i] == 'justMarried'){
+                    cat = 'Just Married';
+                } else if(types[i] == 'oldAgeFriendly'){
+                    cat = 'Old Age Friendly';
+                } else if(types[i] == 'kids'){
+                    cat = 'Kids';
+                } else if(types[i] == 'bachelors'){
+                    cat = 'Bachelors';
+                } else if(types[i] == 'petFriendly'){
+                    cat = 'Pet Friendly';
+                }
+                $scope.filterPath = ["Gurgaon >", cat];
                 if(!checkLocalStorage($stateParams.from)){
                     // console.log('from firebase');
                     db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
@@ -207,6 +240,6 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     $scope.selectProject = function(id, name) {
         // console.log(id, name);
-        $state.go('project-details', { id: id, name: name });
+        $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
     }
 })

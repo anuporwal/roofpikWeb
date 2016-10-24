@@ -6,10 +6,14 @@
             </div>
         </div>
     </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" style="margin-top:50px;">
         <div class="projects-wrapper" layout-align="center center" layout="row" flex>
             <div flex="100" layout-align="start start" layout="row">
                 <div class="project-list" flex="50" layout="row" layout-wrap>
+                    <div flex="100" class="path-filters">
+                        <span class="path-btn" ng-repeat="filter in filterPath track by $index">{{filter}}</span>
+                        <!-- {{filterPath}} -->
+                    </div>
                     <div flex="50" flex-xs="100" flex-sm="100" ng-repeat="project in projects" ng-click="selectProject(project.projectId, project.projectName)">
                         <div style="padding:10px">
                             <div class="image-box">

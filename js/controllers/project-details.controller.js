@@ -13,6 +13,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.dataLoaded = false;
     $scope.buyLinks = {};
     $scope.rentLinks = {};
+    // console.log(JSON.parse($stateParams.path));
+    $scope.path = JSON.parse($stateParams.path);
+    $scope.path.push(">");
+    $scope.path.push($scope.projectName);
+    // console.log($scope.path);
     // console.log('working');
 
       $timeout(function() {

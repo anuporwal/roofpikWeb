@@ -206,10 +206,10 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
                 $state.go('project-details', { id: val.id, name: val.name });
             } else if (val.type == 'Locality') {
                 $mdDialog.cancel();
-                $state.go('project-list', { from: 'search', type: 'locality', id: val.id });
+                $state.go('project-list', { from: 'search', type: 'locality', id: val.id, name: val.name });
             } else if (val.type == 'Developer') {
                 $mdDialog.cancel();
-                $state.go('project-list', { from: 'search', type: 'developer', id: val.id });
+                $state.go('project-list', { from: 'search', type: 'developer', id: val.id, name: val.name  });
             }
         }
     }

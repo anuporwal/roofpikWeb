@@ -477,6 +477,24 @@ body {
     width: 100%;
 }
 
+.path-filters .path-btn {
+    padding: 4px;
+}
+
+.path-filters span.path-btn {
+    display: inline-block;
+}
+
+.path-filters span.path-btn:nth-child(even) {
+    color: #262626;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.path-filters span.path-btn:nth-child(odd) {
+    color: #22a8f4;
+}
+
 
 /* Footer */
 
@@ -774,6 +792,36 @@ body {
 }
 
 .tagcloud span.tag-btn:nth-child(6) {
+    background-color: rgba(52, 104, 137, 0.1);
+    color: #3468ed;
+}
+
+.tagcloud span.tag-btn:nth-child(7) {
+    background-color: rgba(34, 168, 244, 0.1);
+    color: #22a8f4;
+}
+
+.tagcloud span.tag-btn:nth-child(8) {
+    background-color: rgba(255, 141, 69, 0.1);
+    color: #ff8d3b;
+}
+
+.tagcloud span.tag-btn:nth-child(9) {
+    background-color: rgba(157, 49, 197, 0.1);
+    color: #9d31c5;
+}
+
+.tagcloud span.tag-btn:nth-child(10) {
+    background-color: rgba(74, 197, 182, 0.1);
+    color: #4ac5b6;
+}
+
+.tagcloud span.tag-btn:nth-child(11) {
+    background-color: rgba(237, 52, 174, 0.1);
+    color: #ed34ae;
+}
+
+.tagcloud span.tag-btn:nth-child(12) {
     background-color: rgba(52, 104, 137, 0.1);
     color: #3468ed;
 }
