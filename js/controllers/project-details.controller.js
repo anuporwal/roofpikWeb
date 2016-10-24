@@ -79,6 +79,24 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                     $("#goodStar").css("width", ($scope.allRatings.threeStar / $scope.allRatings.overallRatingNum) * 100 + '%');
                     $("#averageStar").css("width", ($scope.allRatings.twoStar / $scope.allRatings.overallRatingNum) * 100 + '%');
                     $("#badStar").css("width", ($scope.allRatings.oneStar / $scope.allRatings.overallRatingNum) * 100 + '%');
+                    if($scope.allRatings.amenities){
+                       $scope.allRatings.amenities1 = Math.round($scope.allRatings.amenities); 
+                    }
+                    if($scope.allRatings.security){
+                       $scope.allRatings.security1 = Math.round($scope.allRatings.security); 
+                    }
+                    if($scope.allRatings.openAndGreenAreas){
+                       $scope.allRatings.openAndGreenAreas1 = Math.round($scope.allRatings.openAndGreenAreas); 
+                    }
+                    if($scope.allRatings.electricityAndWaterSupply){
+                       $scope.allRatings.electricityAndWaterSupply1 = Math.round($scope.allRatings.electricityAndWaterSupply); 
+                    }
+                    if($scope.allRatings.convenienceOfHouseMaids){
+                       $scope.allRatings.convenienceOfHouseMaids1 = Math.round($scope.allRatings.convenienceOfHouseMaids); 
+                    }
+                    if($scope.allRatings.convenienceOfParking){
+                       $scope.allRatings.convenienceOfParking1 = Math.round($scope.allRatings.convenienceOfParking); 
+                    }
                     $scope.dataLoaded = true;
                 }, 50);
             })
