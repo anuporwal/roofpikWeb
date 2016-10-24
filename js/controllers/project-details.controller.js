@@ -7,13 +7,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     var rates = [1, 2, 3, 4, 5];
     $scope.projectName = $stateParams.name;
     $scope.projectId = $stateParams.id;
-    $scope.reviews = {};
+    $scope.reviews = [];
     $scope.features = [];
     $scope.bhkAvailable = '';
     $scope.dataLoaded = false;
     $scope.buyLinks = {};
     $scope.rentLinks = {};
-    console.log('working');
+    // console.log('working');
 
       $timeout(function() {
         $('.md-header').fadeIn();
@@ -26,11 +26,11 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.viewReviews = 5;
 
     db.ref('projects/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId).once('value', function(snapshot) {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
-            console.log($scope.project);
-            console.log($scope.project.images.main['2100x800']);
+            // console.log($scope.project);
+            // console.log($scope.project.images.main['2100x800']);
             // $('.gl-page-header-wrapper').css('background-image','url('+$scope.project.images.main['2100x800']+')');
             angular.forEach($scope.project.standoutFeatures, function(value, key) {
                 $scope.features.push(key);
@@ -47,28 +47,45 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
                 $scope.buyLinks.mb = $scope.project.pricingLinks.magicBricks.buy;
                 $scope.rentLinks.mb = $scope.project.pricingLinks.magicBricks.rent;
             }
-            console.log($scope.buyLinks);
+            // console.log($scope.buyLinks);
 
-            console.log($scope.project.bhk);
+            // console.log($scope.project.bhk);
             angular.forEach($scope.project.bhk, function(value, key) {
                 if (value) {
                     $scope.bhkAvailable = $scope.bhkAvailable + key + ', ';
                 }
             })
             $scope.bhkAvailable = $scope.bhkAvailable.substring(0, $scope.bhkAvailable.length - 2) + ' BHK available';
-            console.log($scope.bhkAvailable);
+            // console.log($scope.bhkAvailable);
 
         }, 100);
     }).then(function() {
-        db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId).once('value', function(snapshot) {
+        db.ref('reviews/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId)
+        .orderByChild('wordCount')
+        .once('value', function(snapshot) {
+            var allReviewsCount = Object.keys(snapshot.val()).length;
+            $timeout(function(){
+                var reviewCount = 0;
+                snapshot.forEach(function(childSnapshot){
+                    reviewCount++;
+                    // console.log(childSnapshot.val().wordCount);
+                    $scope.reviews.push(childSnapshot.val());
+                    if(reviewCount == allReviewsCount){
+                        if(reviewCount > 5){
+                            $scope.showReviewBtn = true;
+                        }
+                    }
+                });
+            },0);
+
             // console.log(snapshot.val());
-            $timeout(function() {
-                $scope.reviews = snapshot.val();
-                if(Object.keys(snapshot.val()).length > 5){
-                    $scope.showReviewBtn = true;
-                }
-                // $rootScope.loading = false;
-            }, 100);
+            // $timeout(function() {
+            //     $scope.reviews = snapshot.val();
+            //     if(Object.keys(snapshot.val()).length > 5){
+            //         $scope.showReviewBtn = true;
+            //     }
+            //     // $rootScope.loading = false;
+            // }, 100);
         }).then(function() {
             db.ref('ratingReview/-KPmH9oIem1N1_s4qpCv/residential/' + $scope.projectId).once('value', function(snapshot) {
                 $timeout(function() {
@@ -106,7 +123,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
 
     $scope.showMoreReviews = function(){
         $scope.viewReviews += 5;
-        if(Object.keys($scope.reviews).length > $scope.viewReviews){
+        if($scope.reviews.length > $scope.viewReviews){
             $scope.showReviewBtn = true;
         } else {
             $scope.showReviewBtn = false;
@@ -122,7 +139,7 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.rentSelected = false;
 
     $scope.selectBuyRent = function(value) {
-        console.log(value);
+        // console.log(value);
         if (value == 'buy') {
             $scope.buySelected = true;
             $scope.rentSelected = false;

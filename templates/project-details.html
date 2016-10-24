@@ -54,7 +54,7 @@
             <div flex="100">
                 <div class="all-reviews">
                     <h3 class="all-reviews-heading">Reviews</h3>
-                    <div class="user-review" ng-repeat="review in reviews" layout="row" layout-wrap ng-show="$index < viewReviews">
+                    <div class="user-review" ng-repeat="review in reviews | orderBy :'-'" layout="row" layout-wrap ng-show="$index < viewReviews">
                         <div class="user-img" flex-gt-sm="20" flex-xs="100" flex-sm="100">
                             <img src="images/noImage.png" alt="User">
                         </div>

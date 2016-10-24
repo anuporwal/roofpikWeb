@@ -8,12 +8,12 @@ app.run(function($rootScope, $timeout) {
     $rootScope.loading = true;
     firebase.auth().onAuthStateChanged(function(user) {
         // Sign-out successful.
-        console.log(user);
+        // console.log(user);
         if (user != null) {
             // User is signed in.
             $rootScope.loginStatus = true;
         } else {
-            console.log('called2');
+            // console.log('called2');
             $rootScope.loginStatus = false;
             // No user is signed in.
         }
