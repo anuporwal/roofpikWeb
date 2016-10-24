@@ -1,7 +1,7 @@
 app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope){
    // $rootScope.loading = true;
-    $('.project-details-page').hide();
     $('.new-footer').hide();
+    $('.project-details-page').hide();
     $('.md-header').hide();
 
     var rates = [1, 2, 3, 4, 5];
