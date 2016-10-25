@@ -14,7 +14,6 @@ body {
 
 .md-header {
     margin: 0px 0px;
-    position: fixed;
 }
 
 .md-header .logo {
@@ -28,6 +27,7 @@ body {
 
 .md-header .md-toolbar-tools {
     background: rgb(250, 250, 250);
+    padding: 15px 16px;
 }
 
 .md-header .location-icon {

@@ -1,5 +1,11 @@
 app.controller('writeReviewsCtrl', function($scope, $http, $timeout, $mdToast, $mdDialog, $rootScope) {
 
+    $timeout(function(){
+        $('.md-header').fadeIn();
+        $('.write-review-page').fadeIn();
+        $('.new-footer').fadeIn();
+    },500);
+
     $scope.stepsModel = [];
     var newKey = '';
 

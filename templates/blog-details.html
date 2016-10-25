@@ -5,7 +5,7 @@
                 <div class="featured-story" style="background-image:url({{currentBlog.coverImage['1600x900']}});">
                     <div class="featured-caption">
                         <div class="featured-caption-content">
-                            <div class="featured-caption-category"><a href="#">{{currentBlog.placeName}}</a></div>
+                            <div class="featured-caption-category" ng-show="currentBlog.placeName"><a href="#">{{currentBlog.placeName}}</a></div>
                             <h3><a href="#">{{currentBlog.title}}</a></h3>
                             <time>{{currentBlog.createdDate | date:'MMM dd, yy'}}</time>
                             <ul class="featured-tags">
@@ -38,12 +38,12 @@
                             <span class="md-title">Popular Blogs</span>
                         </md-card-header-text>
                     </md-card-header>
-                    <article ng-repeat="story in popularBlogs" ng-click="goToStoryDetails(story.storyId)">
-                        <img ng-src="{{story.coverImage['700x525']}}" class="md-card-image" alt="Washed Out" />
+                    <article ng-repeat="blog in popularBlogs" ng-click="goToBlogDetails(blog.blogId)">
+                        <img ng-src="{{blog.coverImage['1600x900']}}" class="md-card-image" alt="Washed Out" />
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">{{story.title}}</span>
-                                <span class="md-subhead">{{story.placeName}}</span>
+                                <span class="md-headline">{{blog.title}}</span>
+                                <span class="md-subhead">{{blog.createdDate | date:'MMM dd, yy'}}</span>
                             </md-card-title-text>
                         </md-card-title>
                     </article>
@@ -57,7 +57,7 @@
                     <md-card-content>
                         <ul>
                             <li ng-repeat="locality in popularLocalities">
-                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityPosts(locality)">{{locality.locationName}}</span></div>
+                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityBlogs(locality)">{{locality.locationName}}</span></div>
                                 <div class="clearfix"></div>
                             </li>
                         </ul>
@@ -71,7 +71,7 @@
                     </md-card-header>
                     <md-card-content>
                         <div class="tagcloud">
-                            <p ng-click="getRelatedStories(tag)" ng-repeat="tag in tagCloudData">{{tag.tag}}</p>
+                            <p ng-click="getRelatedBlogs(tag)" ng-repeat="tag in tagCloudData">{{tag.tag}}</p>
                         </div>
                     </md-card-content>
                 </md-card>

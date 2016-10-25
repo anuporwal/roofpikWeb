@@ -10,7 +10,7 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
         $('.home-container').fadeIn();
         $('.new-footer').fadeIn();
 
-    }, 0);
+    }, 1000);
 
 
     $scope.takeToProjectList = function(param) {
@@ -32,30 +32,30 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
             }, 0);
         })
 
-    // db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
-    //     .orderByChild('createdDate')
-    //     .limitToLast(8)
-    //     .once('value', function(snapshot) {
-    //         $timeout(function() {
-    //             snapshot.forEach(function(childSnapshot) {
-    //                 var coverimage = childSnapshot.val().coverImage['700x525'];
-    //                 var blogData = childSnapshot.val();
-    //                 blogData.coverImage = coverimage; 
-    //                 $scope.blogs.push(blogData);
-    //             })
-    //             $timeout(function(){
-    //                 var data = document.getElementById('blog-image-box');
-    //                 console.log(data.clientHeight);
-    //                 console.log(data.scrollHeight);
-    //                 console.log(data.offsetHeight);
-    //                 var data1 = document.getElementById('blog-image');
-    //                 console.log(data1.clientHeight);
-    //                 console.log(data1.scrollHeight);
-    //                 console.log(data1.offsetHeight);
-    //                 data1.height = data.clientHeight;
-    //             },5000);
-    //         }, 0);
-    //     })
+    db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
+        .orderByChild('createdDate')
+        .limitToLast(8)
+        .once('value', function(snapshot) {
+            $timeout(function() {
+                snapshot.forEach(function(childSnapshot) {
+                    var coverimage = childSnapshot.val().coverImage['700x525'];
+                    var blogData = childSnapshot.val();
+                    blogData.coverImage = coverimage; 
+                    $scope.blogs.push(blogData);
+                })
+                $timeout(function(){
+                    var data = document.getElementById('blog-image-box');
+                    console.log(data.clientHeight);
+                    console.log(data.scrollHeight);
+                    console.log(data.offsetHeight);
+                    var data1 = document.getElementById('blog-image');
+                    console.log(data1.clientHeight);
+                    console.log(data1.scrollHeight);
+                    console.log(data1.offsetHeight);
+                    data1.height = data.clientHeight;
+                },1000);
+            }, 0);
+        })
 
 
     if (!checkLocalStorage('family')) {
@@ -151,6 +151,8 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
 
     $scope.gotoWriteReviews = function() {
+        $('.md-header').hide();
+        $('.new-footer').hide();
         $state.go('write-reviews');
     }
 
@@ -161,6 +163,10 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
     $scope.showCoverStories = function(){
         $state.go('cover-stories',{from:'home', id: '-KPmH9oIem1N1_s4qpCv'});
+    }
+
+    $scope.takeToBlogs = function(){
+        $state.go('blogs',{from:'home', id: '-KPmH9oIem1N1_s4qpCv'});
     }
 
     $scope.openSearch = function() {
@@ -187,11 +193,11 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
         $state.go('story-details', { id: val.storyId });
     }
 
-    // $scope.goToBlog = function(blog){
-    //     console.log(blog);
-    //     $state.go('blog-details', {id: '-KUvRMEmRoWEVsl1e37L'});
-    //     // $state.go('blog-details', {id: blog.blogId});
-    // }
+    $scope.goToBlog = function(blog){
+        console.log(blog);
+        $state.go('blog-details', {id: '-KUvRMEmRoWEVsl1e37L'});
+        // $state.go('blog-details', {id: blog.blogId});
+    }
 
     function DialogController($scope, $mdDialog, $timeout) {
         $timeout(function(){

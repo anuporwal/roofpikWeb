@@ -34,19 +34,19 @@ app.controller('blogDetailsCtrl', function($scope, $timeout, $stateParams, $sce,
 		return $sce.trustAsHtml( html );
 	}
 
-	$scope.goToStoryDetails = function(id){
+	$scope.goToBlogDetails = function(id){
 		// console.log(id);
-		$state.go('story-details', {id: id});
+		$state.go('blog-details', {id: id});
 	}
 
-	$scope.getLocalityPosts = function(locality){
+	$scope.getLocalityBlogs = function(locality){
 		// console.log(locality);
-		$state.go('cover-stories', {from:'locality', id: locality.locationId});
+		$state.go('blogs', {from:'locality', id: locality.locationId});
 	}
 
-	$scope.getRelatedStories = function(tag){
+	$scope.getRelatedBlogs = function(tag){
 		// console.log(tag);
-		$state.go('cover-stories', {from:'tag', id: tag.tagId});
+		$state.go('blogs', {from:'tag', id: tag.tagId});
 	}
 	
 })
