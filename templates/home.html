@@ -1,3 +1,12 @@
+<style>
+    .blog-story img{
+        transform: scale(1);
+    }
+    .blog-story img:hover {
+        transform: scale(1.1);
+        transition: .3s ease-in-out;
+    }
+</style>
 <div layout="column" flex layout-wrap layout-fill class="home-container">
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
         <div class="featured-header" layout-align="center center" layout="row" flex>
@@ -77,8 +86,7 @@
         <div class="home-category" layout-align="center center" layout-sm="column" layout-xs="column" layout-gt-sm="row" flex>
             <div flex="80" layout-align="center center" flex-xs="100" flex-sm="100">
                 <h1>  Top Rated Projects </h1>
-                <h2> Zero focus on listing/ classifieds that get you reviews that are <strong>unbiased and neutral.  </strong>
- </h2>
+                <h2> Zero focus on listing/ classifieds that get you reviews that are <strong>unbiased and neutral.</strong></h2>
                 <div layout-sm="column" layout-xs="column" layout-gt-sm="row" layout-align="center center">
                     <div flex="100" class="home-category-wrapper" layout-sm="column" layout-xs="column" layout-gt-sm="row">
                         <div flex="33" flex-xs="100" flex-sm="100" ng-repeat="project in topRated" ng-click="takeToProjectDetails(project)">
@@ -108,7 +116,7 @@
             </div>
         </div>
     </section>
-<!--     <section layout="row" layout-align="center center">
+    <section layout="row" layout-align="center center">
         <div class="home-category" layout-align="center center" layout-wrap>
             <div flex="100" layout-align="center center">
                 <h1>  Cover Stories </h1>
@@ -132,5 +140,26 @@
                 <md-button class="md-raised" ng-click="showCoverStories()">Show More</md-button>
             </div>
         </div>
-    </section> -->
+    </section>
+
+    <section layout="row" layout-align="center center">
+        <div class="home-category" layout-align="center center" layout-wrap>
+            <div flex="100" layout-align="center center">
+                <h1>  Our Blogs </h1>
+                <h2> Some short description on how blogs work</h2>
+            </div>
+            <div flex="100" layout-align="center center" layout-wrap layout="row">
+                <div flex="25" flex-xs="100" flex-sm="50" ng-repeat="blog in blogs track by $index" class="blog-story" ng-click="goToBlog(blog)" >
+                     <div >
+                        <div id="blog-image-box"  style="overflow: hidden;">
+                            <img id="blog-image" ng-src="{{blog.coverImage}}" style="width:100%;height:300px;max-height:300px;" alt=""/>
+                            <div class="cover-desc">
+                                <h3>{{blog.title}}</h3>
+                                <h4>{{blog.createdDate | date: 'MMM dd, yyyy'}}</h4>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
 </div>

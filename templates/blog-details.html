@@ -1,0 +1,81 @@
+<md-content>
+    <div layout="column" flex layout-wrap>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="header-story">
+            <article flex="100" flex-xs="100" flex-sm="100">
+                <div class="featured-story" style="background-image:url({{currentBlog.coverImage['1600x900']}});">
+                    <div class="featured-caption">
+                        <div class="featured-caption-content">
+                            <div class="featured-caption-category"><a href="#">{{currentBlog.placeName}}</a></div>
+                            <h3><a href="#">{{currentBlog.title}}</a></h3>
+                            <time>{{currentBlog.createdDate | date:'MMM dd, yy'}}</time>
+                            <ul class="featured-tags">
+                                <li ng-repeat="tag in currentBlog.hashtags"><a href="#">#{{tag.tag}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
+            <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
+                <md-card class="story-card">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <!-- <span class="md-headline">Vipul Greens</span> -->
+                            <span class="md-subhead">By {{currentBlog.adminName}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p ng-bind-html="toTrustedHTML(currentBlog.details)">
+                        </p>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex="30" class="story-widget" flex-xs="100" flex-sm="100">
+                <md-card class="popular-stories">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Popular Blogs</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <article ng-repeat="story in popularBlogs" ng-click="goToStoryDetails(story.storyId)">
+                        <img ng-src="{{story.coverImage['700x525']}}" class="md-card-image" alt="Washed Out" />
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{story.title}}</span>
+                                <span class="md-subhead">{{story.placeName}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </article>
+                </md-card>
+                <md-card class="popular-localities">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Popular Localities</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <ul>
+                            <li ng-repeat="locality in popularLocalities">
+                                <div><i class="material-icons">&#xE409;</i><span ng-click="getLocalityPosts(locality)">{{locality.locationName}}</span></div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </md-card-content>
+                </md-card>
+                <md-card class="popular-tags">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">Tag Cloud</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <md-card-content>
+                        <div class="tagcloud">
+                            <p ng-click="getRelatedStories(tag)" ng-repeat="tag in tagCloudData">{{tag.tag}}</p>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </section>
+    </div>
+</md-content>

@@ -28,6 +28,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		});
 
 	$stateProvider
+		.state('blog-details', {
+			url: '/blog-details/:id',
+			templateUrl: 'templates/blog-details.html',
+			controller: 'blogDetailsCtrl'
+		});
+
+	$stateProvider
 		.state('project-details', {
 			url: '/project-details/:id/:name/:path',
 			templateUrl: 'templates/project-details.html',
