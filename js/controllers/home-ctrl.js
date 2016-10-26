@@ -253,7 +253,6 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
             }
         }
     }
-
 })
 
 

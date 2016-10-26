@@ -114,11 +114,22 @@ app.controller('coverStoryCtrl', function($scope, $timeout, $state, $mdSidenav, 
 
   $scope.getLocalityPosts = function(locality){
     console.log(locality);
+    var count = 0;
+    var localityStoryCount = 0;
     angular.forEach($scope.allStories, function(value, key){
+      count++;
       if(value.placeId == locality){
+        localityStoryCount++;
         value.selected = true;
       } else {
         value.selected = false;
+      }
+      if(count == Object.keys($scope.allStories).length){
+        if(localityStoryCount == 0){
+          $scope.showNoStories = true;
+        } else {
+          $scope.showNoStories = false;
+        }
       }
     })
   }

@@ -95,6 +95,7 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
               value.selected = false;
             }
             if(count == Object.keys($scope.allBlogs).length){
+              console.log('blogCount ', blogCount);
               if(blogCount == 0){
                 $scope.showNoBlogs = true;
               } else {
@@ -113,12 +114,24 @@ app.controller('blogsCtrl', function($scope, $timeout, $state, $mdSidenav, $sce,
   }
 
   $scope.getLocalityBlogs = function(locality){
+    var count = 0;
+    var localityBlogCount = 0;
     console.log(locality);
     angular.forEach($scope.allBlogs, function(value, key){
+      count++;
       if(value.placeId == locality){
         value.selected = true;
+        localityBlogCount++;
       } else {
         value.selected = false;
+      }
+      if(count == Object.keys($scope.allBlogs).length){
+        console.log('localityBlogCount ', localityBlogCount);
+        if(localityBlogCount == 0){
+          $scope.showNoBlogs = true;
+        } else {
+          $scope.showNoBlogs = false;
+        }
       }
     })
   }

@@ -32,7 +32,7 @@
         </section>
         <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="main-board" layout-align="center top">
             <div flex="50" class="story-board" flex-xs="100" flex-sm="100">
-                <md-card class="story-card" ng-show="showNoBlogs">
+                <md-card class="story-card md-padding" ng-show="showNoBlogs">
                     <h2>No Blogs with this tag</h2>
                 </md-card>
                 <md-card class="story-card" ng-repeat="blog in allBlogs" ng-show="blog.selected" ng-show="!showNoBlogs">
