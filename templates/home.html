@@ -24,27 +24,50 @@
     opacity:0.6;
 }
 
+
+.home-category .what-we-provide{
+    text-align: center;
+}
+
+.home-category .what-we-provide h2 {
+    margin-bottom:25px;
+    padding-bottom:0px;
+    color:#5d5d5d;
+}
+
+.home-category h3 {
+    color:#5d5d5d;
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.home-category .what-we-provide i {
+    font-size:60px;
+    color:#ED8323;
+}
+
 </style>
 <div layout="column" flex layout-wrap layout-fill class="home-container">
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
         <div class="featured-header" layout-align="center center" layout="row" flex>
             <div class="featured-header-wrapper" flex="80" layout-align="center center">
-                <h1>   Discover Best Projects and Localities in Gurgaon </h1>
-                <h2>  India's Premier Property Reviews and Ratings by Residents </h2>
+                <h1>  Power Your Property Search with Genuine User Reviews </h1>
+                <h2>  From food to vacations, you bank on reviews for everything. Why should your property search be any different?  </h2>
                 <div layout="row" layout-align="center center">
                     <div flex="80" class="home-search">
                         <input type="text" placeholder="Search by project, builder, landmark or locality" ng-click="showAdvanced($event)" />
                     </div>
                 </div>
-                <h2> Share your experience </h2>
+                <h2> Browse through 1,000+ verified property reviews. Or share one today. </h2>
             </div>
         </div>
     </section>
     <section layout="row" layout-align="center center">
         <div class="home-category" layout-align="center center" layout-gt-sm="row" flex="80" layout-wrap>
             <div flex="100" layout-align="center center">
-                <h1>  Find the best projects for!! </h1>
-                <h2>  <strong>First time ever</strong> touching the life’s of residents to generate reviews and experiences on living, buying and selling a property.</h2>
+                <h1> Many Property Needs. One Smart Platform to Fulfil Them. </h1>
+                <h2> Families. Working Professionals. Senior Citizens. Entrepreneurs. Singletons.</h2>
+                <h3>We’ve brought together genuine user reviews, fact-based insights, liveability index ratings, and much more from people like you. Everything that matters when buying, selling or renting property is here.</h3>
             </div>
             <div class="home-category-wrapper" layout="row" layout-align="center center" flex="100" layout-wrap>
                 <div flex="50" class="image-box" flex-xs="100" flex-sm="100" ng-click="takeToProjectList('family')">
@@ -86,13 +109,36 @@
             </div>
         </div>
     </section>
+    <section layout="row" layout-align="center center">
+        <div layout="row" flex="80" class="home-category" layout-align="center start" layout-wrap>
+            <div flex="100" layout-align="center center">
+                <h1> The Data Powered Way to Find Property</h1>
+                <h2> Discover how user contributed data can guide your property hunt</h2>
+            </div>
+            <div class="what-we-provide md-padding" flex-gt-sm="33" flex-sm="33" flex-xs="100">
+                <i class="material-icons">star</i>
+                <h2>Neutral & Unbiased Reviews</h2>
+                <h3>Registered users and verified reviews help us derive accurate ratings.</h3>
+            </div>
+            <div class="what-we-provide md-padding" flex-gt-sm="33" flex-sm="33" flex-xs="100">
+                <i class="material-icons">show_chart</i>
+                <h2>Fact-driven Insights</h2>
+                <h3>From noise levels to maintenance, get all the vital stats of a property.</h3>
+            </div>
+            <div class="what-we-provide md-padding" flex-gt-sm="33" flex-sm="33" flex-xs="100">
+                <i class="material-icons">format_list_bulleted</i>
+                <h2>Analytical Comparison Matrices</h2>
+                <h3>We work magic with complex technologies to create detailed property comparisons.</h3>
+            </div>
+        </div>
+    </section>
     <section layout-sm="column" layout-xs="column" layout-gt-sm="row" class="write-reviews">
-        <div layout-align="center center" layout="row" flex>
+        <div layout-align="center center" layout="row" flex class="home-category">
             <div class="reviews-wrapper" flex="80" layout-align="center center">
-                <h1>  2000+ Reviews</h1>
-                <h2>  Write a review and help someone find a home. In association with Nanhi Kali , for every review written we sponsor one day of education for a girl child.
+                <h1> Write a Review About Your Buying or Renting Experience </h1>
+                <h2> Your verified review will do more than help someone find their dream property. It will also help educate a girl.
                 <br>
-                <strong>All the reviews are verified by our team.</strong>
+                For every new review on the website, Roofpik joins hands with Nanhi Kali to sponsor a day’s education for a girl child.
                  </h2>
                 <div layout="row" layout-align="center center">
                     <md-button class="md-raised md-primary" ng-click="gotoWriteReviews()">Write Review</md-button>
@@ -134,7 +180,7 @@
             </div>
         </div>
     </section>
-    <section layout="row" layout-align="center center">
+<!--     <section layout="row" layout-align="center center">
         <div class="home-category" layout-align="center center" layout-wrap>
             <div flex="100" layout-align="center center">
                 <h1>  Cover Stories </h1>
@@ -184,5 +230,5 @@
                 <md-button class="md-raised" ng-click="takeToBlogs()">Show More</md-button>
             </div>
         </div>
-    </section>
+    </section> -->
 </div>
