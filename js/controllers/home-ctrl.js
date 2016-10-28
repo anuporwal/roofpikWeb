@@ -21,41 +21,41 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     $scope.shortStories = [];
     $scope.blogs = [];
 
-    db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
-        .orderByChild('createdDate')
-        .limitToLast(4)
-        .once('value', function(snapshot) {
-            $timeout(function() {
-                snapshot.forEach(function(childSnapshot) {
-                    $scope.shortStories.push(childSnapshot.val());
-                })
-            }, 0);
-        })
+    // db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
+    //     .orderByChild('createdDate')
+    //     .limitToLast(4)
+    //     .once('value', function(snapshot) {
+    //         $timeout(function() {
+    //             snapshot.forEach(function(childSnapshot) {
+    //                 $scope.shortStories.push(childSnapshot.val());
+    //             })
+    //         }, 0);
+    //     })
 
-    db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
-        .orderByChild('createdDate')
-        .limitToLast(8)
-        .once('value', function(snapshot) {
-            $timeout(function() {
-                snapshot.forEach(function(childSnapshot) {
-                    var coverimage = childSnapshot.val().coverImage['700x525'];
-                    var blogData = childSnapshot.val();
-                    blogData.coverImage = coverimage; 
-                    $scope.blogs.push(blogData);
-                })
-                $timeout(function(){
-                    var data = document.getElementById('blog-image-box');
-                    console.log(data.clientHeight);
-                    console.log(data.scrollHeight);
-                    console.log(data.offsetHeight);
-                    var data1 = document.getElementById('blog-image');
-                    console.log(data1.clientHeight);
-                    console.log(data1.scrollHeight);
-                    console.log(data1.offsetHeight);
-                    data1.height = data.clientHeight;
-                },1000);
-            }, 0);
-        })
+    // db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
+    //     .orderByChild('createdDate')
+    //     .limitToLast(8)
+    //     .once('value', function(snapshot) {
+    //         $timeout(function() {
+    //             snapshot.forEach(function(childSnapshot) {
+    //                 var coverimage = childSnapshot.val().coverImage['700x525'];
+    //                 var blogData = childSnapshot.val();
+    //                 blogData.coverImage = coverimage; 
+    //                 $scope.blogs.push(blogData);
+    //             })
+    //             $timeout(function(){
+    //                 var data = document.getElementById('blog-image-box');
+    //                 console.log(data.clientHeight);
+    //                 console.log(data.scrollHeight);
+    //                 console.log(data.offsetHeight);
+    //                 var data1 = document.getElementById('blog-image');
+    //                 console.log(data1.clientHeight);
+    //                 console.log(data1.scrollHeight);
+    //                 console.log(data1.offsetHeight);
+    //                 data1.height = data.clientHeight;
+    //             },1000);
+    //         }, 0);
+    //     })
 
 
     if (!checkLocalStorage('family')) {
