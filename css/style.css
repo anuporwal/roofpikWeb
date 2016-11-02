@@ -949,7 +949,12 @@ html {
     padding: 50px 0px;
 }
 
-#about-us-description p {
+#about-us-description h2 {
+    text-align:center;
+}
+
+#about-us-description p,
+#about-us-description ul li {
     font-size: 14px;
     font-weight: 300;
     color: #888888;
@@ -969,6 +974,12 @@ html {
 
 #our-team-description a {
     color: #337ab7;
+}
+
+#our-team-description p{
+    font-size: 12px;
+    font-weight: 300;
+    color: #888888;  
 }
 
 
@@ -1013,6 +1024,15 @@ html {
     object-fit: cover;
     width: 100%;
     height: 250px;
+}
+
+.careers-at-roofpik-content {
+    width: 85%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 3px;
+    color: #5b5b5b;
 }
 
 

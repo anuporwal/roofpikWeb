@@ -122,6 +122,8 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     var type = $stateParams.type || null;
     var id = $stateParams.id || null;
     var name = $stateParams.name || null;
+
+    $scope.from = $stateParams.from || null;
     $scope.filterPath = [];
     // console.log(type);
     $scope.projects = {};

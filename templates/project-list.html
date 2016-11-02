@@ -1,17 +1,20 @@
 <div layout="column" flex layout-wrap layout-fill class="project-list-page">
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
-        <div class="filters-wrapper" layout-align="center center" layout="row" flex>
+<!--     <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
+        <div class="filters-wrapper md-padding" layout-align="center center" layout="row" flex>
             <div flex="80" layout-align="center center">
                 Filters: {{filterName}}
+
             </div>
         </div>
-    </section>
-    <section layout-sm="column" layout-xs="column" layout-gt-sm="row" style="margin-top:50px;">
+    </section> -->
+    <section layout-sm="column" layout-xs="column" layout-gt-sm="row">
         <div class="projects-wrapper" layout-align="center center" layout="row" flex>
             <div flex="100" layout-align="start start" layout="row">
                 <div class="project-list" flex="50" layout="row" layout-wrap>
-                    <div flex="100" class="path-filters">
+                    <div flex="100" class="path-filters md-padding">
                         <span class="path-btn" ng-repeat="filter in filterPath track by $index">{{filter}}</span>
+                        <h3 ng-if="from == 'topRated'">These Projects Are the Talk of the Town</h3>
+                        <p ng-if="from == 'topRated'">Here’s a snapshot of the very best of projects, apartments, and neighbourhoods based on genuine user reviews.  </p>
                         <!-- {{filterPath}} -->
                     </div>
                     <div flex="50" flex-xs="100" flex-sm="100" ng-repeat="project in projects" ng-click="selectProject(project.projectId, project.projectName)">
