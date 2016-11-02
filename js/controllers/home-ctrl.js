@@ -14,7 +14,9 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
 
     $scope.takeToProjectList = function(param) {
-        $state.go('project-list', { from: param });
+        var year = new Date().getFullYear();
+        // convertCamelCaseToNormal(param);
+        $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertCamelCaseToNormal(param), categoryId: '-KQ9cIdfaoKpCj34yAWC', id: '3'});
     }
 
     $scope.topRated = {};
@@ -157,8 +159,9 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     }
 
     $scope.takeToProjectDetails = function(project) {
-        $scope.newPath = ["Gurgaon"];
-        $state.go('project-details', { id: project.projectId, name: project.projectName, path: JSON.stringify($scope.newPath)});
+        var year = new Date().getFullYear();
+        // $state.go('project-details', { id: project.projectId, name: project.projectName, path: JSON.stringify($scope.newPath)});
+        $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:null, project:convertToHyphenSeparated(project.projectName), id:project.projectId});
     }
 
     $scope.showCoverStories = function(){
@@ -240,16 +243,18 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
         $scope.selectSearchItem = function(val) {
             // console.log(val);
+            var year = new Date().getFullYear();
             if (val.type == 'Project') {
                 var path = ["Gurgaon"]
                 $mdDialog.cancel();
-                $state.go('project-details', { id: val.id, name: val.name, path: JSON.stringify(path)});
+                // $state.go('project-details', { id: val.id, name: val.name, path: JSON.stringify(path)});
+                $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:null, project:convertToHyphenSeparated(val.name), id:val.id});
             } else if (val.type == 'Locality') {
                 $mdDialog.cancel();
-                $state.go('project-list', { from: 'search', type: 'locality', id: val.id, name: val.name });
+                $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '1'});
             } else if (val.type == 'Developer') {
                 $mdDialog.cancel();
-                $state.go('project-list', { from: 'search', type: 'developer', id: val.id, name: val.name  });
+                $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '2'});
             }
         }
     }
@@ -290,4 +295,50 @@ function getLocalStorage(val){
     // console.log(val);
     // console.log(JSON.parse(localStorage.getItem(val)));
     return JSON.parse(localStorage.getItem(val)).value;
+}
+
+function convertCamelCaseToNormal(data){
+    console.log(data);
+    if (data == null || data == "") {
+      return data;
+    }
+
+    data = data.trim();
+    var newText = "";
+    for (var i = 0; i < data.length; i++) {
+      if (/[A-Z]/.test(data[i])
+          && i != 0
+          && /[a-z]/.test(data[i-1])) {
+        newText += "-";
+      }
+      newText += data[i];
+    }
+    console.log(newText.toLowerCase());
+    return newText.toLowerCase();
+}
+
+function toCamelCase(str){
+    str = str.trim();
+   var newText = str.split('-').map(function(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join('');
+
+   return newText.charAt(0).toLowerCase() + newText.slice(1);
+}
+
+function convertToHyphenSeparated(data){
+    console.log(data);
+    if (data == null || data == "") {
+      return data;
+    }
+
+    data = data.trim();
+    return data.split(" ").join("-").toLowerCase();
+}
+
+function convertHyphenSeparatedToNormal(str){
+    str = str.trim();
+   return str.split('-').map(function(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
 }

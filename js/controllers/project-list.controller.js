@@ -123,25 +123,23 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
     var id = $stateParams.id || null;
     var name = $stateParams.name || null;
 
-    $scope.from = $stateParams.from || null;
+    $scope.category = $stateParams.category || null;
     $scope.filterPath = [];
     // console.log(type);
     $scope.projects = {};
-    var types = ['family', 'justMarried', 'oldAgeFriendly', 'kids', 'bachelors', 'petFriendly'];
+    var types = ['family', 'just-married', 'old-age-friendly', 'kids', 'bachelors', 'pet-friendly'];
 
-    function capitalizeFirstLetter(string) {
-        return string[0].toUpperCase() + string.slice(1);
-    }
+    // function capitalizeFirstLetter(string) {
+    //     return string[0].toUpperCase() + string.slice(1);
+    // }
 
     $scope.storeProjects = function(data){
         var projectCount = 0;
-         if($stateParams.type == 'locality'){
-            $scope.filterPath = ["Gurgaon",">", $stateParams.name];
-            // $scope.filterPath[0] = 'Gurgaon > '
-            // $scope.filterPath[1] = $stateParams.name;
+        $scope.filterPath = ["Gurgaon",">","Residential",">", convertHyphenSeparatedToNormal($stateParams.category)];
+         if($stateParams.id == '1'){
             angular.forEach(data, function(value, key){
                 projectCount++;
-                if(value.localityId == $stateParams.id){
+                if(value.localityId == $stateParams.categoryId){
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
@@ -150,11 +148,10 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
                     $scope.initializeProjects($scope.projects);
                 }
             })
-        } else if($stateParams.type == 'developer'){
-            $scope.filterPath = ["Gurgaon",">", $stateParams.name];
+        } else if($stateParams.id == '2'){
             angular.forEach(data, function(value, key){
                 projectCount++;
-                if(value.developerId == $stateParams.id){
+                if(value.developerId == $stateParams.categoryId){
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
@@ -166,7 +163,7 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
         }
     }
 
-    if($stateParams.from == 'search'){
+    if($stateParams.id == '1' || $stateParams.id == '2'){
         if (!checkLocalStorage('topRated')) {
             // console.log('from database');
             db.ref('topRated').once('value', function(dataSnapshot) {
@@ -184,8 +181,8 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             $scope.numProjects = getLocalStorage('numProjectsObject');
             $scope.storeProjects($scope.topRatedObject);
         }
-    }else if ($stateParams.from == 'topRated') {
-        $scope.filterPath = ["Gurgaon",">","Top Rated"];
+    }else if ($stateParams.category == 'top-rated') {
+        $scope.filterPath = ["Gurgaon",">","Residential",">","Top Rated"];
         if(!checkLocalStorage('topRated')){
             db.ref('topRated').once('value', function(dataSnapshot) {
                 $timeout(function(){
@@ -202,37 +199,39 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
             $scope.initializeProjects($scope.projects);
         }
     } else {
+        console.log($stateParams.category);
         for (var i = 0; i < 6; i++) {
-            if ($stateParams.from == types[i]) {
+            if ($stateParams.category == types[i]) {
                 var cat;
                 if(types[i] == 'family'){
                     cat = 'Family';
-                }else if(types[i] == 'justMarried'){
+                }else if(types[i] == 'just-married'){
                     cat = 'Just Married';
-                } else if(types[i] == 'oldAgeFriendly'){
+                } else if(types[i] == 'old-age-friendly'){
                     cat = 'Old Age Friendly';
                 } else if(types[i] == 'kids'){
                     cat = 'Kids';
                 } else if(types[i] == 'bachelors'){
                     cat = 'Bachelors';
-                } else if(types[i] == 'petFriendly'){
+                } else if(types[i] == 'pet-friendly'){
                     cat = 'Pet Friendly';
                 }
-                $scope.filterPath = ["Gurgaon",">", cat];
-                if(!checkLocalStorage($stateParams.from)){
-                    // console.log('from firebase');
-                    db.ref($stateParams.from + 'List').once('value', function(dataSnapshot) {
+                $scope.filterPath = ["Gurgaon",">","Residential",">", cat];
+                var localStorageFrom = toCamelCase($stateParams.category);
+                console.log(localStorageFrom);
+                if(!checkLocalStorage(localStorageFrom)){
+                    db.ref(localStorageFrom + 'List').once('value', function(dataSnapshot) {
                         $timeout(function(){
                            $scope.numProjects = Object.keys(dataSnapshot.val()).length;
                            $scope.projects = dataSnapshot.val();
-                           setLocalStorage($stateParams.from, $scope.projects);
+                           setLocalStorage(localStorageFrom, $scope.projects);
                            setLocalStorage('numProjects', $scope.numProjects);
                            $scope.initializeProjects($scope.projects);
                         }, 0);
                     })
                 } else {
                     // console.log('from localstorage');
-                    $scope.projects = getLocalStorage($stateParams.from+'Object');
+                    $scope.projects = getLocalStorage(localStorageFrom+'Object');
                     $scope.numProjects = getLocalStorage('numProjectsObject'); 
                     $scope.initializeProjects($scope.projects);
                 }
@@ -242,6 +241,12 @@ app.controller('projectListCtrl', function($scope, $mdSidenav, $timeout, $stateP
 
     $scope.selectProject = function(id, name) {
         // console.log(id, name);
-        $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
+        var year = new Date().getFullYear();
+        // $state.go('project-details', { id: id, name: name, path: JSON.stringify($scope.filterPath) });
+        $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:$stateParams.category, project:convertToHyphenSeparated(name), id:id});
+    }
+
+    $scope.takeToHome = function(){
+        $state.go('home');
     }
 })

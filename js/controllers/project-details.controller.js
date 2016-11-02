@@ -1,11 +1,11 @@
-app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope){
+app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $rootScope, $state){
    // $rootScope.loading = true;
     $('.new-footer').hide();
     $('.project-details-page').hide();
     $('.md-header').hide();
 
     var rates = [1, 2, 3, 4, 5];
-    $scope.projectName = $stateParams.name;
+    // $scope.projectName = $stateParams.project;
     $scope.projectId = $stateParams.id;
     $scope.reviews = [];
     $scope.features = [];
@@ -13,13 +13,6 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
     $scope.dataLoaded = false;
     $scope.buyLinks = {};
     $scope.rentLinks = {};
-    // console.log(JSON.parse($stateParams.path));
-    $scope.path = JSON.parse($stateParams.path || null);
-    $scope.path.push(">");
-    $scope.path.push($scope.projectName);
-    // console.log($scope.path);
-    // console.log('working');
-
       $timeout(function() {
         $('.md-header').fadeIn();
         $('.project-details-page').fadeIn();
@@ -58,6 +51,13 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
         // console.log(snapshot.val());
         $timeout(function() {
             $scope.project = snapshot.val();
+            $scope.projectName = $scope.project.projectName;
+            $scope.path = [">","Gurgaon", ">","Residential", ">"];
+            if($stateParams.category){
+                $scope.path.push(convertHyphenSeparatedToNormal($stateParams.category));
+                $scope.path.push(">");
+            }
+            $scope.path.push($scope.projectName);
             $scope.buyMin = convertCurrency($scope.project.price.buy.min);
             $scope.buyMax = convertCurrency($scope.project.price.buy.max);
             $scope.rentMin = convertCurrency($scope.project.price.rent.min);
@@ -175,5 +175,9 @@ app.controller('projectDetailsCtrl', function($scope, $timeout, $stateParams, $r
             $scope.buySelected = false;
             $scope.rentSelected = true;
         }
+    }
+
+    $scope.takeToHome = function(){
+        $state.go('home');
     }
 })

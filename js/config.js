@@ -41,9 +41,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'blogDetailsCtrl'
 		});
 
+	// $stateProvider
+	// 	.state('project-details', {
+	// 		url: '/project-details/:id/:name/:path',
+	// 		templateUrl: 'templates/project-details.html',
+	// 		controller: 'projectDetailsCtrl'
+	// 	});
 	$stateProvider
 		.state('project-details', {
-			url: '/project-details/:id/:name/:path',
+			url: '/project-details/:year/:city/:type/:category/:project/:id',
 			templateUrl: 'templates/project-details.html',
 			controller: 'projectDetailsCtrl'
 		});
@@ -71,7 +77,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 		.state('project-list', {
-			url: '/project-list/:from/:type/:id/:name',
+			url: '/project-list/:year/:city/:type/:category/:categoryId/:id',
 			templateUrl: 'templates/project-list.html',
 			controller: 'projectListCtrl'
 		});
