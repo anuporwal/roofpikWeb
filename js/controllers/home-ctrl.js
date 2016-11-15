@@ -16,48 +16,49 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
     $scope.takeToProjectList = function(param) {
         var year = new Date().getFullYear();
         // convertCamelCaseToNormal(param);
-        $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertCamelCaseToNormal(param), categoryId: '-KQ9cIdfaoKpCj34yAWC', id: '3'});
+        // $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertCamelCaseToNormal(param), categoryId: '-KQ9cIdfaoKpCj34yAWC', id: '3'});
+        $state.go('projects', {year:year, city: 'gurgaon',type:'residential-projects',category:convertCamelCaseToNormal(param), categoryId: '-KQ9cIdfaoKpCj34yAWC', id: '3'});
     }
 
     $scope.topRated = {};
     $scope.shortStories = [];
     $scope.blogs = [];
 
-    // db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
-    //     .orderByChild('createdDate')
-    //     .limitToLast(4)
-    //     .once('value', function(snapshot) {
-    //         $timeout(function() {
-    //             snapshot.forEach(function(childSnapshot) {
-    //                 $scope.shortStories.push(childSnapshot.val());
-    //             })
-    //         }, 0);
-    //     })
+    db.ref('shortStories/-KPmH9oIem1N1_s4qpCv')
+        .orderByChild('createdDate')
+        .limitToLast(4)
+        .once('value', function(snapshot) {
+            $timeout(function() {
+                snapshot.forEach(function(childSnapshot) {
+                    $scope.shortStories.push(childSnapshot.val());
+                })
+            }, 0);
+        })
 
-    // db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
-    //     .orderByChild('createdDate')
-    //     .limitToLast(8)
-    //     .once('value', function(snapshot) {
-    //         $timeout(function() {
-    //             snapshot.forEach(function(childSnapshot) {
-    //                 var coverimage = childSnapshot.val().coverImage['700x525'];
-    //                 var blogData = childSnapshot.val();
-    //                 blogData.coverImage = coverimage; 
-    //                 $scope.blogs.push(blogData);
-    //             })
-    //             $timeout(function(){
-    //                 var data = document.getElementById('blog-image-box');
-    //                 console.log(data.clientHeight);
-    //                 console.log(data.scrollHeight);
-    //                 console.log(data.offsetHeight);
-    //                 var data1 = document.getElementById('blog-image');
-    //                 console.log(data1.clientHeight);
-    //                 console.log(data1.scrollHeight);
-    //                 console.log(data1.offsetHeight);
-    //                 data1.height = data.clientHeight;
-    //             },1000);
-    //         }, 0);
-    //     })
+    db.ref('shortBlogs/-KPmH9oIem1N1_s4qpCv')
+        .orderByChild('createdDate')
+        .limitToLast(8)
+        .once('value', function(snapshot) {
+            $timeout(function() {
+                snapshot.forEach(function(childSnapshot) {
+                    var coverimage = childSnapshot.val().coverImage['700x525'];
+                    var blogData = childSnapshot.val();
+                    blogData.coverImage = coverimage; 
+                    $scope.blogs.push(blogData);
+                })
+                $timeout(function(){
+                    var data = document.getElementById('blog-image-box');
+                    console.log(data.clientHeight);
+                    console.log(data.scrollHeight);
+                    console.log(data.offsetHeight);
+                    var data1 = document.getElementById('blog-image');
+                    console.log(data1.clientHeight);
+                    console.log(data1.scrollHeight);
+                    console.log(data1.offsetHeight);
+                    data1.height = data.clientHeight;
+                },1000);
+            }, 0);
+        })
 
 
     if (!checkLocalStorage('family')) {
@@ -251,10 +252,12 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
                 $state.go('project-details', {year: year, city: 'gurgaon', type:'residential-projects', category:null, project:convertToHyphenSeparated(val.name), id:val.id});
             } else if (val.type == 'Locality') {
                 $mdDialog.cancel();
-                $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '1'});
+                // $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '1'});
+                $state.go('projects', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '1'});
             } else if (val.type == 'Developer') {
                 $mdDialog.cancel();
-                $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '2'});
+                // $state.go('project-list', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '2'});
+                $state.go('projects', {year:year, city: 'gurgaon',type:'residential-projects',category:convertToHyphenSeparated(val.name), categoryId: val.id, id: '2'});
             }
         }
     }

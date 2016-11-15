@@ -1,0 +1,112 @@
+<md-content class="project-list-page">
+	<div flex="100" class="path-filters" layout="row">
+		<span class="path-btn" ng-click="takeToHome()">Home</span>
+	    <span class="path-btn">></span>
+	    <span class="path-btn" ng-repeat="filter in filterPath track by $index">{{filter}}</span>
+	</div>
+    <div layout="row" flex="80" layout-align="start start" class="project-list-box">
+        <div flex="30" layout="column">
+            <md-card flex="100">
+            	<p id="filter-headings">Project Status</p>
+            	<div class="filters">
+            		<p>
+            			<md-checkbox class="md-primary" ng-checked="exists('Ready To Move')" ng-click="toggle('Ready To Move')">
+		               		Ready To Move
+		            	</md-checkbox>
+		            </p>
+		            <p>
+			            <md-checkbox class="md-primary" ng-checked="exists('Under Construction')" ng-click="toggle('Under Construction')">
+			               Under Construction
+			            </md-checkbox>
+			        </p>
+            	</div>
+            </md-card>
+            <md-card flex="100">
+            	<p id="filter-headings">BHK</p>
+            	<div class="filters">
+            		<p ng-repeat="item in bhk">
+		            	<md-checkbox class="md-primary" ng-checked="existsBhk(item)" ng-click="toggleBhk(item)">
+			               {{ item }}
+			            </md-checkbox>
+		            </p>
+            	</div>
+            </md-card>
+            <md-card flex="100">
+            	<p id="filter-headings">Locality</p>
+            	<div class="filters">
+            		<p ng-repeat="item in localities">
+		            	<md-checkbox class="md-primary" ng-checked="existsLocality(item)" ng-click="toggleLocality(item)">
+			               {{ item.locationName }}
+			            </md-checkbox>
+		            </p>
+            	</div>
+            </md-card>
+            <md-card flex="100">
+            	<p id="filter-headings">User Rating</p>
+            	<div class="filters">
+            		<p ng-repeat="item in ratings">
+		            	<md-checkbox class="md-primary" ng-checked="existsRatings(item)" ng-click="toggleRatings(item)">
+			               {{ item }}
+			            </md-checkbox>
+		            </p>
+            	</div>
+            </md-card>
+            <md-card flex="100">
+            	<p id="filter-headings">Price</p>
+            	<div class="filters">
+            		<p layout="row">
+            			<span flex="20" class="price-optn">Buy</span>
+            			<span flex="35">
+            				<md-input-container>
+            					<input ng-model="filters.price.buy.min" placeholder="Min" type="number">
+            				</md-input-container>
+            			</span>
+            			<span flex="10" class="price-separator">-</span>
+            			<span flex="35">
+            				<md-input-container>
+            					<input ng-model="filters.price.buy.max" placeholder="Max" type="number">
+            				</md-input-container>
+            			</span>
+            		</p>
+            		<p layout="row">
+            			<span flex="20" class="price-optn">Rent</span>
+            			<span flex="35">
+            				<md-input-container>
+            					<input ng-model="filters.price.rent.min" placeholder="Min" type="number">
+            				</md-input-container>
+            			</span>
+            			<span flex="10" class="price-separator">-</span>
+            			<span flex="35">
+            				<md-input-container>
+            					<input ng-model="filters.price.rent.max" placeholder="Max" type="number">
+            				</md-input-container>
+            			</span>
+            		</p>
+            		<span class="price-submit" ng-click="applyPriceFilter()">Apply</span>
+            	</div>
+            </md-card>
+        </div>
+        <div flex="70" layout="column">
+            <md-card flex="100" layout="row" ng-repeat="project in projects" class="project-card" ng-click="selectProject(project.projectId, project.projectName)" ng-show="project.show">
+            	<div flex="25" class="project-profile-img">
+            		<img ng-src="{{project.imgUrl}}" alt=""/>
+            	</div>
+            	<div layout="column" class="md-padding" flex="50" class="project-data">
+                	<h2 >{{project.projectName}}</h2>
+                	<h4>{{project.displayLocation}}</h4>
+                	<p class="rating">
+                		<span ng-repeat="rate in [1,2,3,4,5] track by $index" >
+                            <i class="material-icons" ng-class="($index<=(project.overallRating-1))?'golden':'grey'" style="font-size:12px;">grade</i>
+                        </span>{{project.overallRatingNum}} Review<span ng-show="project.overallRatingNum>1">s</span>
+                    </p>
+                    <p class="rank">#{{$index+1}} of {{numProjects}} projects in Gurgaon</p>
+            	</div>
+            	<div flex="25" layout="column" class="extra-details">
+            		<p><span class="price-headings">BUY : </span>&#8377;{{project.buyMin}} - &#8377;{{project.buyMax}}</p>
+            		<p><span class="price-headings">RENT : </span>&#8377;{{project.rentMin}} - &#8377;{{project.rentMax}}</p>
+            		<h3>{{project.bhkAvailable}}</h3>
+            	</div>
+            </md-card>
+        </div>
+    </div>
+</md-content>
