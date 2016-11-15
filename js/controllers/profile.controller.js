@@ -64,6 +64,21 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 		if($scope.city != 'Gurgaon'){
 			console.log('city changed');
 		}
+		var updates = {};
+		updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3'] = $scope.user;
+		db.ref().update(updates).then(function(){
+			swal({
+                title: "Saved",
+                text: "Your information was successfully saved!",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#AEDEF4",
+                confirmButtonText: "OK",
+                closeOnConfirm: false
+            }, function() {
+                window.location.reload(true);
+            });
+		})
 	}
 
 	$scope.showUserReviews = function(){
