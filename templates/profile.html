@@ -1,0 +1,224 @@
+<style>
+	.profile-page {
+		margin-top:100px;
+	}
+	.profile-page .profile-page-content{
+		margin:0 auto;
+	}
+	.profile-page input {
+		border: 1px solid #ccc;
+		padding:8px 10px;
+		width:80%;
+	}
+
+	#add-mobile-btn:hover {
+		cursor: auto;
+		text-decoration:underline;
+	}
+	#add-mobile-btn:focus {
+		outline:none;
+	}
+	#submit-btn {
+		margin:0 auto;
+		background-color:#ff5a5f;
+		color:#fff;
+		font-weight:bold;
+	}
+	#view-reviews:hover {
+		cursor: auto;
+		color:#808080;
+	}
+	#view-reviews:focus {
+		outline:none;
+	}
+
+	#profile-img {
+		height: 150px;
+		border-radius: 50%;
+	}
+
+	.change-img-btn {
+		background-color: #ccc;
+		color:#fff;
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 33px;
+		padding: 8px 15px;
+		border-radius: 3px;
+	}
+
+	.user-detail-row{
+		margin-bottom:15px;
+	}
+
+	.detail-label {
+		text-align:right;
+		margin-right:20px;
+	}
+	#gender-dropdown, #year-dropdown, #city-dropdown {
+		font-size: 100%;
+		height: 33px;
+		width: 15%;
+	}
+	#month-dropdown {
+		font-size: 100%;
+		height: 33px;
+		width: 20%;
+	}
+	#date-dropdown {
+		font-size: 100%;
+		height: 33px;
+		width: 10%;
+	}
+	#add-mobile-btn i {
+		font-size: 18px;
+	}
+	#add-mobile-btn-link {
+		margin-left: 4px;
+		font-size: 14px;
+	}
+	#mobile-div {
+		padding: 20px 10px;
+		margin: 24px 0px;
+		border: 1px solid #ccc;
+	}
+	#extra-code {
+		padding: 0 7px;
+		line-height: 30px;
+		border: 1px solid #ccc;
+		background-color: #fff;
+		border-right: none;
+	}
+	#add-num-btn {
+		background-color: #ccc;
+		line-height: 33px;
+		padding: 0 15px;
+		border-radius: 3px;
+	}
+</style>
+<md-content class="profile-page">
+    <div layout="row" flex="80" class="profile-page-content">
+        <div flex="30" style="text-align:center;">
+       		<!-- <img ng-src="user.profileImg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" style="height: 200px;border-radius: 50%;"/> -->
+       		<img id="profile-img" ng-src="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
+        	<p><span class="change-img-btn" ng-click="changeProfileImage()">Change</span></p>
+        	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
+        </div>
+        <div flex="70" style="border:1px solid #ccc;" class="md-padding">
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>First Name</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.fname">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Last Name</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.lname">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>I Am</h4>
+                </div>
+                <div flex="80">
+                    <select ng-model="user.gender" id="gender-dropdown">
+						<option ng-value="gender" ng-repeat="gender in allGenders">{{gender}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Birth Date</h4>
+                </div>
+                <div flex="80">
+                    <select ng-model="user.birthDay.month" id="month-dropdown">
+						<option ng-value="month" ng-repeat="month in allMonths">{{month}}</option>
+					</select>
+					<select ng-model="user.birthDay.date" id="date-dropdown">
+						<option ng-value="date" ng-repeat="date in allDates">{{date}}</option>
+					</select>
+					<select ng-model="user.birthDay.year" id="year-dropdown">
+						<option ng-value="year" ng-repeat="year in allYears">{{year}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Email Address</h4>
+                </div>
+                <div flex="80">
+                    <input type="email" ng-model="user.email.emailAddress">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Mobile</h4>
+                </div>
+                <div flex="80">
+                    <input type="tel" ng-model="user.mobile.mobileNum">
+                    <p ng-show="user.mobile.mobileProvided == false && !addMobileClicked" layout="row" ng-click="addMobile()" id="add-mobile-btn">
+                    	<span>
+                    		<i class="material-icons">add</i>
+                    	</span>
+                    	<span id="add-mobile-btn-link">Add Mobile</span>
+                    </p>
+                    <div ng-show="addMobileClicked" layout="row" flex="50" id="mobile-div">
+                    	<div id="extra-code"><b>+91</b></div>
+                    	<div><input type="tel" ng-model="mobno"></div>
+                    	<span id="add-num-btn" ng-click="addMobileNumber(mobno)">Add</span>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>City</h4>
+                </div>
+                <div flex="80">
+                    <select ng-model="city" id="city-dropdown">
+						<option ng-value="city" ng-repeat="city in cities">{{city}}</option>
+					</select>
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Society/Locality</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.address.societyLocality">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Flat/House No.</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.address.flatHouseNo">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Block/Building No.</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.address.blockBuildingNo">
+                </div>
+            </div>
+            <div layout="row" class="user-detail-row">
+                <div flex="20" class="detail-label">
+                    <h4>Pincode</h4>
+                </div>
+                <div flex="80">
+                    <input type="text" ng-model="user.address.pincode">
+                </div>
+            </div>
+            <div style="text-align:center;">
+            	<md-button class="md-raised" ng-click="submit()" id="submit-btn">Save</md-button>
+            </div>
+        </div>
+    </div>
+</md-content>

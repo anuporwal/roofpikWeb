@@ -1,22 +1,35 @@
-<md-content class="user-all-reviews-page">
+<style>
+    .user-all-review-page #edit-btn:focus {
+        outline:none;
+    }
+</style>
+
+<md-content class="user-all-reviews-page" style="margin-top:100px;">
     <div layout="row" layout-sm="column" layout-align="space-around">
       <md-progress-circular ng-hide="dataloaded" class="md-warn md-hue-3" md-diameter="60"></md-progress-circular>
     </div>
-    <md-card class="md-padding" ng-repeat="review in allReviews" id="user-review-card" ng-show="dataloaded">
-        <div class="user-review">
-            <h1>{{review.reviewTitle}}</h1>
-            <div layout="row">
-            	<div flex="33">
-            		<p ng-if="review.projectName">{{review.projectName}}</p>
-            		<p ng-if="review.locationName">{{review.locationName}}</p>
-            	</div>
-            	<div flex="33">
-            		<p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yyyy'}}</p>
-            	</div>
-            	<div flex="33" id="edit-review-btn" class="roofpikGreen">
-            		<i class="material-icons" ng-click="editReview(review)">mode_edit</i>
-            	</div>
+    <div flex="50" style="margin:0 auto;border:1px solid #ccc;color:#404040;">
+        <div flex="100" style="margin-top: -15px;padding: 15px 20px 1px;background-color: #ccc">
+            <h3>Past Reviews</h3>
+        </div>
+        <div flex="100" class="md-padding" ng-show="noReviews">
+            <h3>Currently you do not have any reviews</h3>
+        </div>
+        <div flex="100" class="md-padding" ng-hide="noReviews">
+            <div ng-repeat="review in allReviews" ng-show="dataloaded" flex="100" layout="row" style="margin-bottom:20px;">
+                <div flex="10" style="padding-top:18px;">{{$index+1}}</div>
+                <div flex="70">
+                    <h3>{{review.reviewTitle}}</h3>
+                    <p ng-if="review.createdDate">{{review.createdDate | date:'MMM dd, yyyy'}}</p>
+                    <p ng-if="review.projectName">{{review.projectName}}</p>
+                    <p ng-if="review.locationName">{{review.locationName}}</p>
+                </div>
+                <div flex="20">
+                    <md-button class="md-fab md-mini md-primary">
+                        <i id="edit-btn" class="material-icons" ng-click="editReview(review)" style="margin-top:7px;">mode_edit</i>
+                    </md-button>
+                </div>
             </div>
         </div>
-    </md-card>
+    </div>
 </md-content>

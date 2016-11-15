@@ -117,6 +117,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			controller: 'faqCtrl'
 		});
 
+	$stateProvider
+		.state('profile', {
+			url: '/profile',
+			templateUrl: 'templates/profile.html',
+			controller: 'profileCtrl'
+		});
+
+
 
 	$urlRouterProvider.otherwise('/home');
 
