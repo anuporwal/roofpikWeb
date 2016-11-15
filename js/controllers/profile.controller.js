@@ -26,7 +26,6 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 			}
 			if($scope.user.mobile.mobileProvided == false){
 				$scope.showAddMobile = true;
-				$scope.user.mobile.mobileNum = '';
 			}
 			console.log($scope.user.address.cityName);
 			$scope.city = $scope.user.address.cityName;
@@ -60,6 +59,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 	}
 
 	$scope.submit = function(){
+		swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
 		console.log($scope.user);
 		if($scope.city != 'Gurgaon'){
 			console.log('city changed');
@@ -88,4 +88,31 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 	$scope.changeProfileImage = function(){
 		
 	}
+
+    $scope.getFileDetails = function(event) {
+        $scope.selectedFile;
+        $scope.uploadedImage = '';
+        var files = event.target.files; //FileList object
+        $scope.selectedFile = files[0];
+        // console.log($scope.selectedFile);
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            reader.onload = $scope.imageIsLoaded;
+            reader.readAsDataURL(file);
+        }
+    }
+
+    $scope.imageIsLoaded = function(e) {
+        $scope.stepsModel = [];
+        $scope.$apply(function() {
+            $scope.stepsModel.push(e.target.result);
+            $timeout(function() {
+                $scope.uploadedImage = $scope.stepsModel[0];
+                console.log($scope.uploadedImage);
+                // $scope.showAdvanced($scope.uploadedImage);
+            }, 0);
+        });
+    }
+
 })

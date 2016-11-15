@@ -95,16 +95,30 @@
 		padding: 0 15px;
 		border-radius: 3px;
 	}
+	#change-image {
+		
+	}
+	input[type=file] { 
+	    width: 1px; 
+	    visibility: hidden;
+	}
+
 </style>
 <md-content class="profile-page">
-    <div layout="row" flex="80" class="profile-page-content">
+    <div layout="row" flex="70" class="profile-page-content">
         <div flex="30" style="text-align:center;">
        		<!-- <img ng-src="user.profileImg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" style="height: 200px;border-radius: 50%;"/> -->
        		<img id="profile-img" ng-src="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
-        	<p><span class="change-img-btn" ng-click="changeProfileImage()">Change</span></p>
+        	<!-- <p><span class="change-img-btn" ng-click="changeProfileImage()">Change</span></p> -->
+        	<input  type="file" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
+        	<input type="button" id="change-image" value="Change"/>
+<!-- 			<div class="profile-img-upload">
+	        	<input type="file" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
+				<input type="button" value="Change"/>
+			</div> -->
         	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
         </div>
-        <div flex="70" style="border:1px solid #ccc;">
+        <div flex="70" style="border:1px solid #ccc; padding-bottom:20px;margin-bottom:20px;">
             <div flex="100" style="margin: -15px 0 20px 0;padding: 15px 20px 1px;background-color: #ccc">
 	            <h3>Profile Information</h3>
 	        </div>
@@ -155,7 +169,7 @@
                     <h4>Email Address</h4>
                 </div>
                 <div flex="80">
-                    <input type="email" ng-model="user.email.emailAddress">
+                    <input type="email" ng-model="user.email.emailAddress" disabled>
                 </div>
             </div>
             <div layout="row" class="user-detail-row">
@@ -163,8 +177,8 @@
                     <h4>Mobile</h4>
                 </div>
                 <div flex="80">
-                    <input type="tel" ng-model="user.mobile.mobileNum">
-                    <p ng-show="user.mobile.mobileProvided == false && !addMobileClicked" layout="row" ng-click="addMobile()" id="add-mobile-btn">
+                    <input type="tel" ng-model="user.mobile.mobileNum" disabled>
+                    <!-- <p ng-show="user.mobile.mobileProvided == false && !addMobileClicked" layout="row" ng-click="addMobile()" id="add-mobile-btn">
                     	<span>
                     		<i class="material-icons">add</i>
                     	</span>
@@ -174,7 +188,7 @@
                     	<div id="extra-code"><b>+91</b></div>
                     	<div><input type="tel" ng-model="mobno"></div>
                     	<span id="add-num-btn" ng-click="addMobileNumber(mobno)">Add</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div layout="row" class="user-detail-row">
