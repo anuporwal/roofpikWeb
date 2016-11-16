@@ -3,6 +3,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 
 	var uid = 'hT1YLR90MkUDX3PMgDpbdmyYviF3';
 	$scope.cities = [];
+	$scope.dataloaded = false;
+	$('.profile-page').hide();
 
 	db.ref('city').once('value', function(snapshot){
 		$timeout(function(){
@@ -35,6 +37,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 			console.log($scope.user.address.cityName);
 			$scope.city = $scope.user.address.cityName;
 		}, 0);
+	}).then(function(){
+		$scope.dataloaded = true;
+		$('.profile-page').fadeIn();
 	})
 
 	$scope.allGenders = ['Gender', 'Male', 'Female', 'Other'];
@@ -59,12 +64,36 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 	}
 
 	$scope.addMobileNumber = function(mob){
-		$scope.user.mobile.mobileNum = mob;
+		swal({
+		  title: "Updating",
+		  imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+		  showConfirmButton: false
+		});
+		var updates = {};
+		db.ref('userRegistration/mobile/'+$scope.user.mobile.mobileNum).remove();
+		updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3/mobile/mobileNum'] = mob;
+		updates['users/hT1YLR90MkUDX3PMgDpbdmyYviF3/mobile/mobileProvided'] = true;
+		updates['userRegistration/mobile/'+mob] = $scope.user.uid;
+		console.log(updates);
+		db.ref().update(updates).then(function(){
+			$timeout(function(){
+				$scope.user.mobile.mobileNum = mob;
+				$scope.user.mobile.mobileProvided = true;
+				updates = {};
+				sweetAlert("Successful", "Mobile Number Successfully Added", "success");
+			}, 0);
+			// window.location.reload(true);
+		})
 		$scope.addMobileClicked = false;
 	}
 
 	$scope.submit = function(){
-		swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
+		swal({
+		  title: "Saving",
+		  imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+		  showConfirmButton: false
+		});
+		// swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
 		console.log($scope.user);
 		if($scope.city != 'Gurgaon'){
 			console.log('city changed');
@@ -90,21 +119,12 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 		$state.go('user-all-reviews');
 	}
 
-	// $scope.changeProfileImage = function(){
-		
-	// }
-
-	// $(function(){
-	//     $('#image-upload-btn').click(function(){
-	//         $('#image-upload-actual-btn').click(function(){
-	//         	alert('0');
-	//         	$scope.getFileDetails(event);
-	//         });
-	//     });
-	// });
-
     $scope.createPath = function(imgUrl) {
-    	swal({ title: "Uploading...", text: "Please wait.", showConfirmButton: false });
+    	swal({
+		  title: "Uploading",
+		  imageUrl: "https://d1ow200m9i3wyh.cloudfront.net/img/assets/common/images/loader.gif",
+		  showConfirmButton: false
+		});
         $scope.path = 'users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage';
 
         $http({
@@ -220,6 +240,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
     $scope.getFileDetails = function(event) {
         $scope.selectedFile;
         $scope.uploadedImage = '';
+
         var files = event.target.files; //FileList object
         $scope.selectedFile = files[0];
         for (var i = 0; i < files.length; i++) {
@@ -240,6 +261,11 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
                 $scope.showAdvanced($scope.uploadedImage);
             }, 0);
         });
+    }
+
+    $scope.uploadImage = function(){
+    	console.log('called');
+    	$( "#profile-image-test" ).click();
     }
 
 })

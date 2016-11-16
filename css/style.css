@@ -1488,10 +1488,19 @@ md-toolbar h3 span {
     padding: 0 15px;
     border-radius: 3px;
 }
-.profile-page #change-image {
-    background-color:red;
+
+.profile-page #image-upload-btn {
+    width: auto;
+    /* margin: 0 auto; */
+    background-color: #ff5a5f;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
 }
-.profile-page #image-upload-actual-btn { 
-    width: 1px; 
-    visibility: hidden;
-}   
+
+.profile-page .profile-img-upload input[type="file"]{
+    -webkit-appearance:none; 
+    position:absolute;
+    top:0; left:0;
+    opacity:0; 
+}
