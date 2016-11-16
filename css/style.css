@@ -1368,3 +1368,13 @@ md-toolbar h3 span {
     border: 1px solid #B3B3B2;
     float: right;
 }
+
+.project-list-page #clear-filter {
+    background-color: #ccc;
+    font-size: 12px;
+    float: right;
+    color: #fff;
+    border-radius: 2px;
+    border: 1px solid #b3b3b3;
+    padding: 2px 7px;
+}

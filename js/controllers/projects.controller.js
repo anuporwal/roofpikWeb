@@ -408,4 +408,10 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
 		}
 	}
 
+  $scope.clearPriceFilter = function(){
+    $scope.filters.price.buy = {};
+    $scope.filters.price.rent = {};
+    filterList();
+  }
+
 })
