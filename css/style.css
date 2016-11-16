@@ -1304,6 +1304,10 @@ md-toolbar h3 span {
     color:#589442;
 }
 
+.project-list-page .project-card:focus {
+    outline: none;
+}
+
 .project-list-page .project-card p {
     margin:5px 10px;
     color:#4d4d4d;

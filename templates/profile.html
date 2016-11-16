@@ -5,12 +5,10 @@
 <md-content class="profile-page">
     <div layout="row" flex="70" class="profile-page-content">
         <div flex="30" style="text-align:center;">
-       		<!-- <img ng-src="user.profileImg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" style="height: 200px;border-radius: 50%;"/> -->
        		<img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
 			<div class="profile-img-upload">
 				<input type="file" id="profile-image-test" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
 	        	<md-button class="md-raised" ng-click="uploadImage()" id="submit-btn">Change Image</md-button>
-				<!-- <input type="button" class="md-raised" id="image-upload-btn" value="Change Image"/> -->
 			</div>
         	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
         </div>
