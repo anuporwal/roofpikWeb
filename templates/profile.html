@@ -96,25 +96,24 @@
 		border-radius: 3px;
 	}
 	#change-image {
-		
+		background-color:red;
 	}
-	input[type=file] { 
-	    width: 1px; 
-	    visibility: hidden;
-	}
+	#image-upload-actual-btn { 
+    width: 1px; 
+    visibility: hidden;
+}
 
 </style>
 <md-content class="profile-page">
     <div layout="row" flex="70" class="profile-page-content">
         <div flex="30" style="text-align:center;">
        		<!-- <img ng-src="user.profileImg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" style="height: 200px;border-radius: 50%;"/> -->
-       		<img id="profile-img" ng-src="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
+       		<img id="profile-img" ng-src="{{uploadedImage}}" alt="http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg"/>
         	<!-- <p><span class="change-img-btn" ng-click="changeProfileImage()">Change</span></p> -->
-        	<input  type="file" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
-        	<input type="button" id="change-image" value="Change"/>
-<!-- 			<div class="profile-img-upload">
-	        	<input type="file" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
-				<input type="button" value="Change"/>
+        	<input value="Change" type="file" id="change-image" onchange="angular.element(this).scope().getFileDetails(event)" accept="image/*" single/>
+			<!-- <div class="profile-img-upload">
+	        	<input type="file" id="image-upload-actual-btn"/>
+				<input type="button" id="image-upload-btn" value="Change Image" />
 			</div> -->
         	<h3 id="view-reviews" ng-click="showUserReviews()">View Reviews</h3>
         </div>
@@ -234,7 +233,7 @@
                 </div>
             </div>
             <div style="text-align:center;">
-            	<md-button class="md-raised" ng-click="submit()" id="submit-btn">Save</md-button>
+            	<md-button class="md-raised" ng-click="createPath()" id="submit-btn">Save</md-button>
             </div>
         </div>
     </div>

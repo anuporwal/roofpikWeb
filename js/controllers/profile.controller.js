@@ -1,4 +1,4 @@
-app.controller('profileCtrl', function($scope, $timeout, $state){
+app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $http){
 	console.log('working');
 
 	var uid = 'hT1YLR90MkUDX3PMgDpbdmyYviF3';
@@ -11,6 +11,8 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 			})
 		},0);
 	})
+
+	$scope.uploadedImage = 'http://www.e-codices.unifr.ch/documents/media/Collections/img-not-available_en.jpg';
 	db.ref('users/hT1YLR90MkUDX3PMgDpbdmyYviF3').once('value', function(snapshot){
 		console.log(snapshot.val());
 		$timeout(function(){
@@ -26,6 +28,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 			}
 			if($scope.user.mobile.mobileProvided == false){
 				$scope.showAddMobile = true;
+			}
+			if($scope.user.profileImage){
+				$scope.uploadedImage = $scope.user.profileImage;
 			}
 			console.log($scope.user.address.cityName);
 			$scope.city = $scope.user.address.cityName;
@@ -58,9 +63,11 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 		$scope.addMobileClicked = false;
 	}
 
-	$scope.submit = function(){
-		swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
+	$scope.submit = function(imgUrl){
 		console.log($scope.user);
+		if(imgUrl != 'no-image'){
+			$scope.user.profileImage = imgUrl;
+		}
 		if($scope.city != 'Gurgaon'){
 			console.log('city changed');
 		}
@@ -85,16 +92,138 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
 		$state.go('user-all-reviews');
 	}
 
-	$scope.changeProfileImage = function(){
+	// $scope.changeProfileImage = function(){
 		
-	}
+	// }
+
+	// $(function(){
+	//     $('#image-upload-btn').click(function(){
+	//         $('#image-upload-actual-btn').click(function(){
+	//         	alert('0');
+	//         	$scope.getFileDetails(event);
+	//         });
+	//     });
+	// });
+
+    $scope.createPath = function() {
+    	swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
+        $scope.path = 'users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage';
+        if ($scope.selectedFile) {
+            $http({
+                method: 'POST',
+                url: 'http://139.162.3.205/api/createPath',
+                params: {
+                    path: $scope.path
+                }
+            }).then(function successCallback(response) {
+                if (response.data.SuccessCode == 200) {
+                    $scope.path = response.data.path;
+                    console.log('Path Created');
+                    $scope.upload($scope.path);
+                }
+            }, function errorCallback(response) {
+                sweetAlert("Error", "Profile image cannot be uploaded!", "error");
+            });
+        } else {
+            $scope.submit('no-image');
+        }
+    }
+
+    $scope.size = '200x200';
+
+    $scope.upload = function(path) {
+        $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify($scope.uploadedImage) })
+            .success(function(response) {
+                if (response.StatusCode == 200) {
+                    $scope.submit(response.Message);
+                }
+            })
+            .error(function(err) {
+                sweetAlert("Error", "Profile image cannot be uploaded!", "error");
+            })
+    }
+
+    function DialogController($scope, $mdDialog, locals) {
+        $scope.locals = locals;
+        // console.log($scope.locals);
+        $('.demo').croppie({
+            url: $scope.locals.imageUrl,
+        });
+
+        // console.log($('.demo').html());
+        $timeout(function() {
+            cropImage($scope.locals.imageUrl);
+        }, 0);
+
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+
+        var basic;
+
+        function cropImage(source) {
+            // console.log(source);
+            // console.log($('.demo').html());
+            basic = $('.demo').croppie({
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'square'
+                }
+            });
+            basic.croppie('bind', {
+                url: source
+            });
+        }
+
+        $scope.cropClick = function() {
+            basic.croppie('result', {
+                type: 'canvas',
+                format: 'jpeg',
+                square: true
+            }).then(function(resp) {
+                $timeout(function() {
+                    $scope.answer(resp);
+                }, 0);
+
+            });
+        }
+    }
+
+    $scope.showAdvanced = function(imageUrl) {
+        $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'templates/crop-image.html',
+                parent: angular.element(document.body),
+                // targetEvent: ev,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen, // Only for -xs, -sm breakpoints.
+                locals: {
+                    imageUrl: imageUrl
+                }
+            })
+            .then(function(answer) {
+                $timeout(function() {
+                    $scope.uploadedImage = answer;
+                }, 0);
+            }, function() {
+            	console.log('Dialog cancelled');
+            });
+    };
 
     $scope.getFileDetails = function(event) {
         $scope.selectedFile;
         $scope.uploadedImage = '';
         var files = event.target.files; //FileList object
         $scope.selectedFile = files[0];
-        // console.log($scope.selectedFile);
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var reader = new FileReader();
@@ -110,7 +239,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state){
             $timeout(function() {
                 $scope.uploadedImage = $scope.stepsModel[0];
                 console.log($scope.uploadedImage);
-                // $scope.showAdvanced($scope.uploadedImage);
+                $scope.showAdvanced($scope.uploadedImage);
             }, 0);
         });
     }
