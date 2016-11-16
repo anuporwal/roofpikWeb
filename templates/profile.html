@@ -1,109 +1,3 @@
-<style>
-	.profile-page {
-		margin-top:100px;
-	}
-	.profile-page .profile-page-content{
-		margin:0 auto;
-	}
-	.profile-page input {
-		border: 1px solid #ccc;
-		padding:8px 10px;
-		width:80%;
-	}
-
-	#add-mobile-btn:hover {
-		cursor: auto;
-		text-decoration:underline;
-	}
-	#add-mobile-btn:focus {
-		outline:none;
-	}
-	#submit-btn {
-		margin:0 auto;
-		background-color:#ff5a5f;
-		color:#fff;
-		font-weight:bold;
-	}
-	#view-reviews:hover {
-		cursor: auto;
-		color:#808080;
-	}
-	#view-reviews:focus {
-		outline:none;
-	}
-
-	#profile-img {
-		height: 150px;
-		border-radius: 50%;
-	}
-
-	.change-img-btn {
-		background-color: #ccc;
-		color:#fff;
-		font-size: 16px;
-		font-weight: bold;
-		line-height: 33px;
-		padding: 8px 15px;
-		border-radius: 3px;
-	}
-
-	.user-detail-row{
-		margin-bottom:15px;
-	}
-
-	.detail-label {
-		text-align:right;
-		margin-right:20px;
-	}
-	#gender-dropdown, #year-dropdown, #city-dropdown {
-		font-size: 100%;
-		height: 33px;
-		width: 15%;
-	}
-	#month-dropdown {
-		font-size: 100%;
-		height: 33px;
-		width: 20%;
-	}
-	#date-dropdown {
-		font-size: 100%;
-		height: 33px;
-		width: 10%;
-	}
-	#add-mobile-btn i {
-		font-size: 18px;
-	}
-	#add-mobile-btn-link {
-		margin-left: 4px;
-		font-size: 14px;
-	}
-	#mobile-div {
-		padding: 20px 10px;
-		margin: 24px 0px;
-		border: 1px solid #ccc;
-	}
-	#extra-code {
-		padding: 0 7px;
-		line-height: 30px;
-		border: 1px solid #ccc;
-		background-color: #fff;
-		border-right: none;
-	}
-	#add-num-btn {
-		background-color: #ccc;
-		line-height: 33px;
-		padding: 0 15px;
-		border-radius: 3px;
-	}
-	#change-image {
-		background-color:red;
-	}
-	#image-upload-actual-btn { 
-    width: 1px; 
-    visibility: hidden;
-}
-
-</style>
 <md-content class="profile-page">
     <div layout="row" flex="70" class="profile-page-content">
         <div flex="30" style="text-align:center;">
@@ -233,7 +127,7 @@
                 </div>
             </div>
             <div style="text-align:center;">
-            	<md-button class="md-raised" ng-click="createPath()" id="submit-btn">Save</md-button>
+            	<md-button class="md-raised" ng-click="submit()" id="submit-btn">Save</md-button>
             </div>
         </div>
     </div>

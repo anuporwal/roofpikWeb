@@ -1364,9 +1364,12 @@ md-toolbar h3 span {
 
 .project-list-page .price-submit {
     background-color: #ccc;
-    padding: 5px;
-    border: 1px solid #B3B3B2;
+    padding: 4px 7px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
     float: right;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
 .project-list-page #clear-filter {
@@ -1378,3 +1381,117 @@ md-toolbar h3 span {
     border: 1px solid #b3b3b3;
     padding: 2px 7px;
 }
+
+.project-list-page .shown-projects {
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+    color: #006699;
+    padding-right: 10px;
+}
+
+
+/*Profile Page*/
+.profile-page {
+    margin-top:100px;
+}
+.profile-page .profile-page-content{
+    margin:0 auto;
+}
+.profile-page input {
+    border: 1px solid #ccc;
+    padding:8px 10px;
+    width:80%;
+}
+
+.profile-page #add-mobile-btn:hover {
+    cursor: auto;
+    text-decoration:underline;
+}
+.profile-page #add-mobile-btn:focus {
+    outline:none;
+}
+.profile-page #submit-btn {
+    margin:0 auto;
+    background-color:#ff5a5f;
+    color:#fff;
+    font-weight:bold;
+}
+.profile-page #view-reviews:hover {
+    cursor: auto;
+    color:#808080;
+}
+.profile-page #view-reviews:focus {
+    outline:none;
+}
+
+.profile-page #profile-img {
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-page .change-img-btn {
+    background-color: #ccc;
+    color:#fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 33px;
+    padding: 8px 15px;
+    border-radius: 3px;
+}
+
+.profile-page .user-detail-row{
+    margin-bottom:15px;
+}
+
+.profile-page .detail-label {
+    text-align:right;
+    margin-right:20px;
+}
+.profile-page #gender-dropdown, #year-dropdown, #city-dropdown {
+    font-size: 100%;
+    height: 33px;
+    width: 15%;
+}
+.profile-page #month-dropdown {
+    font-size: 100%;
+    height: 33px;
+    width: 20%;
+}
+.profile-page #date-dropdown {
+    font-size: 100%;
+    height: 33px;
+    width: 10%;
+}
+.profile-page #add-mobile-btn i {
+    font-size: 18px;
+}
+.profile-page #add-mobile-btn-link {
+    margin-left: 4px;
+    font-size: 14px;
+}
+.profile-page #mobile-div {
+    padding: 20px 10px;
+    margin: 24px 0px;
+    border: 1px solid #ccc;
+}
+.profile-page #extra-code {
+    padding: 0 7px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-right: none;
+}
+.profile-page #add-num-btn {
+    background-color: #ccc;
+    line-height: 33px;
+    padding: 0 15px;
+    border-radius: 3px;
+}
+.profile-page #change-image {
+    background-color:red;
+}
+.profile-page #image-upload-actual-btn { 
+    width: 1px; 
+    visibility: hidden;
+}   

@@ -1,5 +1,5 @@
 <md-content class="project-list-page">
-	<div flex="100" class="path-filters" layout="row">
+	<div flex="100" class="path-filters" layout="row" style="padding-left:10%;">
 		<span class="path-btn" ng-click="takeToHome()">Home</span>
 	    <span class="path-btn">></span>
 	    <span class="path-btn" ng-repeat="filter in filterPath track by $index">{{filter}}</span>
@@ -57,7 +57,7 @@
                     <span id = "clear-filter" ng-click="clearPriceFilter()">Clear</span>
                 </p>
             	<div class="filters">
-            		<p layout="row">
+            		<p layout="row" style="height: 60px;">
             			<span flex="20" class="price-optn">Buy</span>
             			<span flex="35">
             				<md-input-container>
@@ -71,7 +71,7 @@
             				</md-input-container>
             			</span>
             		</p>
-            		<p layout="row">
+            		<p layout="row" style="height: 60px;">
             			<span flex="20" class="price-optn">Rent</span>
             			<span flex="35">
             				<md-input-container>
@@ -90,6 +90,9 @@
             </md-card>
         </div>
         <div flex="70" layout="column">
+            <div flex="100" class="shown-projects">
+                {{showCount}}/{{numProjects}}
+            </div>
             <md-card flex="100" layout="row" ng-repeat="project in projects" class="project-card" ng-click="selectProject(project.projectId, project.projectName)" ng-show="project.show">
             	<div flex="25" class="project-profile-img">
             		<img ng-src="{{project.imgUrl}}" alt=""/>

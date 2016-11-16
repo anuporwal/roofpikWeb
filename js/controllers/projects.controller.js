@@ -51,9 +51,9 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
                     $scope.projects[key] = value;
                 }
                 if(projectCount == Object.keys(data).length){
-                    // console.log($scope.projects);
+                    // console.log($scope.projects); 
                     $scope.numProjects = Object.keys($scope.projects).length;
-                    
+                    $scope.showCount  = Object.keys($scope.projects).length;
                 }
             })
         } else if($stateParams.id == '2'){
@@ -66,7 +66,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
                 if(projectCount == Object.keys(data).length){
                     // console.log($scope.projects);
                     $scope.numProjects = Object.keys($scope.projects).length;
-                    
+                    $scope.showCount  = Object.keys($scope.projects).length; 
                 }
             })
         }
@@ -78,6 +78,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
             db.ref('topRated').once('value', function(dataSnapshot) {
                 $timeout(function() {
                     $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                    $scope.showCount  = Object.keys(dataSnapshot.val()).length;
                     $scope.topRatedObject = dataSnapshot.val();
                     setLocalStorage('topRated', $scope.topRatedObject);
                     setLocalStorage('numProjects', $scope.numProjects);
@@ -88,6 +89,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
             // console.log('from localstorage');
             $scope.topRatedObject = getLocalStorage('topRatedObject');
             $scope.numProjects = getLocalStorage('numProjectsObject');
+            $scope.showCount  = getLocalStorage('numProjectsObject');
             $scope.storeProjects($scope.topRatedObject);
         }
     }else if ($stateParams.category == 'top-rated') {
@@ -97,6 +99,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
                 $timeout(function(){
                     $scope.projects = preprocessData(dataSnapshot.val());
                     $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                    $scope.showCount  = Object.keys(dataSnapshot.val()).length;
                     setLocalStorage('topRated', dataSnapshot.val());
                     setLocalStorage('numProjects', $scope.numProjects);
                     
@@ -106,6 +109,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
             $scope.projects = preprocessData(getLocalStorage('topRatedObject'));
 	        console.log($scope.projects);
             $scope.numProjects = getLocalStorage('numProjectsObject');
+            $scope.showCount  = getLocalStorage('numProjectsObject');
             
         }
     } else {
@@ -133,6 +137,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
                     db.ref(localStorageFrom + 'List').once('value', function(dataSnapshot) {
                         $timeout(function(){
                            $scope.numProjects = Object.keys(dataSnapshot.val()).length;
+                           $scope.showCount = Object.keys(dataSnapshot.val()).length;
                            $scope.projects = preprocessData(dataSnapshot.val());
                            setLocalStorage(localStorageFrom, $scope.projects);
                            setLocalStorage('numProjects', $scope.numProjects);
@@ -143,6 +148,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
                     // console.log('from localstorage');
                     $scope.projects = preprocessData(getLocalStorage(localStorageFrom+'Object'));
                     $scope.numProjects = getLocalStorage('numProjectsObject'); 
+                    $scope.showCount = getLocalStorage('numProjectsObject');
                 }
             }
         }
@@ -199,7 +205,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
   		for(key in $scope.projects){
 			if(filters.indexOf($scope.projects[key].projectStatus) > -1){
 				console.log('yes');
-				$scope.projects[key].show = true;
+				$scope.projects[key].show = true
 			} else {
 				$scope.projects[key].show = false;
 			}
@@ -220,6 +226,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
    				console.log(exists);
    				if(exists){
    					console.log('exists');
+ 
    				} else {
    					console.log('does not exist');
    					$scope.projects[key].show = false;
@@ -283,6 +290,15 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
   		}
   	}
 
+    function findShowCount(){
+      $scope.showCount = 0;
+      for(key in $scope.projects){
+        if($scope.projects[key].show){
+          $scope.showCount++;
+        }
+      }
+    }
+
   	function filterList(){
   		if($scope.filters.status.length){
   			console.log('if called');
@@ -315,6 +331,7 @@ app.controller('projectsCtrl', function($scope, $timeout, $stateParams, $state){
   		if($scope.filters.price.rent.min < $scope.filters.price.rent.max){
   			filterPriceRent($scope.filters.price.rent);
   		}
+      findShowCount();
   	}
 
 	$scope.exists = function (item) {

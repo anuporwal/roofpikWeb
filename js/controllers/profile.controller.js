@@ -63,11 +63,9 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 		$scope.addMobileClicked = false;
 	}
 
-	$scope.submit = function(imgUrl){
+	$scope.submit = function(){
+		swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
 		console.log($scope.user);
-		if(imgUrl != 'no-image'){
-			$scope.user.profileImage = imgUrl;
-		}
 		if($scope.city != 'Gurgaon'){
 			console.log('city changed');
 		}
@@ -105,37 +103,36 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
 	//     });
 	// });
 
-    $scope.createPath = function() {
-    	swal({ title: "Saving...", text: "Please wait.", showConfirmButton: false });
+    $scope.createPath = function(imgUrl) {
+    	swal({ title: "Uploading...", text: "Please wait.", showConfirmButton: false });
         $scope.path = 'users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage';
-        if ($scope.selectedFile) {
-            $http({
-                method: 'POST',
-                url: 'http://139.162.3.205/api/createPath',
-                params: {
-                    path: $scope.path
-                }
-            }).then(function successCallback(response) {
-                if (response.data.SuccessCode == 200) {
-                    $scope.path = response.data.path;
-                    console.log('Path Created');
-                    $scope.upload($scope.path);
-                }
-            }, function errorCallback(response) {
-                sweetAlert("Error", "Profile image cannot be uploaded!", "error");
-            });
-        } else {
-            $scope.submit('no-image');
-        }
+
+        $http({
+            method: 'POST',
+            url: 'http://139.162.3.205/api/createPath',
+            params: {
+                path: $scope.path
+            }
+        }).then(function successCallback(response) {
+            if (response.data.SuccessCode == 200) {
+                $scope.path = response.data.path;
+                console.log('Path Created');
+                $scope.upload($scope.path, imgUrl);
+            }
+        }, function errorCallback(response) {
+            sweetAlert("Error", "Profile image cannot be uploaded!", "error");
+        });
     }
 
     $scope.size = '200x200';
 
-    $scope.upload = function(path) {
-        $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify($scope.uploadedImage) })
+    $scope.upload = function(path, imgUrl) {
+        $http.post("http://139.162.3.205/api/testupload", { path: JSON.stringify(imgUrl) })
             .success(function(response) {
                 if (response.StatusCode == 200) {
-                    $scope.submit(response.Message);
+                	db.ref('users/hT1YLR90MkUDX3PMgDpbdmyYviF3/profileImage').set(response.Message).then(function(){
+                		sweetAlert("Success", "Profile image successfully uploaded!", "success");
+                	})
                 }
             })
             .error(function(err) {
@@ -213,6 +210,7 @@ app.controller('profileCtrl', function($scope, $timeout, $state, $mdDialog, $htt
             .then(function(answer) {
                 $timeout(function() {
                     $scope.uploadedImage = answer;
+                    $scope.createPath(answer);
                 }, 0);
             }, function() {
             	console.log('Dialog cancelled');
