@@ -1,6 +1,6 @@
 <md-content class="project-list-page">
 	<div flex="100" class="path-filters" layout="row" style="padding-left:10%;">
-		<span class="path-btn" ng-click="takeToHome()">Home</span>
+		<span class="path-btn" id="home-btn" ng-click="takeToHome()">Home</span>
 	    <span class="path-btn">></span>
 	    <span class="path-btn" ng-repeat="filter in filterPath track by $index">{{filter}}</span>
 	</div>

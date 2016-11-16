@@ -47,15 +47,14 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
                     $scope.blogs.push(blogData);
                 })
                 $timeout(function(){
+                    console.log('hello');
                     var data = document.getElementById('blog-image-box');
-                    console.log(data.clientHeight);
-                    console.log(data.scrollHeight);
-                    console.log(data.offsetHeight);
-                    var data1 = document.getElementById('blog-image');
-                    console.log(data1.clientHeight);
-                    console.log(data1.scrollHeight);
-                    console.log(data1.offsetHeight);
-                    data1.height = data.clientHeight;
+                    console.log(data.clientWidth);
+                    console.log(data.scrollWidth);
+                    console.log(data.offsetWidth);
+                    var newHeight = ((data.clientWidth)*0.75);
+                    console.log(newHeight);
+                    document.getElementById('blog-image-box').style.height = newHeight+ 'px';
                 },1000);
             }, 0);
         })

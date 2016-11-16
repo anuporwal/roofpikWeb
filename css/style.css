@@ -1394,6 +1394,15 @@ md-toolbar h3 span {
     padding-right: 10px;
 }
 
+#home-btn:hover {
+    cursor:auto;
+    color:#006699;
+}
+
+#home-btn:focus{
+    outline:none;
+}
+
 
 /*Profile Page*/
 .profile-page {
