@@ -47,14 +47,14 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
                     $scope.blogs.push(blogData);
                 })
                 $timeout(function(){
-                    console.log('hello');
-                    var data = document.getElementById('blog-image-box');
-                    console.log(data.clientWidth);
-                    console.log(data.scrollWidth);
-                    console.log(data.offsetWidth);
-                    var newHeight = ((data.clientWidth)*0.75);
-                    console.log(newHeight);
-                    document.getElementById('blog-image-box').style.height = newHeight+ 'px';
+                    // console.log('hello');
+                    // var data = document.getElementById('blog-image-box');
+                    // console.log(data.clientWidth);
+                    // console.log(data.scrollWidth);
+                    // console.log(data.offsetWidth);
+                    // var newHeight = ((data.clientWidth)*0.75);
+                    // console.log(newHeight);
+                    // document.getElementById('blog-image-box').style.height = newHeight+ 'px';
                 },1000);
             }, 0);
         })
@@ -198,8 +198,8 @@ app.controller('homeCtrl', function($scope, $timeout, $state, $mdDialog) {
 
     $scope.goToBlog = function(blog){
         console.log(blog);
-        $state.go('blog-details', {id: '-KUvRMEmRoWEVsl1e37L'});
-        // $state.go('blog-details', {id: blog.blogId});
+        // $state.go('blog-details', {id: '-KUvRMEmRoWEVsl1e37L'});
+        $state.go('blog-details', {id: blog.blogId});
     }
 
     function DialogController($scope, $mdDialog, $timeout) {
